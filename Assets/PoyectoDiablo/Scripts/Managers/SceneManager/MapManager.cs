@@ -61,16 +61,32 @@ public class MapManager : MonoBehaviour
             {
                 _isLoading = true;
                 positionText.text = "Cargando...";
-                StartCoroutine(LoadSceneWithDelay(newPos, 1f));
+                StartCoroutine(LoadSceneAsync(newPos));
             }
         }
     }
 
-    IEnumerator LoadSceneWithDelay(Vector2Int newPos, float delay)
-    {
-        yield return new WaitForSeconds(delay);
+	IEnumerator LoadSceneAsync(Vector2Int newPos)
+	{
+		// Activar loading UI
+		//loadingScreen.SetActive(true);
+		positionText.text = "Cargando...";
 
-        LevelGenerator.Instance.PlayerCurrentRoom = newPos;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+		Time.timeScale = 0f;
+
+		LevelGenerator.Instance.PlayerCurrentRoom = newPos;
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+		asyncLoad.allowSceneActivation = false;
+
+		while (asyncLoad.progress < 0.9f)
+		{
+			yield return null;
+		}
+
+		asyncLoad.allowSceneActivation = true;
+
+		yield return new WaitForEndOfFrame();
+
+		Time.timeScale = 1f;
+	}
 }

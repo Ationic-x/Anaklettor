@@ -18,14 +18,14 @@ public class TestMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow)) { _forward = true; }
-        else if (Input.GetKeyUp(KeyCode.UpArrow)) { _forward = false; }
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) { _left = true; }
-        else if (Input.GetKeyUp(KeyCode.LeftArrow)) { _left = false; }
-        if (Input.GetKeyDown(KeyCode.RightArrow)) { _right = true; }
-        else if (Input.GetKeyUp(KeyCode.RightArrow)) { _right = false; }
-        if (Input.GetKeyDown(KeyCode.DownArrow)) { _backWard = true; }
-        else if (Input.GetKeyUp(KeyCode.DownArrow)) { _backWard = false; }
+		_forward = false;
+		_backWard = false;
+        _left = false;
+		_right = false;
+		if (Input.GetKey(KeyCode.UpArrow)) { _forward = true; }
+        if (Input.GetKey(KeyCode.LeftArrow)) { _left = true; }
+        if (Input.GetKey(KeyCode.RightArrow)) { _right = true; }
+        if (Input.GetKey(KeyCode.DownArrow)) { _backWard = true; }
     }
 
     private void FixedUpdate()
@@ -51,7 +51,7 @@ public class TestMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        switch (other.gameObject.name)
+		switch (other.gameObject.name)
         {
             case "North":
                 _mapManager.ChangeScene(Vector2Int.up);
@@ -69,4 +69,13 @@ public class TestMovement : MonoBehaviour
                 break;
         }
     }
+
+    // Method to reduce possible bugs when change between scenes
+    public void ChangeScene()
+    {
+		_backWard = false;
+		_forward = false;
+		_left = false;
+		_right = false;
+	}
 }

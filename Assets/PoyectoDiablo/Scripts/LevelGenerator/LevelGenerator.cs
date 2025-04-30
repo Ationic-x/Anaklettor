@@ -2,21 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Level numbers
-// 0 = origin
-// 1 = vertical
-// 2 = horizontal
-// 3 = up-right 
-// 4 = up-left
-// 5 = down-right
-// 6 = down-left
-// 7 = left-up
-// 8 = left-down
-// 9 = right-up
-// 10 = right-down
-// 11+ = random maps
+// Path Sketch
+// ----[00]-----
+// |           |
+// |           |
+//[11]        [10]
+// |           |
+// |           |
+// ----[01]-----
+// Horizontal 1X
+// Vertical 0X
+// NorthEast X0
+// SouthWest X1
+//
+// Start point 0_00_XX_1
+// End point 0_XX_00_1
 public class LevelGenerator : MonoBehaviour
 {
+    private int option = 0b0_00_00_0; // Option: [0] non-path [00] to [00] from [0] origin/end
     public static LevelGenerator Instance { get; private set; } = null;
 
     private int _mapWidth = 10;
@@ -50,7 +53,7 @@ public class LevelGenerator : MonoBehaviour
 
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
-                map[x, y] = 15;
+                map[x, y] = 32; // 32 or higher
 
         List<Vector2Int> possibleDestinations = new List<Vector2Int>();
         for (int x = 0; x < width; x++)
@@ -74,81 +77,48 @@ public class LevelGenerator : MonoBehaviour
 
         List<Vector2Int> path = GeneratePath(origin, target);
 
-        map[origin.x, origin.y] = 0;
-        int lastValue = 0;
-        int lastY = origin.y;
-        int lastX = origin.x;
-        for (int i = 1; i < path.Count; i++)
+        
+        
+        for (int i = 0; i < path.Count - 1; i++)
         {
-            Vector2Int pos = path[i];
+			ClearOption(); // Make sure is cleared
+			Vector2Int current = path[i];
+			Vector2Int next = path[i + 1];
 
-            if ((lastY - pos.y) != 0)
-            {
-                if(lastValue == 2)
-                {
-                    if (origin.x - pos.x < 0)
-                    {
-                        if (origin.y - pos.y < 0)
-                        {
-                            map[lastX, lastY] = 7;
-                        } else
-                        {
-                            map[lastX, lastY] = 8;
-                        }
-                    } else
-                    {
-                        if (origin.y - pos.y < 0)
-                        {
-                            map[lastX, lastY] = 9;
-                        }
-                        else
-                        {
-                            map[lastX, lastY] = 10;
-                        }
-                    }
-                }
-                lastValue = 1;
-                map[pos.x, pos.y] = 1; // Vertical
+            // Origin
+            if (i == 0) option |= 0b0_00_00_1; // Origin
+			else SetOptionOrigin(map[path[i - 1].x, path[i - 1].y]);
 
-            } else
-            {
-                if (lastValue == 1)
-                {
-                    if (origin.y - pos.y < 0)
-                    {
-                        if (origin.x - pos.x < 0)
-                        {
-                            map[lastX, lastY] = 3;
-                        }
-                        else
-                        {
-                            map[lastX, lastY] = 4;
-                        }
-                    }
-                    else
-                    {
-                        if (origin.x - pos.x < 0)
-                        {
-                            map[lastX, lastY] = 5;
-                        }
-                        else
-                        {
-                            map[lastX, lastY] = 6;
-                        }
-                    }
-                }
-                lastValue = 2;
-                map[pos.x, pos.y] = 2; // Horizontal
-            }
+			// Destination
+			if (current.x < next.x) option |= 0b0_10_00_0; // Horizontal right
+            else if (current.x > next.x) option |= 0b0_11_00_0; // Horizontal left
+            else if (current.y < next.y) option |= 0b0_00_00_0; // Vertical up
+            else if (current.y > next.y) option |= 0b0_01_00_0; // Vertical down
+            
+            map[current.x, current.y] = option; // Set the value of the current position
+		}
+        ClearOption();
+        SetOptionOrigin(map[path[^2].x, path[^2].y]);
+        option += 0b1;
 
-            lastY = pos.y;
-            lastX = pos.x;
-        }
+		map[target.x, target.y] = option;
 
-        return map;
+		return map;
     }
 
-    private List<Vector2Int> GeneratePath(Vector2Int origin, Vector2Int target)
+    private void ClearOption()
+    {
+		option = 0b0_00_00_0;
+	}
+
+    private void SetOptionOrigin(int previousValue)
+	{
+		option |= ((previousValue >> 3) ^ 0b1) << 2;
+	}
+
+
+	#region Path Generation
+	private List<Vector2Int> GeneratePath(Vector2Int origin, Vector2Int target)
     {
         List<Vector2Int> path = new List<Vector2Int> { origin };
         Vector2Int current = origin;
@@ -185,29 +155,22 @@ public class LevelGenerator : MonoBehaviour
         else if (target.y < current.y) return new Vector2Int(current.x, current.y - 1);
         return current;
     }
+	#endregion
 
-    public bool IsValid(Vector2Int pos)
+	#region Map Checks
+    public bool IsOrigin(Vector2Int pos)
     {
-        return pos.x >= 0 && pos.x < _mapWidth && pos.y >= 0 && pos.y < _mapHeight
-            && _mapData[pos.x, pos.y] != 2;
+		return (pos == _origin);
     }
 
-    public void PrintMap(int[,] mapData)
+	public bool IsValid(Vector2Int pos)
     {
-        string output = "";
-        for (int y = mapData.GetLength(1) - 1; y >= 0; y--)
-        {
-            for (int x = 0; x < mapData.GetLength(0); x++)
-            {
-                output += mapData[x, y] + " ";
-            }
-            output += "\n";
-        }
-        Debug.Log(output);
+        return pos.x >= 0 && pos.x < _mapWidth && pos.y >= 0 && pos.y < _mapHeight;
     }
+	#endregion
 
-    // Getters and Setters
-    public RoomData GetOrCreateRoomData(Vector2Int position)
+	#region Getters and Setters
+	public RoomData GetOrCreateRoomData(Vector2Int position)
     {
         if (!_roomMap.ContainsKey(position))
         {
@@ -221,4 +184,21 @@ public class LevelGenerator : MonoBehaviour
         get { return _playerCurrentRoom; }
         set { _playerCurrentRoom = value; }
     }
+	#endregion
+
+	#region Debug
+	public void PrintMap(int[,] mapData)
+	{
+		string output = "";
+		for (int y = mapData.GetLength(1) - 1; y >= 0; y--)
+		{
+			for (int x = 0; x < mapData.GetLength(0); x++)
+			{
+				output += mapData[x, y] + " ";
+			}
+			output += "\n";
+		}
+		Debug.Log(output);
+	}
+	#endregion
 }
