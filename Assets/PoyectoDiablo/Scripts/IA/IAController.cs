@@ -1,10 +1,14 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class IAController : MonoBehaviour
 {
+
+    //Objetos referenciados    
+    [SerializeField] private GameObject _eyeObject;
 
     //Objetos
     private GameObject[] _eyeArray;
@@ -42,7 +46,6 @@ public class IAController : MonoBehaviour
         StartCoroutine(Patrol());
     }
 
-
     void Update()
     {
         RayDetector();
@@ -56,60 +59,73 @@ public class IAController : MonoBehaviour
     {
         try
         {
-            GameObject eyeParent = GameObject.Find("RayCastEyes").gameObject;
-
-            if (eyeParent)
+            if (_eyeObject)
             {
-                _eyeArray = new GameObject[eyeParent.transform.childCount];
+                _eyeArray = new GameObject[_eyeObject.transform.childCount];
 
                 int counter = 0;
 
-                foreach (Transform child in eyeParent.transform)
+                foreach (Transform child in _eyeObject.transform)
                 {
                     _eyeArray[counter] = child.gameObject;
                     counter++;
                 }
             }
-
             else
             {
-                Debug.LogWarning("No se encontr� el GameObject 'RayCastEyes'.");
+                Debug.LogError($"{transform.parent.name}: El campo '_eyeObject' no está asignado en el inspector.");
             }
 
         }
         catch (System.Exception e)
         {
-            Debug.LogWarning(e.Message);
+            Debug.LogError(e.Message);
         }
     }
 
     //Se lanzan los rayos y se comprueba si colisiona con el jugador
     private void RayDetector()
     {
+
         if (!_targetFound)
         {
             RaycastHit hit;
 
-            foreach (GameObject eye in _eyeArray)
+            if (_eyeArray != null)
             {
-                Vector3 origin = eye.transform.position;
-
-                Vector3 direction = eye.transform.forward;
-
-                if (Physics.Raycast(origin, direction, out hit, 20, LayerMask.GetMask("Player")))
+                foreach (GameObject eye in _eyeArray)
                 {
-                    Debug.DrawRay(origin, direction * hit.distance, Color.red);
+                    Vector3 origin = eye.transform.position;
 
-                    _playerGameObject = hit.transform.GameObject();
+                    Vector3 direction = eye.transform.forward;
 
-                    _targetFound = true;
-                }
-                else
-                {
-                    Debug.DrawRay(origin, direction * 20, Color.green);
+                    //Esto permite que los rallos colisionen on todo
+                    if (Physics.Raycast(origin, direction, out hit, 20))
+                    {
+
+                        Debug.DrawRay(origin, direction * hit.distance, Color.red);
+
+                        //Aqui se comprueba si el rayo colisiona con el jugador
+                        if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
+                        {
+                            _playerGameObject = hit.transform.GameObject();
+
+                            _targetFound = true;
+                        }
+
+                    }
+                    else
+                    {
+                        Debug.DrawRay(origin, direction * 20, Color.green);
+                    }
                 }
             }
+            else
+            {
+                Debug.LogError($"{transform.parent.name}: El array de ojos no está inicializado.");
+            }
         }
+
     }
 
     //Mueve la cabeza del modelo a la que esta asociada los raycast
@@ -276,7 +292,7 @@ public class IAController : MonoBehaviour
 
     #region Ataque
 
-    
+
     private void Attack()
     {
         StartCoroutine(SwordBlow());
@@ -295,7 +311,7 @@ public class IAController : MonoBehaviour
 
             if (elapsedTime >= coolDownTime)
             {
-                Debug.Log("Ataca");                
+                Debug.Log("Ataca");
                 break;
             }
 
