@@ -8,10 +8,11 @@ public class TestMovement : MonoBehaviour
     private bool _left = false;
     private bool _right = false;
     private float _speed = 5f;
-    [SerializeField] private MapManager _mapManager;
+    private MapManager _mapManager;
+    private Vector3 _enterPosition;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
     {
     }
 
@@ -26,7 +27,7 @@ public class TestMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow)) { _left = true; }
         if (Input.GetKey(KeyCode.RightArrow)) { _right = true; }
         if (Input.GetKey(KeyCode.DownArrow)) { _backWard = true; }
-    }
+	}
 
     private void FixedUpdate()
     {
@@ -48,27 +49,46 @@ public class TestMovement : MonoBehaviour
         }
     }
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-		switch (other.gameObject.name)
+	private void OnTriggerEnter(Collider other)
+	{
+        if (other.CompareTag("Warp"))
         {
-            case "North":
-                _mapManager.ChangeScene(Vector2Int.up);
-                break;
-            case "South":
-                _mapManager.ChangeScene(Vector2Int.down);
-                break;
-            case "East":
-                _mapManager.ChangeScene(Vector2Int.right);
-                break;
-            case "West":
-                _mapManager.ChangeScene(Vector2Int.left);
-                break;
-            default:
-                break;
-        }
-    }
+			other.gameObject.GetComponentInChildren<Animator>().SetTrigger("In");
+			other.gameObject.SetActive(true);
+			_enterPosition = transform.position;
+		}
+	}
+
+	// This code have a lesser misstake, my test scenario is reversed so X and Z are positive when should be negative
+	private void OnTriggerExit(Collider other)
+	{
+        if (other.CompareTag("Warp"))
+        {
+			float offset = 0.2f; // small offset to avoid unexpected behaviours 
+			other.gameObject.GetComponentInChildren<Animator>().SetTrigger("Out");
+			switch (other.gameObject.name)
+			{
+				case "North":
+					if (_enterPosition.z - offset > transform.position.z)
+						_mapManager.ChangeScene(Vector2Int.up);
+					break;
+				case "South":
+					if (_enterPosition.z + offset < transform.position.z)
+						_mapManager.ChangeScene(Vector2Int.down);
+					break;
+				case "East":
+					if (_enterPosition.x - offset > transform.position.x)
+						_mapManager.ChangeScene(Vector2Int.right);
+					break;
+				case "West":
+					if (_enterPosition.x + offset < transform.position.x)
+						_mapManager.ChangeScene(Vector2Int.left);
+					break;
+				default:
+					break;
+			}
+		}
+	}
 
     // Method to reduce possible bugs when change between scenes
     public void ChangeScene()
@@ -77,5 +97,10 @@ public class TestMovement : MonoBehaviour
 		_forward = false;
 		_left = false;
 		_right = false;
+	}
+
+    public void SetMapManager(MapManager newMapManager)
+	{
+		_mapManager = newMapManager;
 	}
 }

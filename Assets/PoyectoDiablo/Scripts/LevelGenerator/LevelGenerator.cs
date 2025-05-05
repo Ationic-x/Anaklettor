@@ -20,7 +20,7 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     private int option = 0b0_00_00_0; // Option: [0] non-path [00] to [00] from [0] origin/end
-    public static LevelGenerator Instance { get; private set; } = null;
+    public static LevelGenerator Instance { get; private set; }
 
     private int _mapWidth = 10;
     private int _mapHeight = 10;
@@ -28,6 +28,9 @@ public class LevelGenerator : MonoBehaviour
 
     private Vector2Int _origin = new Vector2Int(3, 3);
     private Vector2Int _playerCurrentRoom;
+    private Vector3 _playerPosition;
+    private Quaternion _playerRotation;
+    private Vector2Int _moveDirection = Vector2Int.zero;
 
     private Dictionary<Vector2Int, RoomData> _roomMap = new();
 
@@ -41,9 +44,9 @@ public class LevelGenerator : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            _mapData = GenerateMap(_mapWidth, _mapHeight, _origin, _maxDistance);
-            PrintMap(_mapData);
-        }
+			_mapData = GenerateMap(_mapWidth, _mapHeight, _origin, _maxDistance);
+			PrintMap(_mapData);
+		}
     }
 
     private int[,] GenerateMap(int width, int height, Vector2Int origin, int steps)
@@ -77,48 +80,48 @@ public class LevelGenerator : MonoBehaviour
 
         List<Vector2Int> path = GeneratePath(origin, target);
 
-        
-        
+
+
         for (int i = 0; i < path.Count - 1; i++)
         {
-			ClearOption(); // Make sure is cleared
-			Vector2Int current = path[i];
-			Vector2Int next = path[i + 1];
+            ClearOption(); // Make sure is cleared
+            Vector2Int current = path[i];
+            Vector2Int next = path[i + 1];
 
             // Origin
             if (i == 0) option |= 0b0_00_00_1; // Origin
-			else SetOptionOrigin(map[path[i - 1].x, path[i - 1].y]);
+            else SetOptionOrigin(map[path[i - 1].x, path[i - 1].y]);
 
-			// Destination
-			if (current.x < next.x) option |= 0b0_10_00_0; // Horizontal right
+            // Destination
+            if (current.x < next.x) option |= 0b0_10_00_0; // Horizontal right
             else if (current.x > next.x) option |= 0b0_11_00_0; // Horizontal left
             else if (current.y < next.y) option |= 0b0_00_00_0; // Vertical up
             else if (current.y > next.y) option |= 0b0_01_00_0; // Vertical down
-            
+
             map[current.x, current.y] = option; // Set the value of the current position
-		}
+        }
         ClearOption();
         SetOptionOrigin(map[path[^2].x, path[^2].y]);
         option += 0b1;
 
-		map[target.x, target.y] = option;
+        map[target.x, target.y] = option;
 
-		return map;
+        return map;
     }
 
     private void ClearOption()
     {
-		option = 0b0_00_00_0;
-	}
+        option = 0b0_00_00_0;
+    }
 
     private void SetOptionOrigin(int previousValue)
-	{
-		option |= ((previousValue >> 3) ^ 0b1) << 2;
-	}
+    {
+        option |= ((previousValue >> 3) ^ 0b1) << 1;
+    }
 
 
-	#region Path Generation
-	private List<Vector2Int> GeneratePath(Vector2Int origin, Vector2Int target)
+    #region Path Generation
+    private List<Vector2Int> GeneratePath(Vector2Int origin, Vector2Int target)
     {
         List<Vector2Int> path = new List<Vector2Int> { origin };
         Vector2Int current = origin;
@@ -155,9 +158,14 @@ public class LevelGenerator : MonoBehaviour
         else if (target.y < current.y) return new Vector2Int(current.x, current.y - 1);
         return current;
     }
-	#endregion
+    #endregion
 
-	#region Map Checks
+    #region Map Checks
+    public int GetMapValue(Vector2Int pos)
+	{
+        return _mapData[pos.x, pos.y];
+	}
+
     public bool IsOrigin(Vector2Int pos)
     {
 		return (pos == _origin);
@@ -179,11 +187,29 @@ public class LevelGenerator : MonoBehaviour
         return _roomMap[position];
     }
 
-    public Vector2Int PlayerCurrentRoom
+    public Vector3 PlayerPosition
+	{
+		get { return _playerPosition; }
+		set { _playerPosition = value; }
+	}
+    
+    public Quaternion PlayerRotation
+	{
+		get { return _playerRotation; }
+		set { _playerRotation = value; }
+	}
+
+	public Vector2Int PlayerCurrentRoom
     {
         get { return _playerCurrentRoom; }
         set { _playerCurrentRoom = value; }
     }
+
+    public Vector2Int MoveDirection
+    {
+		get { return _moveDirection; }
+		set { _moveDirection = value; }
+	}
 	#endregion
 
 	#region Debug
