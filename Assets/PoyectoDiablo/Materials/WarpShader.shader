@@ -12,14 +12,20 @@ Shader "Custom/TriangleTileShader"
 
     SubShader
     {
-        Tags { "RenderType" = "Transparent" }
+        Tags {
+            "Queue" = "Transparent"
+            "RenderType" = "Transparent"
+            "IgnoreProjector" = "True"
+        }
+
+        Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
+        Cull Off
+        ZTest LEqual
         LOD 100
 
         Pass
         {
-            Blend SrcAlpha OneMinusSrcAlpha
-            ZWrite Off
-
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag

@@ -4,7 +4,8 @@ Shader "Custom/DungeonMinimapShader"
     Properties
     {
         _GridSize("Grid Size (X,Y)", Vector) = (8, 8, 0, 0)
-        _Zoom("Zoom", Float) = 1
+        _Zoom("Zoom", Range(0, 1)) = 1
+        _Translate("Translate", Vector) = (0, 0, 0, 0)
         _PlayerCell("Player Cell (X,Y)", Vector) = (0, 0, 0, 0)
         _CellDataTex("Cell Data Texture", 2D) = "white" {}
 
@@ -16,10 +17,17 @@ Shader "Custom/DungeonMinimapShader"
 
     SubShader
     {
-        Tags { "RenderType" = "Transparent" }
-        LOD 100
+        Tags {
+            "Queue" = "Transparent"
+            "RenderType" = "Transparent"
+            "IgnoreProjector" = "True"
+        }
+
         Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off
+        Cull Off
+        ZTest LEqual
+        LOD 100
 
         Pass
         {
@@ -31,6 +39,7 @@ Shader "Custom/DungeonMinimapShader"
             float4 _GridSize;
             float _Zoom;
             float4 _PlayerCell;
+            float4 _Translate;
 
             fixed4 _BGColor;
             fixed4 _CellColor;
@@ -53,7 +62,7 @@ Shader "Custom/DungeonMinimapShader"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv * _Zoom;
+                o.uv = v.uv * (1 - _Zoom) +  _Translate.xy;
                 return o;
             }
 
@@ -67,10 +76,7 @@ Shader "Custom/DungeonMinimapShader"
                 float2 cellFrac = frac(gridUV); // local position within cell
 
                 // Sample cell visibility (0 = hidden, 1 = visible)
-                float2 texUV = cellCoord / _GridSize.xy;
-                float visibility = tex2D(_CellDataTex, texUV).r;
-
-                if (visibility < 0.1)
+                if (any(cellCoord < 0.0) || any(cellCoord >= _GridSize.xy))
                     return _BGColor;
 
                 // Border thickness
