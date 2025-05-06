@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,9 +13,9 @@ public class IAController : MonoBehaviour
 
     private NavMeshAgent _nvAgent;
 
-    private GameObject _head;
-
     private GameObject _playerGameObject;
+
+    private Animator _animator;
 
     //Tamanyo del mapa
     private int areaSize = 20;
@@ -26,11 +27,13 @@ public class IAController : MonoBehaviour
 
     private bool _targetFound = false;
 
-    private bool _searching = false;
+    private bool _isSearching = false;
+
+    private bool _isInCooldown = false;
 
     private void Awake()
-    {        
-        _head = FindChildRecursive(transform, "root/hips/spine/chest/head");
+    {
+        _animator = GetComponentInParent<Animator>();
 
         _nvAgent = GetComponent<NavMeshAgent>();
 
@@ -45,6 +48,8 @@ public class IAController : MonoBehaviour
     void Update()
     {
         RayDetector();
+
+        UpdateAnimationsVariables();
     }
 
     #region Vista
@@ -119,71 +124,38 @@ public class IAController : MonoBehaviour
 
     }
 
-    //Mueve la cabeza del modelo a la que esta asociada los raycast
+    //Espera como maximo 2.2 segundos a realizar la animacion de idle en la que el enemigo mueve la cabeza y por lo tanto los raycast
     private IEnumerator SearchPlayer()
     {
+        _isSearching = true;
 
-        if (_head)
+        float searchDuration = 2.2f;
+
+        float elapsed = 0f;
+
+        while (elapsed < searchDuration)
         {
-            _searching = true;
-
-            //Cantidad de rotacion de la cabeza
-            float minY = -63f;
-            float maxY = 63f;
-
-            //Velociad de rotacion de la cabeza
-            float speed = 2f;
-
-            //Tiempo transcurrido de la busqueda
-            float elapsedTime = 0f;
-
-            // Duracion busqueda
-            float duration = 2.5f;
-
-            //Rotacion original de la cabeza
-            Vector3 originalHeadRotation = _head.transform.localEulerAngles;
-
-            if (_head && !_targetFound)
-            {
-                while (!_targetFound && _searching && elapsedTime < duration)
-                {
-
-                    float angle = Mathf.Lerp(minY, maxY, (Mathf.Sin(Time.time * speed) + 1f) / 2f);
-
-                    Vector3 currentRotation = _head.transform.localEulerAngles;
-                    _head.transform.localEulerAngles = new Vector3(currentRotation.x, angle, currentRotation.z);
-
-                    elapsedTime += Time.deltaTime;
-
-                    if (_targetFound)
-                    {
-                        break;
-                    }
-
-                    yield return null;
-
-                }
-
-            }
-
-            _head.transform.localEulerAngles = originalHeadRotation;
-
-            Stop();
-
             if (_targetFound)
             {
-                StartCoroutine(Chase());
-            }
-            else
-            {
-                StartCoroutine(Patrol());
+                break;
             }
 
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        Stop();
+
+        if (_targetFound)
+        {
+            StartCoroutine(Chase());
         }
         else
         {
-            Debug.LogError("GameObject head no encontrado en el enemigo");
+            StartCoroutine(Patrol());
         }
+
     }
 
     #endregion END Vista
@@ -282,14 +254,15 @@ public class IAController : MonoBehaviour
 
         _isAttacking = false;
 
-        _searching = false;
+        _isSearching = false;
+
+        _isInCooldown = false;
 
     }
 
     #endregion END Movimiento
 
     #region Ataque
-
 
     private void Attack()
     {
@@ -299,28 +272,68 @@ public class IAController : MonoBehaviour
     //Realiza un espadazo con un cooldown determinado
     private IEnumerator SwordBlow()
     {
+        _isAttacking = true;
+
+        //yield return new WaitForEndOfFrame();
+
+        //float duration = _animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        //float cooldown = 2f;
+
+        //float elapsedTime = 0f;
+
+        //while(duration + cooldown > elapsedTime)
+        //{
+        //    elapsedTime += Time.deltaTime;
+        //}
+
         float elapsedTime = 0f;
 
         float coolDownTime = 1f;
 
         while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= 2f)
         {
+
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime >= coolDownTime)
             {
+
                 Debug.Log("Ataca");
+
                 break;
             }
 
             yield return null;
         }
 
+
+        Stop();
+
+        //yield return new WaitForEndOfFrame();
+
         StartCoroutine(Chase());
     }
+   
 
 
     #endregion END Ataque
+
+    #region Animaciones
+
+    private void UpdateAnimationsVariables()
+    {
+        if (_animator)
+        {
+            _animator.SetBool("_isMoving", _isMoving);
+            _animator.SetBool("_isAttacking", _isAttacking);
+            _animator.SetBool("_isSearching", _isSearching);
+
+            _animator.SetBool("_isInCooldown", _isInCooldown);
+        }
+
+    }
+
+    #endregion
 
     #region Tools
 
