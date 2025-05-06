@@ -62,7 +62,16 @@ Shader "Custom/DungeonMinimapShader"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv * (1 - _Zoom) +  _Translate.xy;
+                float centerPoint = (_GridSize.x - 1) / 2;
+                float scaledGrid = centerPoint * (1 - _Zoom);
+                float coordPlayer = abs(_PlayerCell.x - _GridSize.x + 1);
+                if (coordPlayer >= scaledGrid) {
+                    centerPoint = _PlayerCell.x;
+                } else {
+                    float t = (scaledGrid - coordPlayer) / (centerPoint - coordPlayer);
+                    centerPoint = lerp(_PlayerCell.x, (_GridSize.x - 1) / 2, t);
+                }
+                o.uv = v.uv * (1 - _Zoom) +  (0.5 * _Zoom - (_GridSize.x - 1) / (2 * _GridSize.x) + centerPoint / _GridSize.x);
                 return o;
             }
 
