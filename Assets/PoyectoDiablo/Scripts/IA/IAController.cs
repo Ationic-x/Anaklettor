@@ -7,9 +7,6 @@ using UnityEngine.AI;
 public class IAController : MonoBehaviour
 {
 
-    //Objetos referenciados    
-    [SerializeField] private GameObject _eyeObject;
-
     //Objetos
     private GameObject[] _eyeArray;
 
@@ -20,7 +17,7 @@ public class IAController : MonoBehaviour
     private GameObject _playerGameObject;
 
     //Tamanyo del mapa
-    public int areaSize = 20;
+    private int areaSize = 20;
 
     //Bools
     private bool _isMoving = false;
@@ -32,13 +29,12 @@ public class IAController : MonoBehaviour
     private bool _searching = false;
 
     private void Awake()
-    {
-        _head = GameObject.Find("head").gameObject;
+    {        
+        _head = FindChildRecursive(transform, "root/hips/spine/chest/head");
 
         _nvAgent = GetComponent<NavMeshAgent>();
 
         GetEyes();
-
     }
 
     void Start()
@@ -51,36 +47,31 @@ public class IAController : MonoBehaviour
         RayDetector();
     }
 
-
     #region Vista
 
     //Se obtiene los transforms donde se lanzaran los rayos
     private void GetEyes()
     {
-        try
+
+        GameObject eyeObject = FindChildRecursive(transform, "root/hips/spine/chest/head/RayCastEyes");
+
+        if (eyeObject)
         {
-            if (_eyeObject)
+            _eyeArray = new GameObject[eyeObject.transform.childCount];
+
+            int counter = 0;
+
+            foreach (Transform child in eyeObject.transform)
             {
-                _eyeArray = new GameObject[_eyeObject.transform.childCount];
-
-                int counter = 0;
-
-                foreach (Transform child in _eyeObject.transform)
-                {
-                    _eyeArray[counter] = child.gameObject;
-                    counter++;
-                }
+                _eyeArray[counter] = child.gameObject;
+                counter++;
             }
-            else
-            {
-                Debug.LogError($"{transform.parent.name}: El campo '_eyeObject' no está asignado en el inspector.");
-            }
-
         }
-        catch (System.Exception e)
+        else
         {
-            Debug.LogError(e.Message);
+            Debug.LogError($"{transform.parent.name}: El campo 'eyeObject' no está asignado en el inspector.");
         }
+
     }
 
     //Se lanzan los rayos y se comprueba si colisiona con el jugador
@@ -132,60 +123,67 @@ public class IAController : MonoBehaviour
     private IEnumerator SearchPlayer()
     {
 
-        _searching = true;
-
-        //Cantidad de rotacion de la cabeza
-        float minY = -63f;
-        float maxY = 63f;
-
-        //Velociad de rotacion de la cabeza
-        float speed = 2f;
-
-        //Tiempo transcurrido de la busqueda
-        float elapsedTime = 0f;
-
-        // Duracion busqueda
-        float duration = 2.5f;
-
-        //Rotacion original de la cabeza
-        Vector3 originalHeadRotation = _head.transform.localEulerAngles;
-
-        if (_head && !_targetFound)
+        if (_head)
         {
-            while (!_targetFound && _searching && elapsedTime < duration)
+            _searching = true;
+
+            //Cantidad de rotacion de la cabeza
+            float minY = -63f;
+            float maxY = 63f;
+
+            //Velociad de rotacion de la cabeza
+            float speed = 2f;
+
+            //Tiempo transcurrido de la busqueda
+            float elapsedTime = 0f;
+
+            // Duracion busqueda
+            float duration = 2.5f;
+
+            //Rotacion original de la cabeza
+            Vector3 originalHeadRotation = _head.transform.localEulerAngles;
+
+            if (_head && !_targetFound)
             {
-
-                float angle = Mathf.Lerp(minY, maxY, (Mathf.Sin(Time.time * speed) + 1f) / 2f);
-
-                Vector3 currentRotation = _head.transform.localEulerAngles;
-                _head.transform.localEulerAngles = new Vector3(currentRotation.x, angle, currentRotation.z);
-
-                elapsedTime += Time.deltaTime;
-
-                if (_targetFound)
+                while (!_targetFound && _searching && elapsedTime < duration)
                 {
-                    break;
-                }
 
-                yield return null;
+                    float angle = Mathf.Lerp(minY, maxY, (Mathf.Sin(Time.time * speed) + 1f) / 2f);
+
+                    Vector3 currentRotation = _head.transform.localEulerAngles;
+                    _head.transform.localEulerAngles = new Vector3(currentRotation.x, angle, currentRotation.z);
+
+                    elapsedTime += Time.deltaTime;
+
+                    if (_targetFound)
+                    {
+                        break;
+                    }
+
+                    yield return null;
+
+                }
 
             }
 
-        }
+            _head.transform.localEulerAngles = originalHeadRotation;
 
-        _head.transform.localEulerAngles = originalHeadRotation;
+            Stop();
 
-        Stop();
+            if (_targetFound)
+            {
+                StartCoroutine(Chase());
+            }
+            else
+            {
+                StartCoroutine(Patrol());
+            }
 
-        if (_targetFound)
-        {
-            StartCoroutine(Chase());
         }
         else
         {
-            StartCoroutine(Patrol());
+            Debug.LogError("GameObject head no encontrado en el enemigo");
         }
-
     }
 
     #endregion END Vista
@@ -323,5 +321,30 @@ public class IAController : MonoBehaviour
 
 
     #endregion END Ataque
+
+    #region Tools
+
+    // Encuentra un hijo dentro de una jerarquía especificada usando una ruta.
+    //Devuelve null si no se encuentra alguno de los nodos. 
+    private GameObject FindChildRecursive(Transform parentTransform, string path)
+    {
+        string[] segments = path.Split('/');
+
+        Transform currentTransform = parentTransform;
+
+        foreach (string segment in segments)
+        {
+            currentTransform = currentTransform.Find(segment);
+
+            if (currentTransform == null)
+            {
+                return null;
+            }
+        }
+
+        return currentTransform.gameObject;
+    }
+
+    #endregion END Tools
 }
 
