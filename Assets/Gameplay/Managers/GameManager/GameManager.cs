@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +9,9 @@ public class GameManager : MonoBehaviour
     List<ScriptableObject> availableEnemyJobs = new List<ScriptableObject>();
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] CinemachineCamera gameCamera;
+
+    GameObject player;
     string playerJob;
 
     private List<ScriptableObject> FindAll<T>(string path = "")
@@ -35,6 +39,8 @@ public class GameManager : MonoBehaviour
         playerJob = FindAnyObjectByType<PlayerSelectManager>().SelectedCharacter;
         InstantiatePlayer();
         InstantiateEnemies();
+
+        gameCamera.Follow = player.transform;
     }
 
     void InstantiatePlayer() {
@@ -42,7 +48,7 @@ public class GameManager : MonoBehaviour
         availablePlayerJobs = FindAll<ScriptableObject>("Assets/Gameplay/Actor/ScriptableObjects/Player/");
         ActorDataSO actorData = availablePlayerJobs.Find(x => x.name == playerJob) as ActorDataSO;
         playerPrefab.GetComponent<PlayerController>().ActorData = actorData;
-        GameObject player = Instantiate(playerPrefab, playerSpawnPoint.transform.position, Quaternion.identity, playerSpawnPoint.transform);
+        player = Instantiate(playerPrefab, playerSpawnPoint.transform.position, Quaternion.identity, playerSpawnPoint.transform);
         player.SetActive(true);
     }
 

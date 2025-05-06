@@ -1,6 +1,3 @@
-using System;
-using TMPro;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerController : Actor
@@ -10,17 +7,35 @@ public class PlayerController : Actor
     protected int Experience { get; set; }
     protected int MaxExperience { get; set; }
 
+    private GameObject actorModelObject;
+    private Animator animator;
+
     void Start()
     {
         PlayerInitialize();
-        base.InitializeAnimations();
+        actorModelObject = gameObject.transform.GetChild(0).gameObject;
+        animator = actorModelObject.AddComponent<Animator>();
+        animator.runtimeAnimatorController = ActorData.animatorController;
     }
 
     void Update()
     {
-        
+        float vAxis = Input.GetAxis("Vertical");
+
+        base.movementSpeed = vAxis * ActorData.stats.Speed;
+        base.eulerAngleVelocity = new Vector3(0, Input.GetAxis("Horizontal") * 80, 0);
+        animator.SetFloat("Velocity", vAxis);
+
+        if (Input.GetButton("Fire1"))
+            animator.SetTrigger("Attack");
     }
-    
+
+    void FixedUpdate()
+    {
+        Rotate();
+        Move();
+    }
+
     public void PlayerInitialize() 
     {
         MaxHealth = ActorData.stats.MaxHP;

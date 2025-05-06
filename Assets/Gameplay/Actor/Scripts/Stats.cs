@@ -5,6 +5,7 @@ public class Stats : IStats
 {
     [SerializeField] protected string characterName;
 
+    [SerializeField] protected int speed;
     [SerializeField] protected int maxHP;
     [SerializeField] protected int hp;
     [SerializeField] protected int mana;
@@ -17,6 +18,13 @@ public class Stats : IStats
     [SerializeField] protected float mulDefense;
 
     #region [Integers]
+
+    public int Speed
+    {
+        get => speed;
+        set => speed = value;
+    }
+
     public int MaxHP
     {
         get => maxHP;
