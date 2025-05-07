@@ -266,13 +266,21 @@ public class IAController : MonoBehaviour
 
     private void Attack()
     {
-        StartCoroutine(SwordBlow());
+        //StartCoroutine(SwordBlow());
+
+        _animator.SetTrigger("AttackTrigger");
     }
 
     //Realiza un espadazo con un cooldown determinado
     private IEnumerator SwordBlow()
     {
-        _isAttacking = true;
+        //_isAttacking = true;
+
+        Attack();
+
+        //_animator.ResetTrigger("AttackTrigger");
+
+        //_animator.SetTrigger("AttackTrigger");
 
         //yield return new WaitForEndOfFrame();
 
@@ -281,39 +289,48 @@ public class IAController : MonoBehaviour
 
         //float elapsedTime = 0f;
 
-        //while(duration + cooldown > elapsedTime)
+        //while (duration > elapsedTime)
         //{
         //    elapsedTime += Time.deltaTime;
         //}
 
-        float elapsedTime = 0f;
+        ////////////////
+        ///
 
-        float coolDownTime = 1f;
 
-        while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= 2f)
+        //float elapsedTime = 0f;
+
+        //float coolDownTime = 1f;
+
+        //while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= 2f)
+        //{
+
+        //    elapsedTime += Time.deltaTime;
+
+        //    if (elapsedTime >= coolDownTime)
+        //    {
+
+        //        Debug.Log("Ataca");
+
+        //        break;
+        //    }
+
+        //    yield return null;
+        //}
+
+
+        if (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= 2f)
         {
-
-            elapsedTime += Time.deltaTime;
-
-            if (elapsedTime >= coolDownTime)
-            {
-
-                Debug.Log("Ataca");
-
-                break;
-            }
-
-            yield return null;
-        }
-
+            yield return new WaitForSeconds(1.5f);
+        }        
 
         Stop();
 
-        //yield return new WaitForEndOfFrame();
-
+        _isMoving = true;
         StartCoroutine(Chase());
+       
     }
-   
+
 
 
     #endregion END Ataque
