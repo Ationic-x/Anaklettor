@@ -38,6 +38,8 @@ public class PlayerController : Actor
 
     public void PlayerInitialize() 
     {
+        Debug.Log(ActorData.ToString());
+
         MaxHealth = ActorData.stats.MaxHP;
         Health = MaxHealth;
         Mana = ActorData.stats.Mana;
