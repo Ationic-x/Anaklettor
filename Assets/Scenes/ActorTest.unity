@@ -163,7 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72e29b93473b074c99de23c17a70bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedCharacter: Knight
+  selectedCharacter:
+    jobType: 2
 --- !u!1 &765060716
 GameObject:
   m_ObjectHideFlags: 0
