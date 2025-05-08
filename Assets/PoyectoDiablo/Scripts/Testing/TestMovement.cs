@@ -33,61 +33,52 @@ public class TestMovement : MonoBehaviour
     {
         if (_forward)
         {
-            transform.position += transform.forward * Time.deltaTime * _speed;
+            transform.position -= transform.forward * Time.deltaTime * _speed;
         }
         if (_backWard)
         {
-            transform.position -= transform.forward * Time.deltaTime * _speed;
+            transform.position += transform.forward * Time.deltaTime * _speed;
         }
         if (_left)
         {
-            transform.position -= transform.right * Time.deltaTime * _speed;
+            transform.position += transform.right * Time.deltaTime * _speed;
         }
         if (_right)
         {
-            transform.position += transform.right * Time.deltaTime * _speed;
+            transform.position -= transform.right * Time.deltaTime * _speed;
         }
     }
 
 	private void OnTriggerEnter(Collider other)
 	{
-        if (other.CompareTag("Warp"))
-        {
-			other.gameObject.GetComponentInChildren<Animator>().SetTrigger("In");
-			other.gameObject.SetActive(true);
-			_enterPosition = transform.position;
-		}
+		WarpData warp = other.GetComponentInChildren<WarpData>();
+		if (warp == null) return;
+
+		other.gameObject.GetComponentInChildren<Animator>().SetTrigger("In");
+		_enterPosition = transform.position;
 	}
 
 	// This code have a lesser misstake, my test scenario is reversed so X and Z are positive when should be negative
 	private void OnTriggerExit(Collider other)
 	{
-        if (other.CompareTag("Warp"))
-        {
-			float offset = 0.2f; // small offset to avoid unexpected behaviours 
-			other.gameObject.GetComponentInChildren<Animator>().SetTrigger("Out");
-			switch (other.gameObject.name)
-			{
-				case "North":
-					if (_enterPosition.z - offset > transform.position.z)
-						_mapManager.ChangeScene(Vector2Int.up);
-					break;
-				case "South":
-					if (_enterPosition.z + offset < transform.position.z)
-						_mapManager.ChangeScene(Vector2Int.down);
-					break;
-				case "East":
-					if (_enterPosition.x - offset > transform.position.x)
-						_mapManager.ChangeScene(Vector2Int.right);
-					break;
-				case "West":
-					if (_enterPosition.x + offset < transform.position.x)
-						_mapManager.ChangeScene(Vector2Int.left);
-					break;
-				default:
-					break;
-			}
-		}
+		WarpData warp = other.GetComponentInChildren<WarpData>();
+        if (warp == null) return;
+
+
+		float offset = 1.1f;
+		other.GetComponentInChildren<Animator>()?.SetTrigger("Out");
+
+		Vector3 position = transform.position;
+		Vector2Int direction = warp.Direction;
+
+		bool shouldWarp =
+			(direction == Vector2Int.up && _enterPosition.z * offset < position.z) ||
+			(direction == Vector2Int.down && _enterPosition.z * offset > position.z) ||
+			(direction == Vector2Int.right && _enterPosition.x * offset < position.x) ||
+			(direction == Vector2Int.left && _enterPosition.x * offset > position.x);
+
+		if (shouldWarp)
+			_mapManager.ChangeScene(warp.NewRoom, direction);
 	}
 
     // Method to reduce possible bugs when change between scenes

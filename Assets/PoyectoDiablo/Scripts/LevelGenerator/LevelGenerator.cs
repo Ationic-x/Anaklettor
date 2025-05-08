@@ -173,7 +173,7 @@ public class LevelGenerator : MonoBehaviour
 
 	public bool IsValid(Vector2Int pos)
     {
-        return pos.x >= 0 && pos.x < _mapWidth && pos.y >= 0 && pos.y < _mapHeight;
+		return pos.x >= 0 && pos.x < _mapWidth && pos.y >= 0 && pos.y < _mapHeight;
     }
 	#endregion
 

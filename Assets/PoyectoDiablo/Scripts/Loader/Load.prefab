@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3130355470575829878
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Sala actual: 3, 3, ID: 9 +  Rotation: (0, 180)'
+  m_text: Cargando...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 3748580810088227584}
   - component: {fileID: 6803658441650001016}
   - component: {fileID: 3651704463881858858}
+  - component: {fileID: 5049044465792274480}
   m_Layer: 5
   m_Name: Load
   m_TagString: Untagged
@@ -261,7 +262,7 @@ Canvas:
   m_GameObject: {fileID: 7748004471074913366}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -269,7 +270,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -297,7 +298,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6803658441650001016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,3 +338,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5049044465792274480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748004471074913366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9087533adbeb2644f8d852dfed2a4997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _warpPrefab: {fileID: 2467427411415663709, guid: a90a87b873e593f41901024272600090, type: 3}
+  _player: {fileID: 3068678621140226955, guid: f2bf87cd4fafa6d4787bfd5674d6c003, type: 3}
+  _listEnemies:
+    entries:
+    - Key: 0
+      Value: {fileID: 5496147368724889126, guid: 125eaea587e42034bbedc2b2cf31590b, type: 3}
+  _spawnRules: {fileID: 11400000, guid: 7eb91242054a53643b78c8b515922d3c, type: 2}

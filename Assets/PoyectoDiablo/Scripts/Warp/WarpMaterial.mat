@@ -25,15 +25,15 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Height: 0.701
-    - _Width: 0.694
+    - _Height: 1
+    - _Width: 1
     m_Colors:
     - _BGColor: {r: 0, g: 0, b: 0, a: 1}
     - _BackgroundColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 0.84611267, b: 0, a: 1}
     - _ScrollSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _TColor: {r: 1, g: 0, b: 0, a: 1}
-    - _TilingAndOffset: {r: 18.94, g: 1.2, b: 0.75, a: 1}
+    - _TilingAndOffset: {r: 1, g: 1, b: 1, a: 1}
     - _TriangleColor: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
