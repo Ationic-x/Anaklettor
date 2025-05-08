@@ -17,6 +17,8 @@ public class IAController : MonoBehaviour
 
     private Animator _animator;
 
+    private ActorDataSO _actorData;
+
     //Tamanyo del mapa
     private int areaSize = 20;
 
@@ -41,10 +43,12 @@ public class IAController : MonoBehaviour
         _nvAgent = GetComponent<NavMeshAgent>();
 
         GetEyes();
+
     }
 
     void Start()
     {
+        Debug.Log(_actorData.stats.MovementSpeed);
         StartCoroutine(Idle(5));
         //StartCoroutine(Patrol());
     }
@@ -364,5 +368,7 @@ public class IAController : MonoBehaviour
     }
 
     #endregion END Tools
+
+    public ActorDataSO ActorData { set => _actorData = value; }
 }
 

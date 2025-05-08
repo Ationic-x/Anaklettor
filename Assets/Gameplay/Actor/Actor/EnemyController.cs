@@ -14,7 +14,8 @@ public class EnemyController : Actor
         Defense = ActorData.stats.Defense;
         Level = 1;
 
-        Instantiate(ActorData.model, transform.position, Quaternion.identity, transform);
+        GameObject EnemyRef = Instantiate(ActorData.model, transform.position, Quaternion.identity, transform);
+        EnemyRef.GetComponentInChildren<IAController>().ActorData = ActorData;
     }
 
     // Update is called once per frame

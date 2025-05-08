@@ -71,6 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8489679363179553518}
+  - component: {fileID: 4669270058042522633}
   m_Layer: 0
   m_Name: RayCastEyes
   m_TagString: Untagged
@@ -100,6 +101,18 @@ Transform:
   - {fileID: 8429359944586507915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4669270058042522633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589395201438228081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24a3b7363f024d54781e858f173dedbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2778141115252838297
 GameObject:
   m_ObjectHideFlags: 0
