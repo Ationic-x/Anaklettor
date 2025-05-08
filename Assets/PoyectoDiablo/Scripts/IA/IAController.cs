@@ -31,6 +31,9 @@ public class IAController : MonoBehaviour
 
     private bool _isDead = false;
 
+    //Variables
+    [SerializeField] private float _attackDelay = 0.5f;
+
     private void Awake()
     {
         _animator = GetComponentInParent<Animator>();
@@ -296,7 +299,7 @@ public class IAController : MonoBehaviour
         while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= 2f)
         {
             Attack();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0)[0].clip.length + _attackDelay);
         }
 
         Stop();
@@ -311,6 +314,7 @@ public class IAController : MonoBehaviour
         _isDead = true;
         Stop();
         StopAllCoroutines();
+        _nvAgent.enabled = false;
         _animator.SetTrigger("DieTrigger");
     }
 

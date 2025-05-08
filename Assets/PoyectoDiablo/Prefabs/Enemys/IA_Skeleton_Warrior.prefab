@@ -372,6 +372,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IA_Skeleton_Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 1820415068267828097, guid: 2ebb3eee56c934b4183459cceed48d61, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2196004506624635508, guid: 2ebb3eee56c934b4183459cceed48d61, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.33081627
@@ -618,6 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eda95400ffe4f24e9c5d78c1d8962ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackDelay: 0.5
 --- !u!195 &8524412985577226724
 NavMeshAgent:
   m_ObjectHideFlags: 0
