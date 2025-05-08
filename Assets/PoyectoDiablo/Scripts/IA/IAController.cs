@@ -29,7 +29,7 @@ public class IAController : MonoBehaviour
 
     private bool _isSearching = false;
 
-    private bool _isInCooldown = false;
+    private bool _isDead = false;
 
     private void Awake()
     {
@@ -42,7 +42,8 @@ public class IAController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Patrol());
+        StartCoroutine(Idle(5));
+        //StartCoroutine(Patrol());
     }
 
     void Update()
@@ -83,7 +84,7 @@ public class IAController : MonoBehaviour
     private void RayDetector()
     {
 
-        if (!_targetFound)
+        if (!_targetFound && !_isDead)
         {
             RaycastHit hit;
 
@@ -162,6 +163,22 @@ public class IAController : MonoBehaviour
 
     #region Movimiento
 
+    private IEnumerator Idle(float secondsInIdle)
+    {
+        yield return new WaitForSeconds(secondsInIdle);
+
+        Stop();
+
+        if (_targetFound)
+        {
+            StartCoroutine(Chase());
+        }
+        else
+        {
+            StartCoroutine(Patrol());
+        }
+    }
+
     //Obtiene un punto aleatorio del escenario para la navegacion
     private Vector3 RandomPosition()
     {
@@ -214,6 +231,8 @@ public class IAController : MonoBehaviour
     {
         if (_playerGameObject)
         {
+            //Como ya ha encontrado al jugador empieza a correr y por lo tanto va mas rapido
+            _nvAgent.speed = 4.25f;
 
             while (Vector3.Distance(transform.position, _playerGameObject.transform.position) >= 2f)
             {
@@ -237,7 +256,7 @@ public class IAController : MonoBehaviour
 
         _nvAgent.SetDestination(destination);
 
-        while (Vector3.Distance(transform.position, destination) >= 1.5f)
+        while (Vector3.Distance(transform.position, destination) >= 2f)
         {
             yield return new WaitForFixedUpdate();
         }
@@ -256,8 +275,6 @@ public class IAController : MonoBehaviour
 
         _isSearching = false;
 
-        _isInCooldown = false;
-
     }
 
     #endregion END Movimiento
@@ -266,71 +283,36 @@ public class IAController : MonoBehaviour
 
     private void Attack()
     {
-        //StartCoroutine(SwordBlow());
-
         _animator.SetTrigger("AttackTrigger");
     }
 
     //Realiza un espadazo con un cooldown determinado
     private IEnumerator SwordBlow()
     {
-        //_isAttacking = true;
 
         Attack();
 
-        //_animator.ResetTrigger("AttackTrigger");
-
-        //_animator.SetTrigger("AttackTrigger");
-
-        //yield return new WaitForEndOfFrame();
-
-        //float duration = _animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-        //float cooldown = 2f;
-
-        //float elapsedTime = 0f;
-
-        //while (duration > elapsedTime)
-        //{
-        //    elapsedTime += Time.deltaTime;
-        //}
-
-        ////////////////
-        ///
-
-
-        //float elapsedTime = 0f;
-
-        //float coolDownTime = 1f;
-
-        //while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= 2f)
-        //{
-
-        //    elapsedTime += Time.deltaTime;
-
-        //    if (elapsedTime >= coolDownTime)
-        //    {
-
-        //        Debug.Log("Ataca");
-
-        //        break;
-        //    }
-
-        //    yield return null;
-        //}
-
-
-        if (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= 2f)
+        ////Si sigue estando al alcance de golpear otra vez espera 1.5 segundos y vuelve a atacar
+        while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= 2f)
         {
+            Attack();
             yield return new WaitForSeconds(1.5f);
-        }        
+        }
 
         Stop();
-
-        _isMoving = true;
         StartCoroutine(Chase());
-       
+
     }
 
+    //Esto hace que aparezca en los 3 puntos en el componente script este metodo para ejecutar 
+    [ContextMenu("Dead")]
+    public void Dead()
+    {
+        _isDead = true;
+        Stop();
+        StopAllCoroutines();
+        _animator.SetTrigger("DieTrigger");
+    }
 
 
     #endregion END Ataque
@@ -344,8 +326,10 @@ public class IAController : MonoBehaviour
             _animator.SetBool("_isMoving", _isMoving);
             _animator.SetBool("_isAttacking", _isAttacking);
             _animator.SetBool("_isSearching", _isSearching);
+            _animator.SetBool("_targetFound", _targetFound);
 
-            _animator.SetBool("_isInCooldown", _isInCooldown);
+            _animator.SetBool("_isDead", _isDead);
+
         }
 
     }
