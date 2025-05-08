@@ -10,17 +10,15 @@ public class MinimapManager : MonoBehaviour
 	public Material material;
 	public Vector2 playerPosition;
 
-	// Update is called once per frame
-	void Update()
+	void Start()
     {
-		// Actualiza lista de celdas visitadas
-
 		for (int i = 0; i < visited.Count && i < MaxVisited; i++)
-		visitedArray[i] = new Vector4(visited[i].x, visited[i].y, 0, 0);
+			visitedArray[i] = new Vector4(visited[i].x, visited[i].y, 0, 0);
+		
 		material.SetVectorArray("_VisitedCells", visitedArray);
 		material.SetInt("_VisitedCount", visited.Count);
 
-		// También puedes actualizar el jugador
+
 		material.SetVector("_PlayerCell", new Vector4(playerPosition.x, playerPosition.y, 0, 0));
 	}
 }

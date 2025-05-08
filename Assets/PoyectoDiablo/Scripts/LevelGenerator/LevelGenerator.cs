@@ -187,6 +187,11 @@ public class LevelGenerator : MonoBehaviour
         return _roomMap[position];
     }
 
+    public RoomData GetOrCreateCurrentRoomData()
+    {
+        return GetOrCreateRoomData(_playerCurrentRoom);
+    }
+
     public Vector3 PlayerPosition
 	{
 		get { return _playerPosition; }

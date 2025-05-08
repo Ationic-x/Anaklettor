@@ -32,14 +32,14 @@ Material:
         m_Scale: {x: 0, y: 0}
         m_Offset: {x: 0, y: 0}
     m_Ints:
-    - _GridSize: 10
+    - _GridSize: 6
     m_Floats:
     - _GridSize: 2.16
     - _Zoom: 0
     m_Colors:
     - _BGColor: {r: 0, g: 0, b: 0, a: 1}
     - _BorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _CellColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
+    - _CellColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
     - _GridSize: {r: 3, g: 3, b: 0, a: 0}
     - _PlayerCell: {r: 0, g: 0, b: 0, a: 0}
     - _PlayerColor: {r: 1, g: 0, b: 0, a: 1}

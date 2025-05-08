@@ -29,13 +29,14 @@ public static class SpawnController
 		Vector3 floorScale = floor.transform.localScale;
 
 		// Find enemy container and redefined spawn positions/size (have spawn points)
-		GameObject enemyContainer = GameObject.FindGameObjectWithTag(Tags.Floor);
+		GameObject enemyContainer = GameObject.FindGameObjectWithTag(Tags.Spawn);
 		List<Vector3> predefinedPositions = new();
 		
 		for (int i = 0; i < enemyContainer.transform.childCount; i++)
 		{
 			Transform child = enemyContainer.transform.GetChild(i);
 			predefinedPositions.Add(new Vector3(child.position.x, floorPostion.y + floorScale.y * 0.5f, child.position.z));
+			Object.Destroy(child);
 		}
 		int min = Mathf.Max(rules.minEnemies, predefinedPositions.Count);
 		int count = Random.Range(min, rules.maxEnemies + 1);
@@ -86,9 +87,12 @@ public static class SpawnController
 			GameObject enemy = Object.Instantiate(prefab, spawnPos, randomYRotation, enemyContainer.transform);
 			usedPositions.Add(spawnPos);
 		}
-	}
 
-	private static Vector3 GetValidSpawnPosition(Vector3 position, Vector3 scale, float edgeMargin, float spacing, List<Vector3> existing)
+		// Store the new enemies
+        SaveController.SaveEnemies(enemiesDictionary[selectedRoles[0]]);
+    }
+
+    private static Vector3 GetValidSpawnPosition(Vector3 position, Vector3 scale, float edgeMargin, float spacing, List<Vector3> existing)
 	{
 		int maxAttempts = 50;
 

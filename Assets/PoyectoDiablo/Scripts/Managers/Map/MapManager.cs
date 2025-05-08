@@ -9,13 +9,10 @@ using UnityEngine.UIElements;
 
 public class MapManager : MonoBehaviour
 {
-    public TextMeshProUGUI positionText;
     private static Dictionary<int, Tuple<int, float>> _sceneDictionary = new Dictionary<int, Tuple<int, float>>();
 
     private LoadSceneController _loadSceneController;
 
-	public Transform enemyContainer;
-    public Animator loadingAnimator;
     private RoomData _currentRoomData;
     private LevelGenerator _levelInstance;
 
@@ -29,7 +26,6 @@ public class MapManager : MonoBehaviour
 
 		_currentRoomData = LevelGenerator.Instance.GetOrCreateRoomData(pos);
 		
-        if (_levelInstance.MoveDirection != Vector2Int.zero) loadingAnimator.SetTrigger("Enable");
 		if (_sceneDictionary.Count == 0) InitializeSceneDictionary();
 
 		_loadSceneController = FindFirstObjectByType<LoadSceneController>();
@@ -71,36 +67,8 @@ public class MapManager : MonoBehaviour
 		};
 	}
 
-	//private void SpawnEnemiesForRoom()
- //   {
-
- //       if (!_currentRoomData.initialized)
- //       {
-
- //           for (int i = 0; i < enemyCount; i++)
- //           {
- //               var enemyData = new EnemyData();
- //               enemyData.position = new Vector3Int(UnityEngine.Random.Range(-5, 6), 0, UnityEngine.Random.Range(-5, 6));
- //               _currentRoomData.enemies.Add(enemyData);
- //           }
-
- //           _currentRoomData.initialized = true;
- //       }
-
- //       foreach (var enemy in _currentRoomData.enemies)
- //       {
- //           TestEnemy controller = enemyData.GetComponent<TestEnemy>();
- //           controller.SetData(enemy);
- //       }
- //   }
-
     public void ChangeScene(Vector2Int newRoom, Vector2Int direction)
     {
         _loadSceneController.ChangeScene(newRoom, direction);
     }
-
-	//	_levelInstance.PlayerCurrentRoom = newRoom;
-	//	_levelInstance.MoveDirection = direction;
-	//	_levelInstance.PlayerPosition = _player.transform.position;
-	//	_levelInstance.PlayerRotation = _player.transform.rotation;
 }

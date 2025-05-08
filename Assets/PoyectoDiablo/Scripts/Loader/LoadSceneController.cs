@@ -8,6 +8,7 @@ public class LoadSceneController : MonoBehaviour
 {
 	// Load elements
 	[SerializeField] private GameObject _warpPrefab;
+	
 	// Curently we're hardcoding the player prefab, but in future will use a reference of the choosen one (select scene)
 	[SerializeField] private GameObject _player;
 	[SerializeField] private SerializableDictionary<Rol, GameObject> _listEnemies;
@@ -22,11 +23,13 @@ public class LoadSceneController : MonoBehaviour
 	private MapManager _mapManager;
 	private GameObject _floor;
 
-	private void Awake()
+    #region Preload
+    private void Awake()
 	{
 		_isLoading = false;
 		_loadingAnimator = GetComponentInChildren<Animator>();
-		GetComponentInChildren<TextMeshProUGUI>().text = "Cargando..."; // In case of multiple languages
+
+        GetComponentInChildren<TextMeshProUGUI>().text = "Cargando..."; // In case of multiple languages
 	}
 
 	private void Start()
@@ -45,7 +48,10 @@ public class LoadSceneController : MonoBehaviour
 		WarpGenerator.Generate(_mapManager, _floor, _warpPrefab);
 		SpawnController.SpawnPlayer(_mapManager, _floor, _player);
 		SpawnController.SpawnEnemies(_spawnRules, _floor, _listEnemies.ToDictionary());
-	}
+        SaveController.Initialize(_mapManager);
+
+        if (_mapManager.LevelInstance.MoveDirection != Vector2Int.zero) _loadingAnimator.SetTrigger("Enable");
+    }
 
 	public MapManager MapManager { set
 		{
@@ -53,13 +59,14 @@ public class LoadSceneController : MonoBehaviour
 			StartCoroutine(WaitForFloorAndMap());
 		}
 	}
+    #endregion
 
-	public void ChangeScene(Vector2Int newRoom, Vector2Int direction)
+    #region Load and Loading
+    public void ChangeScene(Vector2Int newRoom, Vector2Int direction)
 	{
 		if (_isLoading) return;
 		_isLoading = true;
 
-		_mapManager.LevelInstance.MoveDirection = direction;
 		StartCoroutine(LoadSceneAsync(newRoom, direction));
 	}
 
@@ -73,21 +80,6 @@ public class LoadSceneController : MonoBehaviour
 		_loadingAnimator.SetTrigger(animationDirection);
 	}
 
-	IEnumerator ExitAnimationDelayed(float delay)
-	{
-		// Apply animation and making sure is applied
-		yield return new WaitForEndOfFrame();
-		LoadAnimationDirection(_mapManager.LevelInstance.MoveDirection);
-		yield return new WaitForEndOfFrame();
-
-		// Wait animation end + CD
-		float animDuration = _loadingAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-		yield return new WaitForSecondsRealtime(animDuration + _AnimationDelay);
-
-		// Return game control
-		Time.timeScale = 1f;
-		yield return new WaitForEndOfFrame();
-	}
 
 	IEnumerator LoadSceneAsync(Vector2Int newRoom, Vector2Int direction)
 	{
@@ -97,6 +89,9 @@ public class LoadSceneController : MonoBehaviour
 		LoadAnimationDirection(direction);
 		yield return new WaitForEndOfFrame();
 
+		// Save values
+		SaveController.SaveEnemies(_listEnemies[0]);
+		SaveController.SavePlayer(newRoom, direction);
 
 		// Wait Async Load end
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
@@ -117,4 +112,23 @@ public class LoadSceneController : MonoBehaviour
 
 		yield return new WaitForEndOfFrame();
 	}
+    #endregion
+
+    #region End Load
+    IEnumerator ExitAnimationDelayed(float delay)
+	{
+		// Apply animation and making sure is applied
+		yield return new WaitForEndOfFrame();
+		LoadAnimationDirection(_mapManager.LevelInstance.MoveDirection);
+		yield return new WaitForEndOfFrame();
+
+		// Wait animation end + CD
+		float animDuration = _loadingAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+		yield return new WaitForSecondsRealtime(animDuration + _AnimationDelay);
+
+		// Return game control
+		Time.timeScale = 1f;
+		yield return new WaitForEndOfFrame();
+	}
+    #endregion
 }
