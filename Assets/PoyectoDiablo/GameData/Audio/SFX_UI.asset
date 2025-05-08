@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153e48faea1a5364c84b3728a9984305, type: 3}
+  m_Name: SFX_UI
+  m_EditorClassIdentifier: 
+  soundEntries:
+  - soundName: snd_ui_move
+    clip: {fileID: 8300000, guid: 4ff37bd3347bfe841865763b06cba313, type: 3}
+    category: 2
+  - soundName: snd_ui_confirm
+    clip: {fileID: 8300000, guid: 8fb51df9c991f0f47874f28c14187bc0, type: 3}
+    category: 2
+  - soundName: snd_ui_cancel
+    clip: {fileID: 8300000, guid: ebac9200391436e409c56fb6d3c21587, type: 3}
+    category: 2
+  - soundName: snd_ui_startgame
+    clip: {fileID: 8300000, guid: 3cb104837d15ea14bb3d5fb406a5966c, type: 3}
+    category: 2
