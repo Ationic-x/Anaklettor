@@ -30,21 +30,23 @@ public static class SaveController
 			roomData = _levelInstance.NewRoomData(_levelInstance.PlayerCurrentRoom);
 		}
 
+		// First element of child count is always the gameobject (itself)
 		for (int i = 0; i < enemyContainer.transform.childCount; i++)
 		{
-			if (firstTime)
+            Transform child = enemyContainer.transform.GetChild(i);
+            if (firstTime)
 			{
 				var enemyData = new EnemyData();
-				enemyData.position = enemyContainer.transform.GetChild(i).position;
-				enemyData.rotation = enemyContainer.transform.GetChild(i).rotation;
+				enemyData.position = child.position;
+				enemyData.rotation = child.rotation;
 				enemyData.actorData = actorData;
 				enemyData.name = EnemyNames.enemyNameID[i];
 				roomData.enemies.Add(enemyData);
 			}
 			else
 			{
-				roomData.enemies[i].position = enemyContainer.transform.GetChild(i).position;
-				roomData.enemies[i].rotation = enemyContainer.transform.GetChild(i).rotation;
+                roomData.enemies[i].position = child.position;
+				roomData.enemies[i].rotation = child.rotation;
 				// Should be stored the hp also
 				// Should be store if is alive also
 			}

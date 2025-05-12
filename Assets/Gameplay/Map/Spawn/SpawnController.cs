@@ -20,12 +20,14 @@ public static class SpawnController
 	private static MapManager _mapManager;
 	private static GameObject _floor;
 	private static GameObject _enemyContainer;
+	private static GameObject _map;
 
-	public static void Init(MapManager newMapManager, GameObject newFloor, GameObject newEnemyContainer)
+	public static void Initialize(MapManager newMapManager, GameObject newFloor, GameObject newEnemyContainer, GameObject newMap)
 	{
 		_mapManager = newMapManager;
 		_floor = newFloor;
 		_enemyContainer = newEnemyContainer;
+		_map = newMap;
 	}
 
 	// Currently using prefab for testing
@@ -53,11 +55,18 @@ public static class SpawnController
 	{
 		if (_mapManager.LevelInstance.TryGetCurrentRoomData(out RoomData roomData))
 		{
-			StoredSpawn(roomData);
+            for (int i = 0; i < _enemyContainer.transform.childCount; i++)
+                Object.DestroyImmediate(_enemyContainer.transform.GetChild(i).gameObject);
+
+            StoredSpawn(roomData);
 		} else
 		{
+            
 			FirstTimeSpawn(rules, enemiesDictionary);
-		}
+
+            _enemyContainer.transform.rotation = _map.transform.rotation;
+            _enemyContainer.transform.localScale = _map.transform.localScale;
+        }
     }
 
 	private static void StoredSpawn(RoomData roomData)

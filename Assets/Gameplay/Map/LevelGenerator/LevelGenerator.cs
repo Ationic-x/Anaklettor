@@ -44,7 +44,7 @@ public class LevelGenerator : MonoBehaviour
     private Dictionary<Vector2Int, RoomData> _roomMap = new();
 
     private int[,] _mapData;
-	private ArrayQueue<Vector4> _visitedRooms = new(MaxVisited, new Vector4(-1, -1, 0, 0));
+    private ArrayQueue<Vector4> _visitedRooms = new(MaxVisited, new Vector4(-1, -1, -1, -1));
 
 
 	private void Awake()

@@ -24,8 +24,6 @@ public class LoadSceneController : MonoBehaviour
 
 	// Map variables
 	private MapManager _mapManager;
-	private GameObject _floor;
-	private GameObject _spawn;
 
     #region Preload
     private void Awake()
@@ -49,21 +47,31 @@ public class LoadSceneController : MonoBehaviour
 	}
 	IEnumerator WaitForGameObjects()
 	{
-		MinimapRenderer minimap = null; // Minimap isnt reused, so we can use a local variable
+		MinimapRenderer minimap = null;
+		GameObject floor = null;
+		GameObject map = null;
+		GameObject spawn = null;
+		GameObject warp = null;
+
 		LevelGenerator levelInstance = _mapManager.LevelInstance;
-		while (_floor == null || _mapManager == null || minimap == null)
+		while (floor == null || _mapManager == null || minimap == null || map == null || spawn == null)
 		{
-			_floor = GameObject.FindGameObjectWithTag(Tags.Floor);
-			_spawn = GameObject.FindGameObjectWithTag(Tags.Spawn);
+			floor = GameObject.FindGameObjectWithTag(Tags.Floor);
+			map = GameObject.FindGameObjectWithTag(Tags.Map);
+			spawn = GameObject.FindGameObjectWithTag(Tags.Spawn);
+			warp = GameObject.FindGameObjectWithTag(Tags.Warp);
 			minimap = FindFirstObjectByType<MinimapRenderer>();
 			yield return null;
 		}
 
 		// Warp
-		WarpGenerator.Generate(levelInstance, _floor, _warpPrefab);
+		WarpGenerator.Generate(levelInstance, floor, _warpPrefab, warp);
+
+		// Rotate Map
+		MapController.RotateMap(6, floor, map);
 
 		// Spawn
-		SpawnController.Init(_mapManager, _floor, _spawn);
+		SpawnController.Initialize(_mapManager, floor, spawn, map);
 		SpawnController.SpawnPlayer(_player);
 		SpawnController.SpawnEnemies(_spawnRules, _listEnemies.ToDictionary());
 

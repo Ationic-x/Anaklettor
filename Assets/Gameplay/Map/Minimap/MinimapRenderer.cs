@@ -51,7 +51,7 @@ public class MinimapRenderer : MonoBehaviour
 
 	public void SetVisitedRoom()
 	{
-		_material.SetVectorArray("_VisitedRoom", _visitedRooms.ToArray());
 		_material.SetInt("_VisitedCount", _visitedRooms.Count);
+		_material.SetVectorArray("_VisitedRooms", _visitedRooms.ToArray());
 	}
 }

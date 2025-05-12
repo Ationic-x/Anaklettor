@@ -2,9 +2,8 @@ using UnityEngine;
 
 public static class WarpGenerator
 {
-	public static void Generate(LevelGenerator levelInstance, GameObject floor, GameObject warpPrefab)
+	public static void Generate(LevelGenerator levelInstance, GameObject floor, GameObject warpPrefab, GameObject warpContainer)
 	{
-		GameObject warpContainer = GameObject.FindGameObjectWithTag(Tags.Warp);
 		if (warpContainer == null)
 		{
 			Debug.LogError("Warp container not found");
