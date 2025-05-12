@@ -43,21 +43,38 @@ public class IAController : MonoBehaviour
         _nvAgent = GetComponent<NavMeshAgent>();
 
         GetEyes();
-
     }
 
-    void Start()
-    {
-        Debug.Log(_actorData.stats.MovementSpeed);
-        StartCoroutine(Idle(5));
-        //StartCoroutine(Patrol());
-    }
+    //void Start()
+    //{
+    //    //Debug.Log(_actorData.stats.MovementSpeed);
+    //    StartCoroutine(Idle(5));
+    //    //StartCoroutine(Patrol());
+    //}
 
     void Update()
     {
         RayDetector();
 
         UpdateAnimationsVariables();
+    }
+
+    private void AssingScriptableObjectStats()
+    {
+
+        if (_nvAgent)
+        {
+
+            _nvAgent.speed = _actorData.stats.MovementSpeed;
+
+        }
+
+    }
+
+    private void OnActorDataSetted()
+    {
+        AssingScriptableObjectStats();
+        StartCoroutine(Idle(3));
     }
 
     #region Vista
@@ -239,7 +256,7 @@ public class IAController : MonoBehaviour
         if (_playerGameObject)
         {
             //Como ya ha encontrado al jugador empieza a correr y por lo tanto va mas rapido
-            _nvAgent.speed = 4.25f;
+            _nvAgent.speed = _nvAgent.speed + _actorData.stats.MulSpeed;
 
             while (Vector3.Distance(transform.position, _playerGameObject.transform.position) >= 2f)
             {
@@ -369,6 +386,11 @@ public class IAController : MonoBehaviour
 
     #endregion END Tools
 
-    public ActorDataSO ActorData { set => _actorData = value; }
+    public ActorDataSO ActorData { set 
+        {
+            _actorData = value;
+            OnActorDataSetted();
+        } 
+    }
 }
 

@@ -1,3 +1,5 @@
+using UnityEngine.Rendering;
+
 public interface IStats
 {
     public string CharacterName { get; set; }
@@ -37,6 +39,10 @@ public interface IStats
     /// Multiplicative defense, how much damage is reduced by * X
     /// </summary>
     public float MulDefense { get; set; }
+    /// <summary>
+    /// Multiplicative speed, how much speed is multiplication by base speed when running
+    /// </summary>
+    public float MulSpeed { get; set; }
 
     public void UpdateStats(IStats stats);
 }

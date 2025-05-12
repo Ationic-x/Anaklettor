@@ -11,7 +11,7 @@ public class EnemyController : Actor
         Mana = ActorData.stats.Mana;
         MaxMana = ActorData.stats.MaxMana;
         AttackPower = ActorData.stats.Attack;
-        Defense = ActorData.stats.Defense;
+        Defense = ActorData.stats.Defense;        
         Level = 1;
 
         GameObject EnemyRef = Instantiate(ActorData.model, transform.position, Quaternion.identity, transform);

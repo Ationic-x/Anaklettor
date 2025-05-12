@@ -16,6 +16,7 @@ public class Stats : IStats
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected float mulAttack;
     [SerializeField] protected float mulDefense;
+    [SerializeField] protected float mulSpeed;
 
     #region [Integers]
 
@@ -79,6 +80,11 @@ public class Stats : IStats
     {
         get => mulDefense;
         set => mulDefense = value;
+    }
+    public float MulSpeed
+    {
+        get => mulSpeed;
+        set => mulSpeed = value;
     }
     #endregion
 

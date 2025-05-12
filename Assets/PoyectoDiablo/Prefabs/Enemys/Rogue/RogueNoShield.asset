@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b07a83b9d10e06e4a9d6682c53ecbf6a, type: 3}
-  m_Name: Warrior
+  m_Name: RogueNoShield
   m_EditorClassIdentifier: 
-  model: {fileID: 6225956860053579359, guid: 906e5fdd66e56e74cadd184179fca050, type: 3}
+  model: {fileID: 8042736114080510047, guid: f343ace926347d44aade34f6dcdcd693, type: 3}
   job:
-    jobType: 0
+    jobType: 2
   stats:
-    characterName: Carlos
+    characterName: Ruperto
     speed: 3
     maxHP: 100
     hp: 100
     mana: 0
     maxMana: 0
-    attack: 3
-    defense: 5
-    movementSpeed: 3.5
+    attack: 6
+    defense: 2
+    movementSpeed: 3
     mulAttack: 0
     mulDefense: 0
+    mulSpeed: 0.5
   animatorController: {fileID: 9100000, guid: a5b9097d5c0cd5a4d93d952e03c3f1dd, type: 2}
