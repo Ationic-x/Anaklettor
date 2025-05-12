@@ -39,6 +39,7 @@ Material:
     - _GridSize: 6
     m_Floats:
     - _GridSize: 6
+    - _MapSize: 1
     - _Zoom: 0
     m_Colors:
     - _BGColor: {r: 0, g: 0, b: 0, a: 1}
@@ -47,6 +48,8 @@ Material:
     - _GridSize: {r: 3, g: 3, b: 0, a: 0}
     - _PlayerCell: {r: 3, g: 3, b: 0, a: 0}
     - _PlayerColor: {r: 1, g: 0, b: 0, a: 1}
+    - _PlayerRoom: {r: 0, g: 0, b: 0, a: 0}
+    - _RoomColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Translate: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

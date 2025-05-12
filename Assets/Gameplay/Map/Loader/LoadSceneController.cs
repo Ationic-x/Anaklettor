@@ -49,13 +49,13 @@ public class LoadSceneController : MonoBehaviour
 	}
 	IEnumerator WaitForGameObjects()
 	{
-		MinimapManager minimap = null; // Minimap isnt reused, so we can use a local variable
+		MinimapRenderer minimap = null; // Minimap isnt reused, so we can use a local variable
 		LevelGenerator levelInstance = _mapManager.LevelInstance;
 		while (_floor == null || _mapManager == null || minimap == null)
 		{
 			_floor = GameObject.FindGameObjectWithTag(Tags.Floor);
 			_spawn = GameObject.FindGameObjectWithTag(Tags.Spawn);
-			minimap = FindFirstObjectByType<MinimapManager>();
+			minimap = FindFirstObjectByType<MinimapRenderer>();
 			yield return null;
 		}
 

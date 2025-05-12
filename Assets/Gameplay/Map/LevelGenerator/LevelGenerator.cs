@@ -244,9 +244,9 @@ public class LevelGenerator : MonoBehaviour
 		set { _mapWidth = value; }
 	}
 
-    public Vector4[] VisitedRooms
+    public ArrayQueue<Vector4> VisitedRooms
     {
-        get { return _visitedRooms.ToArray(); }
+        get { return _visitedRooms; }
 	}
 
 	public int VisitedCount
