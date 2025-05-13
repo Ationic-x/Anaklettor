@@ -3,17 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class PlayerSelectManager : MonoBehaviour
 {
-    public string SelectedCharacter;
+    public IJob.Jobs selectedCharacter;
     void Awake()
     {
         DontDestroyOnLoad(this);
     }
 
-    public void SelectCharacter(string characterName)
+    public void SelectCharacter(Job character)
     {
-        SelectedCharacter = characterName;
-        Debug.Log("Selected Character: " + SelectedCharacter);
-
+        selectedCharacter = character.Class;
         SceneManager.LoadScene("PlayerTest");
     }
 }

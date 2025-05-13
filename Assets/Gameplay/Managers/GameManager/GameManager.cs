@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    List<ScriptableObject> availablePlayerJobs = new List<ScriptableObject>();
-    List<ScriptableObject> availableEnemyJobs = new List<ScriptableObject>();
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject enemyPrefab;
-    string playerJob;
+    [SerializeField] CinemachineCamera gameCamera;
+
+    GameObject player;
 
     private List<ScriptableObject> FindAll<T>(string path = "")
     {
@@ -32,23 +33,31 @@ public class GameManager : MonoBehaviour
     {
         // Ñapa: This is a workaround to get the selected character from the PlayerSelectManager.
         // In a real scenario, you would use a more robust method to pass data between scenes.
-        playerJob = FindAnyObjectByType<PlayerSelectManager>().SelectedCharacter;
-        InstantiatePlayer();
+        string selectedPlayerJob = FindAnyObjectByType<PlayerSelectManager>().selectedCharacter.ToString();
+
+        InstantiatePlayer(selectedPlayerJob);
         InstantiateEnemies();
+
+        gameCamera.Follow = player.transform;
+
+        Debug.Log(selectedPlayerJob);
     }
 
-    void InstantiatePlayer() {
+    void InstantiatePlayer(string playerJob) {
+        List<ScriptableObject> availablePlayerJobs = FindAll<ScriptableObject>("Assets/Gameplay/Actor/ScriptableObjects/Player/");
+
         GameObject playerSpawnPoint = GameObject.FindGameObjectWithTag("Respawn");
-        availablePlayerJobs = FindAll<ScriptableObject>("Assets/Gameplay/Actor/ScriptableObjects/Player/");
         ActorDataSO actorData = availablePlayerJobs.Find(x => x.name == playerJob) as ActorDataSO;
         playerPrefab.GetComponent<PlayerController>().ActorData = actorData;
-        GameObject player = Instantiate(playerPrefab, playerSpawnPoint.transform.position, Quaternion.identity, playerSpawnPoint.transform);
+
+        player = Instantiate(playerPrefab, playerSpawnPoint.transform.position, Quaternion.identity, playerSpawnPoint.transform);
         player.SetActive(true);
     }
 
     void InstantiateEnemies() {
-        availableEnemyJobs = FindAll<ScriptableObject>("Assets/Gameplay/Actor/ScriptableObjects/Enemy/");
+        List<ScriptableObject> availableEnemyJobs = FindAll<ScriptableObject>("Assets/Gameplay/Actor/ScriptableObjects/Enemy/");
         GameObject[] enemySpawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
+
         foreach (GameObject spawnPoint in enemySpawnPoints) {
             ActorDataSO actorData = availableEnemyJobs[Random.Range(0, availableEnemyJobs.Count)] as ActorDataSO;
             GameObject enemy = Instantiate(enemyPrefab, spawnPoint.transform.position, Quaternion.identity, spawnPoint.transform);

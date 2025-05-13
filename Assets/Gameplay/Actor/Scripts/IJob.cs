@@ -5,7 +5,7 @@ public interface IJob
     [System.Serializable]
     public enum Jobs
     {
-        Warrior,
+        Knight,
         Mage,
         Rogue,
         Barbarian

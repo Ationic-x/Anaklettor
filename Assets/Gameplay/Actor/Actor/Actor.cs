@@ -9,12 +9,15 @@ public class Actor : MonoBehaviour, IActor
     protected int MaxMana;
     protected int AttackPower;
     protected int Defense;
-    protected GameObject actorModelObject;
 
-    public void InitializeAnimations()
+    protected Rigidbody rb;
+
+    protected float movementSpeed;
+    protected Vector3 eulerAngleVelocity;
+
+    protected void Awake()
     {
-        GameObject actorModelObject = gameObject.transform.GetChild(0).gameObject;
-        actorModelObject.AddComponent<Animator>().runtimeAnimatorController = ActorData.animatorController;
+        rb = GetComponent<Rigidbody>();
     }
 
     public void Attack()
@@ -33,14 +36,16 @@ public class Actor : MonoBehaviour, IActor
         throw new System.NotImplementedException();
     }
 
-    public void Move(Vector3 direction)
+    public void Move()
     {
-        throw new System.NotImplementedException();
+        // rb.linearVelocity = direction * ActorData.stats.Speed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + (transform.forward * movementSpeed * Time.fixedDeltaTime));
     }
 
-    public void Rotate(Vector3 targetDirection)
+    public void Rotate()
     {
-        throw new System.NotImplementedException();
+        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
+        rb.MoveRotation(rb.rotation * deltaRotation);
     }
 
     public void TakeDamage(int amount)
