@@ -72,7 +72,7 @@ public class AudioManager : MonoBehaviour
     /// Ideal para música de fondo, sonido ambiente, etc.
     /// </summary>
     /// <param name="soundName">El nombre del sonido que se desea reproducir.</param>
-    public void Play(string soundName)
+    public void Play(string soundName, float pitch = 1.0f, float spatialBlend = 0.0f, float dopplerLevel = 0.0f, bool loop = true, float volume = 1.0f)
     {
         // Busca el AudioClip correspondiente en el diccionario global.
         if (globalSoundDictionary.TryGetValue(soundName, out var entry))
@@ -83,8 +83,11 @@ public class AudioManager : MonoBehaviour
 
             audioSource.clip = entry.clip;
             audioSource.outputAudioMixerGroup = GetGroup(entry.category);
-            audioSource.spatialBlend = 0.0f;
-            audioSource.loop = true;
+			audioSource.volume = volume;
+			audioSource.spatialBlend = spatialBlend;
+            audioSource.dopplerLevel = dopplerLevel;
+            audioSource.pitch = pitch;
+            audioSource.loop = loop;
 
             if (!audioSource.isPlaying) audioSource.Play();
         }
@@ -99,18 +102,20 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     /// <param name="soundName">El nombre del sonido que se desea reproducir.</param>
     /// <param name="targetObject">El GameObject al que el sonido debe seguir.</param>
-    public void Play3D(string soundName, GameObject targetObject)
+    public void Play3D(string soundName, GameObject targetObject, float spatialBlend = 1.0f, float pitch = 1.0f, float dopplerLevel = 0.0f, bool loop = false, float volume = 1.0f)
     {
         // Busca el AudioClip correspondiente en el diccionario global.
         if (globalSoundDictionary.TryGetValue(soundName, out var entry))
         {
-            // Verificar si el GameObject ya tiene un AudioSource.
-            if (!targetObject.TryGetComponent<AudioSource>(out var audioSource)) audioSource = targetObject.AddComponent<AudioSource>();
+            AudioSource audioSource = targetObject.AddComponent<AudioSource>();
 
             audioSource.clip = entry.clip;
             audioSource.outputAudioMixerGroup = GetGroup(entry.category);
-            audioSource.spatialBlend = 1.0f; 
-            audioSource.loop = false; // Para testeo
+			audioSource.volume = volume;
+			audioSource.spatialBlend = spatialBlend;
+            audioSource.dopplerLevel = dopplerLevel;
+			audioSource.pitch = pitch;
+			audioSource.loop = loop; // Para testeo
 
             if (!audioSource.isPlaying) audioSource.Play();
         }
@@ -127,7 +132,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     /// <param name="soundName">El nombre del sonido que se desea reproducir.</param>
     /// <param name="position">La posición en el espacio donde se reproducirá el sonido.</param>
-    public void PlayAtPoint(string soundName, Vector3 position)
+    public void PlayAtPoint(string soundName, Vector3 position, float spatialBlend = 1.0f, float pitch = 1.0f, float dopplerLevel = 0.0f, bool loop = false, float volume = 1.0f)
     {
         // Busca el AudioClip correspondiente en el diccionario global.
         if (globalSoundDictionary.TryGetValue(soundName, out var entry))
@@ -140,8 +145,11 @@ public class AudioManager : MonoBehaviour
             AudioSource tempAudioSource = tempAudioObject.AddComponent<AudioSource>();
             tempAudioSource.clip = entry.clip;
             tempAudioSource.outputAudioMixerGroup = GetGroup(entry.category);
-            tempAudioSource.spatialBlend = 1.0f;
-            tempAudioSource.loop = false; // Para testeo
+			tempAudioSource.volume = volume;
+			tempAudioSource.pitch = pitch;
+            tempAudioSource.spatialBlend = spatialBlend;
+            tempAudioSource.dopplerLevel = dopplerLevel;
+            tempAudioSource.loop = loop; // Para testeo
 
             tempAudioSource.Play();
 

@@ -137,6 +137,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioStart: snd_chara_atk
+  pitch: 1
+  spatialBlend: 1
+  dopplerLevel: 0
+  volume: 1
+  loop: 0
 --- !u!1001 &172486957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -295,9 +300,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterVolume: 1
-  musicVolume: 0.562
-  sfxVolume: 0.535
-  uiVolume: 0.533
+  musicVolume: 1
+  sfxVolume: 1
+  uiVolume: 1
   audioMixer: {fileID: 24100000, guid: 5a2a06330eb24554d82e0d590f98af14, type: 2}
   musicAudioGroup: {fileID: -4839286805638845646, guid: 5a2a06330eb24554d82e0d590f98af14, type: 2}
   sfxAudioGroup: {fileID: -7933000536979678585, guid: 5a2a06330eb24554d82e0d590f98af14, type: 2}
@@ -473,6 +478,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioStart: mus_mm1
+  pitch: 1
+  spatialBlend: 0
+  dopplerLevel: 0
+  volume: 1
+  loop: 1
 --- !u!1 &1366724693 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5864823655341688357, guid: fa01e319a25d01b42a35c5b39260390a, type: 3}
@@ -491,6 +501,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioStart: snd_skeleton_talk
+  pitch: 1
+  spatialBlend: 0
+  dopplerLevel: 0
+  volume: 1
+  loop: 0
 --- !u!1 &1720917063
 GameObject:
   m_ObjectHideFlags: 0
