@@ -8,6 +8,7 @@ public interface IJob
         Knight,
         Mage,
         Rogue,
+        Archer,
         Barbarian
     }
     public Jobs Class { get; set; }

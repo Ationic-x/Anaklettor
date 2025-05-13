@@ -43,6 +43,10 @@ public interface IStats
     /// Multiplicative speed, how much speed is multiplication by base speed when running
     /// </summary>
     public float MulSpeed { get; set; }
+    /// <summary>
+    /// Minimun distance to attack the player (For IA)
+    /// </summary>
+    public float MinDistanceAttack { get; set; }
 
     public void UpdateStats(IStats stats);
 }

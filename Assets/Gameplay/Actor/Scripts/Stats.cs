@@ -17,6 +17,7 @@ public class Stats : IStats
     [SerializeField] protected float mulAttack;
     [SerializeField] protected float mulDefense;
     [SerializeField] protected float mulSpeed;
+    [SerializeField] protected float minDistanceAttack;
 
     #region [Integers]
 
@@ -85,6 +86,12 @@ public class Stats : IStats
     {
         get => mulSpeed;
         set => mulSpeed = value;
+    } 
+    
+    public float MinDistanceAttack
+    {
+        get => minDistanceAttack;
+        set => minDistanceAttack = value;
     }
     #endregion
 

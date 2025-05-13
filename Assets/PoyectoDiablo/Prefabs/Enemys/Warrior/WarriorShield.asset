@@ -28,4 +28,5 @@ MonoBehaviour:
     mulAttack: 0
     mulDefense: 0
     mulSpeed: 1
+    minDistanceAttack: 2
   animatorController: {fileID: 9100000, guid: a5b9097d5c0cd5a4d93d952e03c3f1dd, type: 2}

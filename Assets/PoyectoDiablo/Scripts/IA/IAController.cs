@@ -11,6 +11,10 @@ public class IAController : MonoBehaviour
     //Objetos
     private GameObject[] _eyeArray;
 
+    private GameObject _arrowSpawnPoint;
+
+    private GameObject _arrowGameObject;
+
     private NavMeshAgent _nvAgent;
 
     private GameObject _playerGameObject;
@@ -33,8 +37,12 @@ public class IAController : MonoBehaviour
 
     private bool _isDead = false;
 
+    private bool _haveAmmunition = true;
+
     //Variables
     [SerializeField] private float _attackDelay = 0.5f;
+
+    private float _runSpeed = 1f;
 
     private void Awake()
     {
@@ -64,8 +72,11 @@ public class IAController : MonoBehaviour
 
         if (_nvAgent)
         {
-
+            //Se asigna la velocidad de movimiento
             _nvAgent.speed = _actorData.stats.MovementSpeed;
+
+            //Se guarda la velocidad que debe tener el enemigo al correr
+            _runSpeed = _nvAgent.speed + _actorData.stats.MulSpeed;
 
         }
 
@@ -82,7 +93,6 @@ public class IAController : MonoBehaviour
     //Se obtiene los transforms donde se lanzaran los rayos
     private void GetEyes()
     {
-
         GameObject eyeObject = FindChildRecursive(transform, "root/hips/spine/chest/head/RayCastEyes");
 
         if (eyeObject)
@@ -253,12 +263,13 @@ public class IAController : MonoBehaviour
     //Se persigue al jugador con un margen indicado al final del while
     private IEnumerator Chase()
     {
+        //Como ya ha encontrado al jugador empieza a correr asi que se le asigna la velocidad de correr
+        _nvAgent.speed = _runSpeed;
+
         if (_playerGameObject)
         {
-            //Como ya ha encontrado al jugador empieza a correr y por lo tanto va mas rapido
-            _nvAgent.speed = _nvAgent.speed + _actorData.stats.MulSpeed;
 
-            while (Vector3.Distance(transform.position, _playerGameObject.transform.position) >= 2f)
+            while (Vector3.Distance(transform.position, _playerGameObject.transform.position) >= _actorData.stats.MinDistanceAttack)
             {
                 yield return new WaitForFixedUpdate();
 
@@ -267,7 +278,7 @@ public class IAController : MonoBehaviour
 
             Stop();
 
-            StartCoroutine(SwordBlow());
+            StartCoroutine(Attack());
 
         }
 
@@ -280,12 +291,33 @@ public class IAController : MonoBehaviour
 
         _nvAgent.SetDestination(destination);
 
-        while (Vector3.Distance(transform.position, destination) >= 2f)
+        while (Vector3.Distance(transform.position, destination) >= _actorData.stats.MinDistanceAttack)
         {
             yield return new WaitForFixedUpdate();
         }
 
         _isMoving = false;
+    }
+
+    private IEnumerator LookAtPlayer()
+    {
+        // Mientras esté atacando, rota hacia el jugador
+        while (_isAttacking)
+        {
+            Vector3 direction = (_playerGameObject.transform.position - transform.position).normalized;
+            direction.y = 0;
+
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    targetRotation,
+                    Time.deltaTime * _actorData.stats.MovementSpeed
+                );
+            }
+            yield return null;
+        }
     }
 
     //Para el movimiento y cualquier estado de la ia
@@ -305,26 +337,101 @@ public class IAController : MonoBehaviour
 
     #region Ataque
 
-    private void Attack()
+    private IEnumerator Attack()
     {
-        _animator.SetTrigger("AttackTrigger");
+
+        _isAttacking = true;
+
+        if (_actorData.job.Class == IJob.Jobs.Archer)
+        {
+            StartCoroutine(RangeAttack());
+        }
+        else
+        {
+            StartCoroutine(SwordBlow());
+        }
+
+        yield return null;
     }
+
 
     //Realiza un espadazo con un cooldown determinado
     private IEnumerator SwordBlow()
     {
 
-        Attack();
+        _animator.SetTrigger("AttackTrigger");
+
+        StartCoroutine(LookAtPlayer());
 
         ////Si sigue estando al alcance de golpear otra vez espera 1.5 segundos y vuelve a atacar
-        while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= 2f)
+        while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= _actorData.stats.MinDistanceAttack)
         {
-            Attack();
+            _animator.SetTrigger("AttackTrigger");
             yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0)[0].clip.length + _attackDelay);
         }
 
         Stop();
         StartCoroutine(Chase());
+
+    }
+
+
+    private IEnumerator RangeAttack()
+    {
+        //Ajustar cuando realmente tiene municion y cuando no 
+
+        StartCoroutine(LookAtPlayer());
+
+        //Si sigue estando al alcance de golpear otra vez espera 1.5 segundos y vuelve a atacar
+        while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= _actorData.stats.MinDistanceAttack)
+        {
+            // Disparar
+            //_animator.ResetTrigger("ReloadTrigger");                       
+            _animator.SetTrigger("ShootTrigger");
+            //Se dispara la flecha segun la animacion controlado por un evento y el script IAEventsBridge            
+            _haveAmmunition = false;
+            yield return WaitForCurrentAnimation();
+
+            // Recargar
+            //_animator.ResetTrigger("ShootTrigger");
+            _animator.SetTrigger("ReloadTrigger");
+            _haveAmmunition = true;
+            yield return WaitForCurrentAnimation();
+
+        }
+
+        Stop();
+        StartCoroutine(Chase());
+    }
+
+    public void SpawnArrow()
+    {
+        if (!_arrowSpawnPoint)
+        {
+            _arrowSpawnPoint = FindChildRecursive(transform, "root/handIK.r/Skeleton_Crossbow/ArrowSpawnPoint");
+
+            _arrowGameObject = FindChildRecursive(transform, "root/handIK.r/Skeleton_Crossbow/IA_Arrow");
+        }
+
+        float randomOffsetX = Random.Range(-0.35f, 0.35f);
+        float randomOffsetY = Random.Range(-0.35f, 0.35f);
+
+        // Crear nueva posición de spawn con dispersion
+        Vector3 randomOffset = new Vector3(randomOffsetX, randomOffsetY, 0);
+        Vector3 spawnPosition = _arrowSpawnPoint.transform.position + randomOffset;
+                
+        GameObject arrow = Instantiate(_arrowGameObject, spawnPosition, _arrowGameObject.transform.rotation);
+        
+        Rigidbody arrowRigiBody = arrow.GetComponent<Rigidbody>();
+
+        arrowRigiBody.useGravity = true;
+
+        if (arrowRigiBody != null)
+        {
+            arrowRigiBody.AddForce(-_arrowGameObject.transform.up * 6, ForceMode.Impulse);
+        }
+
+        Destroy(arrow, 2.25f);        
 
     }
 
@@ -352,9 +459,8 @@ public class IAController : MonoBehaviour
             _animator.SetBool("_isAttacking", _isAttacking);
             _animator.SetBool("_isSearching", _isSearching);
             _animator.SetBool("_targetFound", _targetFound);
-
             _animator.SetBool("_isDead", _isDead);
-
+            _animator.SetBool("_haveAmmunition", _haveAmmunition);
         }
 
     }
@@ -362,6 +468,21 @@ public class IAController : MonoBehaviour
     #endregion
 
     #region Tools
+
+    private IEnumerator WaitForCurrentAnimation()
+    {
+        // Esperar un frame para que el Animator se actualice
+        yield return null;
+
+        // Obtener duración real del clip activo
+        AnimatorClipInfo[] clipInfo = _animator.GetCurrentAnimatorClipInfo(0);
+
+        if (clipInfo.Length > 0)
+        {
+            float duration = clipInfo[0].clip.length;
+            yield return new WaitForSeconds(duration);
+        }
+    }
 
     // Encuentra un hijo dentro de una jerarquía especificada usando una ruta.
     //Devuelve null si no se encuentra alguno de los nodos. 
@@ -386,11 +507,13 @@ public class IAController : MonoBehaviour
 
     #endregion END Tools
 
-    public ActorDataSO ActorData { set 
+    public ActorDataSO ActorData
+    {
+        set
         {
             _actorData = value;
             OnActorDataSetted();
-        } 
+        }
     }
 }
 

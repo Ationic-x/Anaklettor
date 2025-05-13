@@ -4,8 +4,10 @@ using UnityEngine;
 public class Job : IJob
 {
     [SerializeField] protected IJob.Jobs jobType;
-    public IJob.Jobs Class { 
-        get => Class; 
-        set => Class = value; 
+
+    public IJob.Jobs Class
+    {
+        get => jobType;
+        set => jobType = value;
     }
 }
