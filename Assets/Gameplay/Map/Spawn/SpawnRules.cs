@@ -20,7 +20,7 @@ public class SpawnRules : ScriptableObject
 
 	[Header("Min distance")]
 	public float minSpacingBetweenEnemies = 1f;
-	public float minDistanceFromEdge = 1f;
+	[Range(0, 1)] public float spawnAreaRatio = 1f;
 
 	[Header("Roles")]
 	public List<Rol> roles;

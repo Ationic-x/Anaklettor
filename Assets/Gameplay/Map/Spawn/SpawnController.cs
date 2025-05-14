@@ -55,8 +55,8 @@ public static class SpawnController
 	{
 		if (_mapManager.LevelInstance.TryGetCurrentRoomData(out RoomData roomData))
 		{
-            for (int i = 0; i < _enemyContainer.transform.childCount; i++)
-                Object.DestroyImmediate(_enemyContainer.transform.GetChild(i).gameObject);
+			while (_enemyContainer.transform.childCount > 0)
+				Object.DestroyImmediate(_enemyContainer.transform.GetChild(0).gameObject);
 
             StoredSpawn(roomData);
 		} else
@@ -85,9 +85,9 @@ public static class SpawnController
 		// Find enemy container and redefined spawn positions/size (have spawn points)
 		List<Enemy> predefinedEnemies = new();
 
-		for (int i = 0; i < _enemyContainer.transform.childCount; i++)
+		while (_enemyContainer.transform.childCount > 0)
 		{
-			Transform child = _enemyContainer.transform.GetChild(i);
+			Transform child = _enemyContainer.transform.GetChild(0);
 
 			Vector3 enemyPosition = new Vector3(child.position.x, floorPostion.y + floorScale.y * 0.5f, child.position.z);
 			Quaternion enemyRotation = Quaternion.Euler(0f, child.eulerAngles.y, 0f);
@@ -126,7 +126,7 @@ public static class SpawnController
 		// Default behaviour
 		for (int i = predefinedEnemies.Count; i < count; i++)
 		{
-			Vector3 randomPosition = GetValidSpawnPosition(floorPostion, floorScale, rules.minDistanceFromEdge, rules.minSpacingBetweenEnemies, existingEnemies);
+			Vector3 randomPosition = GetValidSpawnPosition(floorPostion, floorScale, rules.spawnAreaRatio, rules.minSpacingBetweenEnemies, existingEnemies);
 			if (randomPosition == Vector3.positiveInfinity)
 			{
 				Debug.LogWarning("No valid position found.");
@@ -144,14 +144,14 @@ public static class SpawnController
 
 
 
-	private static Vector3 GetValidSpawnPosition(Vector3 position, Vector3 scale, float edgeMargin, float spacing, List<Enemy> enemies)
+	private static Vector3 GetValidSpawnPosition(Vector3 position, Vector3 scale, float spawnAreaRatio, float spacing, List<Enemy> enemies)
 	{
 		int maxAttempts = 50;
 
 		for (int i = 0; i < maxAttempts; i++)
 		{
-			float x = Random.Range(position.x - scale.x * 0.5f + edgeMargin, position.x + scale.x * 0.5f - edgeMargin);
-			float z = Random.Range(position.z - scale.z * 0.5f + edgeMargin, position.z + scale.z * 0.5f - edgeMargin);
+			float x = Random.Range((position.x - scale.x * 0.5f) * spawnAreaRatio, (position.x + scale.x * 0.5f) * spawnAreaRatio);
+			float z = Random.Range((position.z - scale.z * 0.5f) * spawnAreaRatio, (position.z + scale.z * 0.5f) * spawnAreaRatio);
 			Vector3 candidate = new Vector3(x, position.y + scale.y * 0.5f, z);
 
 			bool valid = true;
