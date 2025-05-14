@@ -6998,7 +6998,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1344380783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8437,8 +8437,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Ismael Garc\xEDa G\xF3nzalez\n\nFrancisco Mart\xEDn Vida\xF1a - IA\n\nLuis
-    Francisco Mateo Parra - Dise\xF1o de sonido\n\nPablo Ramos Bl\xE1nquez - UI\n\n\xC1lvaro
-    M\xE1rquez Cazorla - Tilemaps\n\nJuan Jos\xE9 Salvador Piedra"
+    Francisco Mateo Parra - Dise\xF1o de sonido\n\nPablo Ramos Bl\xE1nquez - UI,
+    Enemigos con armas\n\n\xC1lvaro M\xE1rquez Cazorla - Tilemaps, Cinem\xE1tica
+    incial\n\nJuan Jos\xE9 Salvador Piedra"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3166360fec7c19948bdcc5bfae19bd87, type: 2}
   m_sharedMaterial: {fileID: 411501506031509727, guid: 3166360fec7c19948bdcc5bfae19bd87, type: 2}
@@ -10179,7 +10180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1972520520
 MonoBehaviour:
   m_ObjectHideFlags: 0
