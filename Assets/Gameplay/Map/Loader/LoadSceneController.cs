@@ -36,12 +36,13 @@ public class LoadSceneController : MonoBehaviour
 
 	private void Start()
 	{
+
 		if (_mapManager.LevelInstance.MoveDirection != Vector2Int.zero) StartCoroutine(ExitAnimationDelayed());
 	}
 
 	public MapManager MapManager { set
 		{
-			_mapManager = value;
+			_mapManager = value;		
 			StartCoroutine(WaitForGameObjects());
 		}
 	}
@@ -68,7 +69,7 @@ public class LoadSceneController : MonoBehaviour
 		WarpGenerator.Generate(levelInstance, floor, _warpPrefab, warp);
 
 		// Rotate Map
-		MapController.RotateMap(6, floor, map);
+		MapController.RotateMap(levelInstance.CurrentRoomId, floor, map);
 
 		// Spawn
 		SpawnController.Initialize(_mapManager, floor, spawn, map);
@@ -121,7 +122,8 @@ public class LoadSceneController : MonoBehaviour
 
 
 		// Wait Async Load end
-		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+		string sceneName = MapController.GetSceneName(_mapManager.LevelInstance.CurrentRoomId);
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 		asyncLoad.allowSceneActivation = false;
 
 		while (asyncLoad.progress < 0.9f)

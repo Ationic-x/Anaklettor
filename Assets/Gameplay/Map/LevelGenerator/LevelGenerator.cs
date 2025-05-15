@@ -33,7 +33,7 @@ public class LevelGenerator : MonoBehaviour
     private int _mapHeight = 6;
     private int _maxDistance = 4;
 
-    private Vector2Int _origin = new Vector2Int(3, 3);
+    private Vector2Int _origin = new Vector2Int(2, 2);
 
 	// Player Information
 	private Vector2Int _playerCurrentRoom;
@@ -66,7 +66,7 @@ public class LevelGenerator : MonoBehaviour
 
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
-                map[x, y] = 32; // 32 or higher
+                map[x, y] = UnityEngine.Random.Range(32, 71); // 32 or higher
 
         List<Vector2Int> possibleDestinations = new List<Vector2Int>();
         for (int x = 0; x < width; x++)
@@ -209,6 +209,11 @@ public class LevelGenerator : MonoBehaviour
 	{
 		return NewRoomData(_playerCurrentRoom);
 	}
+
+    public int CurrentRoomId
+    { 
+        get => _mapData[_playerCurrentRoom.x, _playerCurrentRoom.y]; 
+    }
 
 	public Vector3 PlayerPosition
 	{

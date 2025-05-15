@@ -39,7 +39,7 @@ public static class SpawnController
 		Vector2Int dir = levelInstance.MoveDirection;
 
 		Vector3 position = dir == Vector2Int.zero ? new Vector3(floorPostion.x ,floorPostion.y + floorScale.y * 0.5f, floorPostion.z) : levelInstance.PlayerPosition;
-		Quaternion rotation = dir == Vector2Int.zero ? new Quaternion(0f, 180f, 0f, 0f) : levelInstance.PlayerRotation;
+		Quaternion rotation = dir == Vector2Int.zero ? new Quaternion(0f, 90f, 0f, 0f) : levelInstance.PlayerRotation;
 		Vector3 flip = Vector3.one;
 
 		if (dir == Vector2Int.up || dir == Vector2Int.down)
@@ -47,6 +47,7 @@ public static class SpawnController
 		else if (dir == Vector2Int.left || dir == Vector2Int.right)
 			flip.x = -0.85f;
 
+		Debug.Log(dir);
 		player = Object.Instantiate(player, Vector3.Scale(position, flip), rotation);
 		player.GetComponentInChildren<TestMovement>().SetMapManager(_mapManager);
 	}

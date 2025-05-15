@@ -44,9 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bcc9fc40a885b4ab1b586c9823b5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionText: {fileID: 0}
-  enemyPrefab: {fileID: 5496147368724889126, guid: 125eaea587e42034bbedc2b2cf31590b, type: 3}
-  playerPrefab: {fileID: 3068678621140226955, guid: f2bf87cd4fafa6d4787bfd5674d6c003, type: 3}
-  warpPrefab: {fileID: 2467427411415663709, guid: a90a87b873e593f41901024272600090, type: 3}
-  enemyContainer: {fileID: 0}
-  loadingAnimator: {fileID: 0}
