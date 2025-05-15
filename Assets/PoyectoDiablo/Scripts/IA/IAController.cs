@@ -37,8 +37,6 @@ public class IAController : MonoBehaviour
 
     private bool _isDead = false;
 
-    private bool _haveAmmunition = true;
-
     //Variables
     [SerializeField] private float _attackDelay = 0.5f;
 
@@ -386,16 +384,15 @@ public class IAController : MonoBehaviour
         while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= _actorData.stats.MinDistanceAttack)
         {
             // Disparar
-            //_animator.ResetTrigger("ReloadTrigger");                       
+            _animator.ResetTrigger("ReloadTrigger");
             _animator.SetTrigger("ShootTrigger");
-            //Se dispara la flecha segun la animacion controlado por un evento y el script IAEventsBridge            
-            _haveAmmunition = false;
+
+            //Se dispara la flecha segun la animacion controlado por un evento y el script IAEventsBridge                        
             yield return WaitForCurrentAnimation();
 
             // Recargar
-            //_animator.ResetTrigger("ShootTrigger");
+            _animator.ResetTrigger("ShootTrigger");
             _animator.SetTrigger("ReloadTrigger");
-            _haveAmmunition = true;
             yield return WaitForCurrentAnimation();
 
         }
@@ -419,9 +416,9 @@ public class IAController : MonoBehaviour
         // Crear nueva posición de spawn con dispersion
         Vector3 randomOffset = new Vector3(randomOffsetX, randomOffsetY, 0);
         Vector3 spawnPosition = _arrowSpawnPoint.transform.position + randomOffset;
-                
+
         GameObject arrow = Instantiate(_arrowGameObject, spawnPosition, _arrowGameObject.transform.rotation);
-        
+
         Rigidbody arrowRigiBody = arrow.GetComponent<Rigidbody>();
 
         arrowRigiBody.useGravity = true;
@@ -431,7 +428,7 @@ public class IAController : MonoBehaviour
             arrowRigiBody.AddForce(-_arrowGameObject.transform.up * 6, ForceMode.Impulse);
         }
 
-        Destroy(arrow, 2.25f);        
+        Destroy(arrow, 2.25f);
 
     }
 
@@ -446,6 +443,36 @@ public class IAController : MonoBehaviour
         _animator.SetTrigger("DieTrigger");
     }
 
+    [ContextMenu("AAAQUEDAÑOOO")]
+    public void TakeDamage()
+    {
+        StartCoroutine(IsDamaged());
+    }
+
+    private IEnumerator IsDamaged()
+    {
+        Stop();
+
+        _animator.SetTrigger("HitTrigger");
+
+        //Hace que el enemigo no se mueva al recibir el daño
+        _nvAgent.isStopped = true;
+
+        yield return WaitForCurrentAnimation();
+
+        //Hace que el enemigo pueda seguir moviendose
+        _nvAgent.isStopped = false;
+
+        if (_targetFound)
+        {
+            StartCoroutine(Chase());
+        }
+        else
+        {
+            StartCoroutine(SearchPlayer());
+        }
+
+    }
 
     #endregion END Ataque
 
@@ -459,8 +486,7 @@ public class IAController : MonoBehaviour
             _animator.SetBool("_isAttacking", _isAttacking);
             _animator.SetBool("_isSearching", _isSearching);
             _animator.SetBool("_targetFound", _targetFound);
-            _animator.SetBool("_isDead", _isDead);
-            _animator.SetBool("_haveAmmunition", _haveAmmunition);
+
         }
 
     }
