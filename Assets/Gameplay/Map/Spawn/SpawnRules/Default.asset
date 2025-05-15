@@ -15,6 +15,6 @@ MonoBehaviour:
   minEnemies: 1
   maxEnemies: 5
   minSpacingBetweenEnemies: 1
-  minDistanceFromEdge: 1
+  spawnAreaRatio: 0.542
   roles: 000000000200000001000000
   randomizeRoles: 0

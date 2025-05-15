@@ -17,6 +17,7 @@ MonoBehaviour:
     jobType: 2
   stats:
     characterName: Carlos
+    speed: 5
     maxHP: 100
     hp: 100
     mana: 0
@@ -26,3 +27,4 @@ MonoBehaviour:
     movementSpeed: 0
     mulAttack: 0
     mulDefense: 0
+  animatorController: {fileID: 9100000, guid: ce6fb4950ba47684f9b6e473eaf47d2d, type: 2}
