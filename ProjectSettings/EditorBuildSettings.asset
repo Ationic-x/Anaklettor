@@ -23,6 +23,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FromTemplates/Side_to_Side.unity
     guid: 4759e1758bfc9e447924649fc375db93
+  - enabled: 1
+    path: Assets/Scenes/FromTemplates/MiscScenes/Misc_1.unity
+    guid: 3cc9d8e52eea1e644a70a68bbeac8453
+  - enabled: 1
+    path: Assets/Scenes/FromTemplates/MiscScenes/Misc_2.unity
+    guid: 91b277bae6845fd4b91afe70ea63a6fb
+  - enabled: 1
+    path: Assets/Scenes/FromTemplates/MiscScenes/Misc_3.unity
+    guid: 7ebeed437da9edf44a0fc1829a2d488a
+  - enabled: 1
+    path: Assets/Scenes/FromTemplates/MiscScenes/Misc_4.unity
+    guid: 412790dae07971b4587938c47a71ffc3
+  - enabled: 1
+    path: Assets/Scenes/FromTemplates/MiscScenes/Misc_5.unity
+    guid: 54d443f13711c96448af9d0f47181e29
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

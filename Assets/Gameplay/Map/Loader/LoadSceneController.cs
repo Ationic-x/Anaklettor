@@ -122,7 +122,7 @@ public class LoadSceneController : MonoBehaviour
 
 
 		// Wait Async Load end
-		string sceneName = MapController.GetSceneName(_mapManager.LevelInstance.CurrentRoomId);
+		string sceneName = MapController.GetSceneName(_mapManager.LevelInstance.CurrentRoomId, _mapManager.LevelInstance.IsCurrentOrigin());
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 		asyncLoad.allowSceneActivation = false;
 

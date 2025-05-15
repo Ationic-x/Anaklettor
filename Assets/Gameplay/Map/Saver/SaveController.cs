@@ -6,9 +6,6 @@ public static class SaveController
 {
     private static LevelGenerator _levelInstance;
 
-	// Unique ID in a funny way
-	// The ammount of names should be bigger than the ammount of enemies
-
 	public static void Initialize(LevelGenerator newLevelInstance)
     {
         _levelInstance = newLevelInstance;
@@ -36,11 +33,11 @@ public static class SaveController
             Transform child = enemyContainer.transform.GetChild(i);
             if (firstTime)
 			{
-				var enemyData = new EnemyData();
+				EnemyData enemyData = new EnemyData();
 				enemyData.position = child.position;
 				enemyData.rotation = child.rotation;
 				enemyData.actorData = actorData;
-				enemyData.name = EnemyNames.enemyNameID[i];
+				enemyData.name = EnemyNames.enemyNameID[i % EnemyNames.enemyNameID.Length];
 				roomData.enemies.Add(enemyData);
 			}
 			else

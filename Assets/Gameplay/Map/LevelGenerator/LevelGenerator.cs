@@ -33,7 +33,7 @@ public class LevelGenerator : MonoBehaviour
     private int _mapHeight = 6;
     private int _maxDistance = 4;
 
-    private Vector2Int _origin = new Vector2Int(2, 2);
+    private Vector2Int _origin = new Vector2Int(3, 3);
 
 	// Player Information
 	private Vector2Int _playerCurrentRoom;
@@ -66,7 +66,7 @@ public class LevelGenerator : MonoBehaviour
 
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
-                map[x, y] = UnityEngine.Random.Range(32, 71); // 32 or higher
+                map[x, y] = UnityEngine.Random.Range(32, 36); // 32 or higher
 
         List<Vector2Int> possibleDestinations = new List<Vector2Int>();
         for (int x = 0; x < width; x++)
@@ -103,10 +103,10 @@ public class LevelGenerator : MonoBehaviour
             else SetOptionOrigin(map[path[i - 1].x, path[i - 1].y]);
 
             // Destination
-            if (current.x < next.x) option |= 0b0_10_00_0; // Horizontal right
-            else if (current.x > next.x) option |= 0b0_11_00_0; // Horizontal left
-            else if (current.y < next.y) option |= 0b0_00_00_0; // Vertical up
-            else if (current.y > next.y) option |= 0b0_01_00_0; // Vertical down
+            if (current.x < next.x) option |= 0b0_10_00_0; // East
+            else if (current.x > next.x) option |= 0b0_11_00_0; // West
+            else if (current.y > next.y) option |= 0b0_01_00_0; // South
+            // North 0b0_00_00_0
 
             map[current.x, current.y] = option; // Set the value of the current position
         }
@@ -179,6 +179,11 @@ public class LevelGenerator : MonoBehaviour
     public bool IsOrigin(Vector2Int pos)
     {
 		return (pos == _origin);
+    }
+
+    public bool IsCurrentOrigin()
+    {
+        return IsOrigin(PlayerCurrentRoom);
     }
 
 	public bool IsValid(Vector2Int pos)
