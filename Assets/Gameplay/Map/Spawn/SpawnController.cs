@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public static class SpawnController 
 {
@@ -50,7 +51,8 @@ public static class SpawnController
 		Debug.Log(dir);
 		player = Object.Instantiate(player, Vector3.Scale(position, flip), rotation);
 		player.GetComponentInChildren<TestMovement>().SetMapManager(_mapManager);
-	}
+        player.GetComponent<BlinkPlayer>().BlinkEffect();
+    }
 
 	public static void SpawnEnemies(SpawnRules rules, Dictionary<Rol, ActorDataSO> enemiesDictionary)
 	{
