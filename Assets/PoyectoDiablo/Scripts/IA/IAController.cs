@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -60,9 +58,16 @@ public class IAController : MonoBehaviour
 
     void Update()
     {
-        RayDetector();
+        if (!_isDead)
+        {
+            RayDetector();
 
-        UpdateAnimationsVariables();
+            UpdateAnimationsVariables();
+        }
+        else
+        {
+            Dead();
+        }
     }
 
     private void AssingScriptableObjectStats()
@@ -436,11 +441,14 @@ public class IAController : MonoBehaviour
     [ContextMenu("Dead")]
     public void Dead()
     {
-        _isDead = true;
-        Stop();
-        StopAllCoroutines();
-        _nvAgent.enabled = false;
-        _animator.SetTrigger("DieTrigger");
+        if (!_isDead)
+        {
+            _isDead = true;
+            Stop();
+            StopAllCoroutines();
+            _nvAgent.enabled = false;
+            _animator.SetTrigger("DieTrigger");
+        }
     }
 
     [ContextMenu("AAAQUEDAÑOOO")]
@@ -539,6 +547,11 @@ public class IAController : MonoBehaviour
         {
             _actorData = value;
             OnActorDataSetted();
+        }
+
+        get
+        {
+            return _actorData;
         }
     }
 }

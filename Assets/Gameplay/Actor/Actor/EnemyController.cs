@@ -11,16 +11,20 @@ public class EnemyController : Actor
         Mana = ActorData.stats.Mana;
         MaxMana = ActorData.stats.MaxMana;
         AttackPower = ActorData.stats.Attack;
-        Defense = ActorData.stats.Defense;        
+        Defense = ActorData.stats.Defense;
         Level = 1;
 
         GameObject EnemyRef = Instantiate(ActorData.model, transform.position, Quaternion.identity, transform);
-        EnemyRef.GetComponentInChildren<IAController>().ActorData = ActorData;
+
+        if (ActorData.name == "Anaklettor")
+        {
+            EnemyRef.GetComponentInChildren<AnaklettorIAController>().ActorData = ActorData;
+        }
+        else
+        {
+            EnemyRef.GetComponentInChildren<IAController>().ActorData = ActorData;
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
