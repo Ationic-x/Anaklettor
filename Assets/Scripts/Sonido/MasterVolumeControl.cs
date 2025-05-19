@@ -20,8 +20,6 @@ public class MasterVolumeControl : MonoBehaviour
 
     public void MasterVolumeController(float sliderMusica)
     {
-        Debug.Log("MasterVolumeController: " + sliderMusica);
-
         if (sliderMusica == 0)
         {
             audioMixer.SetFloat("MasterVolume", -80.0f);
