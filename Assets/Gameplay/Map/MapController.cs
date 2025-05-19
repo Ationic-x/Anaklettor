@@ -43,8 +43,8 @@ public static class MapController
 			{ 4, new RoomSceneData("Corner", -91f) },	// East -> North
 			{ 12, new RoomSceneData("Corner", 91f) },	// East -> South
 			
-			{ 18, new RoomSceneData("Corner", 181f) },	// South -> East
-			{ 26,  new RoomSceneData("Corner", -181f) }, // South -> West
+			{ 26,  new RoomSceneData("Corner", 181f) }, // South -> West
+			{ 18, new RoomSceneData("Corner", -181f) },	// South -> East
 
 			{ 6, new RoomSceneData("Corner", 271f) },	// West -> North
 			{ 14, new RoomSceneData("Corner", -271f) },	// West -> South
