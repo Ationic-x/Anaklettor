@@ -5893,7 +5893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00e6fb419a2e880498bd4e82772eb1ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.6
+      value: -3.31
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00e6fb419a2e880498bd4e82772eb1ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5901,15 +5901,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00e6fb419a2e880498bd4e82772eb1ff, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00e6fb419a2e880498bd4e82772eb1ff, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00e6fb419a2e880498bd4e82772eb1ff, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00e6fb419a2e880498bd4e82772eb1ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8692,7 +8692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5149274279628269137, guid: 5346ec4d7415c3040b90cb4bb62109ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 181
       objectReference: {fileID: 0}
     - target: {fileID: 5149274279628269137, guid: 5346ec4d7415c3040b90cb4bb62109ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -8886,6 +8886,11 @@ PrefabInstance:
 --- !u!4 &1180515732 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5149274279628269137, guid: 5346ec4d7415c3040b90cb4bb62109ec, type: 3}
+  m_PrefabInstance: {fileID: 1180515731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1180515733 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7801061371706550484, guid: 5346ec4d7415c3040b90cb4bb62109ec, type: 3}
   m_PrefabInstance: {fileID: 1180515731}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1211996607
@@ -10268,6 +10273,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 2195754845625024932, guid: c995719c4839deb4f91225808a1f73c8, type: 2}
     value: {fileID: 888708356}
+  - key: {fileID: -8460235326656756890, guid: c995719c4839deb4f91225808a1f73c8, type: 2}
+    value: {fileID: 1180515733}
   m_ExposedReferences:
     m_References: []
 --- !u!1001 &1440165503
