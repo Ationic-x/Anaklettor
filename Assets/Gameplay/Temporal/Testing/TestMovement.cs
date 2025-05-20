@@ -33,19 +33,19 @@ public class TestMovement : MonoBehaviour
     {
         if (_forward)
         {
-            transform.position -= transform.forward * Time.deltaTime * _speed;
+            transform.position += transform.forward * Time.deltaTime * _speed;
         }
         if (_backWard)
         {
-            transform.position += transform.forward * Time.deltaTime * _speed;
+            transform.position -= transform.forward * Time.deltaTime * _speed;
         }
         if (_left)
         {
-            transform.position += transform.right * Time.deltaTime * _speed;
+            transform.position -= transform.right * Time.deltaTime * _speed;
         }
         if (_right)
         {
-            transform.position -= transform.right * Time.deltaTime * _speed;
+            transform.position += transform.right * Time.deltaTime * _speed;
         }
     }
 
