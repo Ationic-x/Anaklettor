@@ -17,4 +17,4 @@ MonoBehaviour:
   minSpacingBetweenEnemies: 1
   spawnAreaRatio: 1
   roles: 
-  randomizeRoles: 1
+  randomizeRoles: 0

@@ -22,7 +22,7 @@ public class PlayerController : Actor
     {
         float vAxis = Input.GetAxis("Vertical");
 
-        base.movementSpeed = vAxis * ActorData.stats.Speed;
+        base.movementSpeed = vAxis * ActorData.stats.Speed; // Modified to inverse
         base.eulerAngleVelocity = new Vector3(0, Input.GetAxis("Horizontal") * 80, 0);
         animator.SetFloat("Velocity", vAxis);
 

@@ -67,11 +67,9 @@ Shader "Custom/TriangleTileShader"
                 float2 uv = frac(i.uv * tiling + offset + _Time.y * scroll);
 
                 // Define triangle shape in UV space (bottom-centered)
-                float edge1 = uv.x;
-                float edge2 = uv.y;
-                float edge3 = 0.5 - abs(uv.x / _Width - 0.5) - uv.y / (_Height*2);
+                float edge = 0.5 - abs(uv.x / _Width - 0.5) - uv.y / (_Height*2);
 
-                return (edge1 >= 0 && edge2 >= 0 && edge3 >= 0) 
+                return (edge >= 0) 
                     ? _TriangleColor 
                     : _BackgroundColor;
             }

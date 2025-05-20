@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,7 @@ public class LoadSceneController : MonoBehaviour
 	
 	// Curently we're hardcoding the player prefab, but in future will use a reference of the choosen one (select scene)
 	[SerializeField] private GameObject _player;
+	[SerializeField] private GameObject _playerCamera;
 	[SerializeField] private SerializableDictionary<Rol, ActorDataSO> _listEnemies;
 	[SerializeField] private SpawnRules _spawnRules;
 
@@ -74,7 +76,7 @@ public class LoadSceneController : MonoBehaviour
 
 		// Spawn
 		SpawnController.Initialize(_mapManager, floor, spawn, map);
-		SpawnController.SpawnPlayer(_player);
+		SpawnController.SpawnPlayer(_player, _playerCamera);
 		SpawnController.SpawnEnemies(_spawnRules, _listEnemies.ToDictionary());
 
 		// Save
