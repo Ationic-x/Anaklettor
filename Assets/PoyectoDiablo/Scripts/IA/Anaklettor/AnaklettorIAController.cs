@@ -9,9 +9,9 @@ public class AnaklettorIAController : MonoBehaviour
     //Objetos
     private GameObject[] _eyeArray;
 
-    private GameObject _arrowSpawnPoint;
+    private GameObject _spellSpawnPoint;
 
-    private GameObject _arrowGameObject;
+    private GameObject _spellGameObject;
 
     private NavMeshAgent _nvAgent;
 
@@ -35,9 +35,6 @@ public class AnaklettorIAController : MonoBehaviour
 
     private bool _isDead = false;
 
-    //Variables
-    [SerializeField] private float _attackDelay = 0.5f;
-
     private float _runSpeed = 1f;
 
     private void Awake()
@@ -48,13 +45,6 @@ public class AnaklettorIAController : MonoBehaviour
 
         GetEyes();
     }
-
-    //void Start()
-    //{
-    //    //Debug.Log(_actorData.stats.MovementSpeed);
-    //    StartCoroutine(Idle(5));
-    //    //StartCoroutine(Patrol());
-    //}
 
     void Update()
     {
@@ -342,40 +332,11 @@ public class AnaklettorIAController : MonoBehaviour
 
     private IEnumerator Attack()
     {
-
         _isAttacking = true;
 
-        if (_actorData.job.Class == IJob.Jobs.Archer || _actorData.job.Class == IJob.Jobs.Mage)
-        {
-            StartCoroutine(RangeAttack());
-        }
-        else
-        {
-            StartCoroutine(SwordBlow());
-        }
+        StartCoroutine(RangeAttack());
 
         yield return null;
-    }
-
-
-    //Realiza un espadazo con un cooldown determinado
-    private IEnumerator SwordBlow()
-    {
-
-        _animator.SetTrigger("AttackTrigger");
-
-        StartCoroutine(LookAtPlayer());
-
-        ////Si sigue estando al alcance de golpear otra vez espera 1.5 segundos y vuelve a atacar
-        while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= _actorData.stats.MinDistanceAttack)
-        {
-            _animator.SetTrigger("AttackTrigger");
-            yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0)[0].clip.length + _attackDelay);
-        }
-
-        Stop();
-        StartCoroutine(Chase());
-
     }
 
 
@@ -406,13 +367,15 @@ public class AnaklettorIAController : MonoBehaviour
         StartCoroutine(Chase());
     }
 
-    public void SpawnArrow()
+    public void TrhowSpell()
     {
-        if (!_arrowSpawnPoint)
+        if (!_spellSpawnPoint)
         {
-            _arrowSpawnPoint = FindChildRecursive(transform, "root/handIK.r/Skeleton_Crossbow/ArrowSpawnPoint");
+            _spellSpawnPoint = FindChildRecursive(transform, "root/handIK.r/SpellCastOrigin");
 
-            _arrowGameObject = FindChildRecursive(transform, "root/handIK.r/Skeleton_Crossbow/IA_Arrow");
+            _spellGameObject = FindChildRecursive(transform, "root/handIK.r");
+
+            _spellGameObject = _spellGameObject.GetComponentInChildren<SpellController>(true).gameObject;
         }
 
         float randomOffsetX = Random.Range(-0.35f, 0.35f);
@@ -420,20 +383,17 @@ public class AnaklettorIAController : MonoBehaviour
 
         // Crear nueva posición de spawn con dispersion
         Vector3 randomOffset = new Vector3(randomOffsetX, randomOffsetY, 0);
-        Vector3 spawnPosition = _arrowSpawnPoint.transform.position + randomOffset;
+        Vector3 spawnPosition = _spellSpawnPoint.transform.position + randomOffset;
 
-        GameObject arrow = Instantiate(_arrowGameObject, spawnPosition, _arrowGameObject.transform.rotation);
+        GameObject spell = Instantiate(_spellGameObject, spawnPosition, _spellGameObject.transform.rotation);
+        spell.SetActive(true);
 
-        Rigidbody arrowRigiBody = arrow.GetComponent<Rigidbody>();
+        Rigidbody spellRigiBody = spell.GetComponent<Rigidbody>();
 
-        arrowRigiBody.useGravity = true;
-
-        if (arrowRigiBody != null)
+        if (spellRigiBody != null)
         {
-            arrowRigiBody.AddForce(-_arrowGameObject.transform.up * 6, ForceMode.Impulse);
+            spellRigiBody.AddForce(_spellGameObject.transform.forward * 6, ForceMode.Impulse);
         }
-
-        Destroy(arrow, 2.25f);
 
     }
 
@@ -448,10 +408,10 @@ public class AnaklettorIAController : MonoBehaviour
             Stop();
             StopAllCoroutines();
             _animator.SetTrigger("DieTrigger");
-        }        
+        }
     }
 
-    [ContextMenu("AAAQUEDAÑOOO")]
+    [ContextMenu("TakeDamage")]
     public void TakeDamage()
     {
         StartCoroutine(IsDamaged());

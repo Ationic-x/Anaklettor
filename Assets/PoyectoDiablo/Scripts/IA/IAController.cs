@@ -11,11 +11,11 @@ public class IAController : MonoBehaviour
 
     private GameObject _arrowSpawnPoint;
 
-    private GameObject _arrowGameObject;
-
     private NavMeshAgent _nvAgent;
 
     private GameObject _playerGameObject;
+
+    [SerializeField] private GameObject _arrowGameObject;
 
     private Animator _animator;
 
@@ -410,10 +410,11 @@ public class IAController : MonoBehaviour
     {
         if (!_arrowSpawnPoint)
         {
-            _arrowSpawnPoint = FindChildRecursive(transform, "root/handIK.r/Skeleton_Crossbow/ArrowSpawnPoint");
-
-            _arrowGameObject = FindChildRecursive(transform, "root/handIK.r/Skeleton_Crossbow/IA_Arrow");
+            //_arrowSpawnPoint = FindChildRecursive(transform, "root/handIK.r/Skeleton_Crossbow/ArrowSpawnPoint");
+            _arrowSpawnPoint = FindChildRecursive(transform, "root/handIK.r/Skeleton_Crossbow/Arrow");
         }
+
+
 
         float randomOffsetX = Random.Range(-0.35f, 0.35f);
         float randomOffsetY = Random.Range(-0.35f, 0.35f);
@@ -422,7 +423,7 @@ public class IAController : MonoBehaviour
         Vector3 randomOffset = new Vector3(randomOffsetX, randomOffsetY, 0);
         Vector3 spawnPosition = _arrowSpawnPoint.transform.position + randomOffset;
 
-        GameObject arrow = Instantiate(_arrowGameObject, spawnPosition, _arrowGameObject.transform.rotation);
+        GameObject arrow = Instantiate(_arrowGameObject, spawnPosition, _arrowSpawnPoint.transform.rotation);
 
         Rigidbody arrowRigiBody = arrow.GetComponent<Rigidbody>();
 
@@ -430,7 +431,7 @@ public class IAController : MonoBehaviour
 
         if (arrowRigiBody != null)
         {
-            arrowRigiBody.AddForce(-_arrowGameObject.transform.up * 6, ForceMode.Impulse);
+            arrowRigiBody.AddForce(-arrow.transform.up * 6, ForceMode.Impulse);
         }
 
         Destroy(arrow, 2.25f);
@@ -451,7 +452,7 @@ public class IAController : MonoBehaviour
         }
     }
 
-    [ContextMenu("AAAQUEDAÑOOO")]
+    [ContextMenu("TakeDamage")]
     public void TakeDamage()
     {
         StartCoroutine(IsDamaged());
