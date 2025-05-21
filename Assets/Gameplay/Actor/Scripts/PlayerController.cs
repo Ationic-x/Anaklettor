@@ -4,16 +4,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : ActorController
 {
-	private DamageBlink _damageBlink;
+	private ChangeMaterialColor _damageBlink;
 
 	protected int Level { get; set; }
     protected int Experience { get; set; }
     protected int MaxExperience { get; set; }
 
     private Vector2 _moveInput;
-    private float _rotationMultiplier = 30f; // Rotation speed is slower than movement
+    
+	private float _rotationMultiplier = 30f; // Rotation speed is slower than movement
+	private float _immuneTime = 1.5f; 
 
 	private bool _isAttacking = false;
+	private bool _isImmune = false;
 
 	public bool smallDamage = false;
 	public bool hugeDamage = false;
@@ -63,7 +66,7 @@ public class PlayerController : ActorController
 			TakeDamage(10);
 		}
 
-		if (!CanDoAction()) return;
+		if (!CanMotion()) return;
 
 		Move();
 		Rotate();
@@ -105,6 +108,13 @@ public class PlayerController : ActorController
 		_isAttacking = false;
 	}
 
+	IEnumerator ImmuneCooldown()
+	{
+		_isImmune = true;
+		yield return new WaitForSeconds(_immuneTime);
+		_isImmune = false;
+	}
+
 	// Enemies cannot be healed, we dont have a healer job or something
 	public void Heal(int amount)
 	{
@@ -114,8 +124,11 @@ public class PlayerController : ActorController
 
 	public override void TakeDamage(int amount)
 	{
+		if (_isImmune) return;
+
 		_damageBlink.TriggerBlink();
-		// Init immune state
+		StartCoroutine(ImmuneCooldown());
+		
 		animator.SetInteger("Damaged", amount);
 		animator.SetTrigger("IsHitted");
 		stats.HP -= amount;
@@ -132,10 +145,10 @@ public class PlayerController : ActorController
 		Level = 1;
 		Experience = 0;
 		MaxExperience = 100;
-		_damageBlink = GetComponentInChildren<DamageBlink>();
+		_damageBlink = GetComponentInChildren<ChangeMaterialColor>();
 	}
 
-	private bool CanDoAction()
+	private bool CanMotion()
 	{
 		string AnimationName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
 

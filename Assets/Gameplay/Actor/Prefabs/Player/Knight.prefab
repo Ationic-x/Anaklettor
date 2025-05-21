@@ -223,10 +223,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8968352993222510600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c529a6e251bc9b48bb63c41afaa4c11, type: 3}
+  m_Script: {fileID: 11500000, guid: aac99510a5e4b89449d012dd87932088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _blinkDuration: 0.1
-  _blinkCount: 3
+  _blinkCount: 2
   _blinkColor: {r: 1, g: 0, b: 0, a: 1}
+  _alternativeColor: {r: 0, g: 0, b: 1, a: 1}
   _materialRef: {fileID: 2100000, guid: a658b952044634c43addad0c04375552, type: 2}
