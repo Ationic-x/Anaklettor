@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using System.Drawing;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public static class SpawnController 
 {
@@ -33,7 +30,7 @@ public static class SpawnController
 	}
 
 	// Currently using prefab for testing
-	public static void SpawnPlayer(GameObject player, GameObject playerCamera)
+	public static void SpawnPlayer(GameObject player, ActorData playerData, GameObject playerCamera)
 	{
 		LevelGenerator levelInstance = _mapManager.LevelInstance;
 		Vector3 floorPostion = _floor.transform.position;
@@ -50,14 +47,14 @@ public static class SpawnController
 			flip.x = -0.85f;
 
 		player = Object.Instantiate(player, Vector3.Scale(position, flip), rotation);
-		player.GetComponentInChildren<TestMovement>().SetMapManager(_mapManager);
-        player.GetComponent<BlinkPlayer>().BlinkEffect();
+		player.GetComponent<PlayerController>().Initialize(playerData);
+        //player.GetComponent<BlinkPlayer>().BlinkEffect();
 
-		playerCamera.GetComponentInChildren<CinemachineCamera>().Target.TrackingTarget = player.transform;
+		playerCamera.GetComponent<CinemachineCamera>().Target.TrackingTarget = player.transform;
 		Object.Instantiate(playerCamera);
     }
 
-	public static void SpawnEnemies(SpawnRules rules, Dictionary<Rol, ActorDataSO> enemiesDictionary)
+	public static void SpawnEnemies(SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
 	{
 		if (_mapManager.LevelInstance.TryGetCurrentRoomData(out RoomData roomData))
 		{
@@ -83,7 +80,7 @@ public static class SpawnController
 		}
 	}
 
-	private static void FirstTimeSpawn(SpawnRules rules, Dictionary<Rol, ActorDataSO> enemiesDictionary)
+	private static void FirstTimeSpawn(SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
 	{
 		Vector3 floorPostion = _floor.transform.position;
 		Vector3 floorScale = _floor.transform.localScale;

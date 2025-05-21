@@ -13,7 +13,7 @@ public static class SaveController
 
 	// This method is used to save all the enemies in the current room
 	// We're currently hardcoding the actor data but should be gotten from the enemycontroller or with other methods
-	public static void SaveEnemies(ActorDataSO actorData)
+	public static void SaveEnemies(ActorData actorData)
     {
 		bool firstTime = false;
 		GameObject enemyContainer = GameObject.FindGameObjectWithTag(Tags.Spawn);

@@ -6,7 +6,7 @@ public class EnemyData
 {
     public Vector3 position;
     public Quaternion rotation;
-    public ActorDataSO actorData;
+    public ActorData actorData;
     public int hp;
     public bool isAlive = true;
     public string name;

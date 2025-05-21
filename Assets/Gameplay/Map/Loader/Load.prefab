@@ -285,8 +285,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _warpPrefab: {fileID: 2467427411415663709, guid: a90a87b873e593f41901024272600090, type: 3}
-  _player: {fileID: 3068678621140226955, guid: f2bf87cd4fafa6d4787bfd5674d6c003, type: 3}
+  _player: {fileID: 7787937590747192945, guid: fcda40ec4f073f145ab705e891e74f77, type: 3}
   _playerCamera: {fileID: 3244676993770304018, guid: c4f6a40382eb1614281aa2602f28e289, type: 3}
+  _playerData: {fileID: 11400000, guid: 6f1357e5ce897224e864dbfef724a299, type: 2}
   _listEnemies:
     entries:
     - Key: 0

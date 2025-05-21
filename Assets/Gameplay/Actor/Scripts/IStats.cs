@@ -1,6 +1,5 @@
 public interface IStats
 {
-    public string CharacterName { get; set; }
     /// <summary>
     /// Maximum ammount of life
     /// </summary>
@@ -29,14 +28,18 @@ public interface IStats
     /// How fast can moves the character
     /// </summary>
     public float MovementSpeed { get; set; }
+	/// <summary>
+	/// Multiplicative damage, how much damage increase per level
+	/// </summary>
+	public float MulAttack { get; set; }
     /// <summary>
-    /// Multiplicative damage, how much is increased the damage by * X
-    /// </summary>
-    public float MulAttack { get; set; }
-    /// <summary>
-    /// Multiplicative defense, how much damage is reduced by * X
+    /// Multiplicative defense, how much defense increase per level
     /// </summary>
     public float MulDefense { get; set; }
+    /// <summary>
+    /// Multiplicative hp, how much hp increased per level
+    /// </summary>
+    public float MulHP { get; set; }
 
     public void UpdateStats(IStats stats);
 }
