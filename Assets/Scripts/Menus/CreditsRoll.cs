@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class CreditsRoll : MonoBehaviour
 {
     #region Global Attributes
     public float scrollSpeed = 75.0f;
 
+    public UnityEvent creditsClose;
     public bool areCreditsFinished = false;
     public float currentScrollPosition = 0f;
     public float scrollDistance = 5000f; //TODO, make it auto
@@ -21,6 +22,7 @@ public class CreditsRoll : MonoBehaviour
     private void Start()
     {
         areCreditsFinished = false;
+        //Invoke("End", 10);
         rectTransform = GetComponent<RectTransform>();
     }
 
@@ -47,8 +49,9 @@ public class CreditsRoll : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBeforeTransition);
 
-        SceneManager.LoadScene("MenuMain");
-        //gameObject.SetActive(false);
+        //SceneManager.LoadScene("MainMenu");
+        //gameObject.SetActive(true);
+        creditsClose.Invoke();
     }
 
     #endregion
