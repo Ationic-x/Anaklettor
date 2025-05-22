@@ -359,8 +359,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3838219398710856425}
-  - component: {fileID: 6617191095312810588}
-  - component: {fileID: 3033676062504024766}
   m_Layer: 0
   m_Name: Rig
   m_TagString: Untagged
@@ -384,40 +382,6 @@ Transform:
   - {fileID: 7629411921335421128}
   m_Father: {fileID: 793048654110708222}
   m_LocalEulerAnglesHint: {x: 0.000001781611, y: 0, z: 0}
---- !u!195 &6617191095312810588
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1710032849228866552}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &3033676062504024766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1710032849228866552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae3db0ed1e0aa844870ec8798c3e52c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1724856405812896380
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8545162089740376700}
+  - component: {fileID: 787705093500883801}
   m_Layer: 0
   m_Name: RayCastEyes
   m_TagString: Untagged
@@ -714,6 +679,18 @@ Transform:
   - {fileID: 2556997091292794271}
   m_Father: {fileID: 6274769388605369072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &787705093500883801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472770093275876209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b4a77f1b4c5f549a6e8e5183852d84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2760089592259378374
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,6 +1146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5039596117235166958}
+  - component: {fileID: 2070543098399955189}
   m_Layer: 0
   m_Name: SpellCastOrigin
   m_TagString: Untagged
@@ -1191,6 +1169,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2062337065356889636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2070543098399955189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719051792328125238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20338bdc2039de04f99b52c561780057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3832114708513847666
 GameObject:
   m_ObjectHideFlags: 0

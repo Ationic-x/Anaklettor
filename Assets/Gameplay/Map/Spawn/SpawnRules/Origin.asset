@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minEnemies: 1
   maxEnemies: 1
-  minSpacingBetweenEnemies: 1
+  minSpacingBetweenEnemies: 3
   spawnAreaRatio: 1
-  roles: 01000000
+  roles: 00000000
   randomizeRoles: 0

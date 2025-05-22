@@ -2352,6 +2352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6093966864273161236}
+  - component: {fileID: 1767113136202516999}
   m_Layer: 0
   m_Name: RayCastEyes
   m_TagString: Untagged
@@ -2381,6 +2382,18 @@ Transform:
   - {fileID: 3548454507280469891}
   m_Father: {fileID: 5040666939547491457}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1767113136202516999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096242108702216596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b4a77f1b4c5f549a6e8e5183852d84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7270596102929225568
 GameObject:
   m_ObjectHideFlags: 0
@@ -3030,8 +3043,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8823161137872422490}
-  - component: {fileID: 184754461205643050}
-  - component: {fileID: 1822380227321516811}
   m_Layer: 0
   m_Name: Rig
   m_TagString: Untagged
@@ -3055,41 +3066,6 @@ Transform:
   - {fileID: 5845467673660067078}
   m_Father: {fileID: 3962012392603933677}
   m_LocalEulerAnglesHint: {x: 0.0000029827636, y: 0, z: 0}
---- !u!195 &184754461205643050
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8866546762200081650}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &1822380227321516811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8866546762200081650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eda95400ffe4f24e9c5d78c1d8962ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackDelay: 0.5
 --- !u!1 &9108115114446109584
 GameObject:
   m_ObjectHideFlags: 0
