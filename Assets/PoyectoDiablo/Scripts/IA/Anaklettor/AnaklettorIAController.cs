@@ -6,513 +6,512 @@ using UnityEngine.AI;
 public class AnaklettorIAController : MonoBehaviour
 {
 
-    //Objetos
-    private GameObject[] _eyeArray;
+    ////Objetos
+    //private GameObject[] _eyeArray;
 
-    private GameObject _spellSpawnPoint;
+    //private GameObject _spellSpawnPoint;
 
-    private GameObject _spellGameObject;
+    //private GameObject _spellGameObject;
 
-    private NavMeshAgent _nvAgent;
+    //private NavMeshAgent _nvAgent;
 
-    private GameObject _playerGameObject;
+    //private GameObject _playerGameObject;
 
-    private Animator _animator;
+    //private Animator _animator;
 
-    private ActorDataSO _actorData;
+    //private ActorDataSO _actorData;
 
-    //Tamanyo del mapa
-    private int areaSize = 20;
+    ////Tamanyo del mapa
+    //private int areaSize = 20;
 
-    //Bools
-    private bool _isMoving = false;
+    ////Bools
+    //private bool _isMoving = false;
 
-    private bool _isAttacking = false;
+    //private bool _isAttacking = false;
 
-    private bool _targetFound = false;
+    //private bool _targetFound = false;
 
-    private bool _isSearching = false;
+    //private bool _isSearching = false;
 
-    private bool _isDead = false;
+    //private bool _isDead = false;
 
-    private float _runSpeed = 1f;
+    //private float _runSpeed = 1f;
 
-    private void Awake()
-    {
-        _animator = GetComponentInParent<Animator>();
+    //private void Awake()
+    //{
+    //    _animator = GetComponentInParent<Animator>();
 
-        _nvAgent = GetComponent<NavMeshAgent>();
+    //    _nvAgent = GetComponent<NavMeshAgent>();
 
-        GetEyes();
-    }
+    //    GetEyes();
+    //}
 
-    void Update()
-    {
-        if (!_isDead)
-        {
-            RayDetector();
+    //void Update()
+    //{
+    //    if (!_isDead)
+    //    {
+    //        RayDetector();
 
-            UpdateAnimationsVariables();
-        }
-        else
-        {
-            Dead();
-        }
-    }
+    //        UpdateAnimationsVariables();
+    //    }
+    //    else
+    //    {
+    //        Dead();
+    //    }
+    //}
 
-    private void AssingScriptableObjectStats()
-    {
+    //private void AssingScriptableObjectStats()
+    //{
 
-        if (_nvAgent)
-        {
-            //Se asigna la velocidad de movimiento
-            _nvAgent.speed = _actorData.stats.MovementSpeed;
+    //    if (_nvAgent)
+    //    {
+    //        //Se asigna la velocidad de movimiento
+    //        _nvAgent.speed = _actorData.stats.MovementSpeed;
 
-            //Se guarda la velocidad que debe tener el enemigo al correr
-            _runSpeed = _nvAgent.speed + _actorData.stats.MulSpeed;
+    //        //Se guarda la velocidad que debe tener el enemigo al correr
+    //        _runSpeed = _nvAgent.speed + _actorData.stats.MulSpeed;
 
-        }
+    //    }
 
-    }
+    //}
 
-    private void OnActorDataSetted()
-    {
-        AssingScriptableObjectStats();
-        StartCoroutine(Idle(3));
-    }
+    //private void OnActorDataSetted()
+    //{
+    //    AssingScriptableObjectStats();
+    //    StartCoroutine(Idle(3));
+    //}
 
-    #region Vista
+    //#region Vista
 
-    //Se obtiene los transforms donde se lanzaran los rayos
-    private void GetEyes()
-    {
-        GameObject eyeObject = FindChildRecursive(transform, "root/hips/spine/chest/head/RayCastEyes");
+    ////Se obtiene los transforms donde se lanzaran los rayos
+    //private void GetEyes()
+    //{
+    //    GameObject eyeObject = FindChildRecursive(transform, "root/hips/spine/chest/head/RayCastEyes");
 
-        if (eyeObject)
-        {
-            _eyeArray = new GameObject[eyeObject.transform.childCount];
+    //    if (eyeObject)
+    //    {
+    //        _eyeArray = new GameObject[eyeObject.transform.childCount];
 
-            int counter = 0;
+    //        int counter = 0;
 
-            foreach (Transform child in eyeObject.transform)
-            {
-                _eyeArray[counter] = child.gameObject;
-                counter++;
-            }
-        }
-        else
-        {
-            Debug.LogError($"{transform.parent.name}: El campo 'eyeObject' no está asignado en el inspector.");
-        }
+    //        foreach (Transform child in eyeObject.transform)
+    //        {
+    //            _eyeArray[counter] = child.gameObject;
+    //            counter++;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError($"{transform.parent.name}: El campo 'eyeObject' no está asignado en el inspector.");
+    //    }
 
-    }
+    //}
 
-    //Se lanzan los rayos y se comprueba si colisiona con el jugador
-    private void RayDetector()
-    {
-
-        if (!_targetFound && !_isDead)
-        {
-            RaycastHit hit;
-
-            if (_eyeArray != null)
-            {
-                foreach (GameObject eye in _eyeArray)
-                {
-                    Vector3 origin = eye.transform.position;
-
-                    Vector3 direction = eye.transform.forward;
-
-                    //Esto permite que los rallos colisionen on todo
-                    if (Physics.Raycast(origin, direction, out hit, 20))
-                    {
-
-                        Debug.DrawRay(origin, direction * hit.distance, Color.red);
-
-                        //Aqui se comprueba si el rayo colisiona con el jugador
-                        if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
-                        {
-                            _playerGameObject = hit.transform.GameObject();
-
-                            _targetFound = true;
-                        }
-
-                    }
-                    else
-                    {
-                        Debug.DrawRay(origin, direction * 20, Color.green);
-                    }
-                }
-            }
-            else
-            {
-                Debug.LogError($"{transform.parent.name}: El array de ojos no está inicializado.");
-            }
-        }
-
-    }
-
-    //Espera como maximo 2.2 segundos a realizar la animacion de idle en la que el enemigo mueve la cabeza y por lo tanto los raycast
-    private IEnumerator SearchPlayer()
-    {
-        _isSearching = true;
-
-        float searchDuration = 2.2f;
-
-        float elapsed = 0f;
-
-        while (elapsed < searchDuration)
-        {
-            if (_targetFound)
-            {
-                break;
-            }
-
-            elapsed += Time.deltaTime;
-
-            yield return null;
-        }
-
-        Stop();
+    ////Se lanzan los rayos y se comprueba si colisiona con el jugador
+    //private void RayDetector()
+    //{
+
+    //    if (!_targetFound && !_isDead)
+    //    {
+    //        RaycastHit hit;
+
+    //        if (_eyeArray != null)
+    //        {
+    //            foreach (GameObject eye in _eyeArray)
+    //            {
+    //                Vector3 origin = eye.transform.position;
+
+    //                Vector3 direction = eye.transform.forward;
+
+    //                //Esto permite que los rallos colisionen on todo
+    //                if (Physics.Raycast(origin, direction, out hit, 20))
+    //                {
+
+    //                    Debug.DrawRay(origin, direction * hit.distance, Color.red);
+
+    //                    //Aqui se comprueba si el rayo colisiona con el jugador
+    //                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
+    //                    {
+    //                        _playerGameObject = hit.transform.GameObject();
+
+    //                        _targetFound = true;
+    //                    }
+
+    //                }
+    //                else
+    //                {
+    //                    Debug.DrawRay(origin, direction * 20, Color.green);
+    //                }
+    //            }
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError($"{transform.parent.name}: El array de ojos no está inicializado.");
+    //        }
+    //    }
+
+    //}
+
+    ////Espera como maximo 2.2 segundos a realizar la animacion de idle en la que el enemigo mueve la cabeza y por lo tanto los raycast
+    //private IEnumerator SearchPlayer()
+    //{
+    //    _isSearching = true;
+
+    //    float searchDuration = 2.2f;
+
+    //    float elapsed = 0f;
+
+    //    while (elapsed < searchDuration)
+    //    {
+    //        if (_targetFound)
+    //        {
+    //            break;
+    //        }
+
+    //        elapsed += Time.deltaTime;
+
+    //        yield return null;
+    //    }
+
+    //    Stop();
 
-        if (_targetFound)
-        {
-            StartCoroutine(Chase());
-        }
-        else
-        {
-            StartCoroutine(Patrol());
-        }
+    //    if (_targetFound)
+    //    {
+    //        StartCoroutine(Chase());
+    //    }
+    //    else
+    //    {
+    //        StartCoroutine(Patrol());
+    //    }
 
-    }
+    //}
 
-    #endregion END Vista
+    //#endregion END Vista
 
-    #region Movimiento
+    //#region Movimiento
 
-    private IEnumerator Idle(float secondsInIdle)
-    {
-        yield return new WaitForSeconds(secondsInIdle);
+    //private IEnumerator Idle(float secondsInIdle)
+    //{
+    //    yield return new WaitForSeconds(secondsInIdle);
 
-        Stop();
+    //    Stop();
 
-        if (_targetFound)
-        {
-            StartCoroutine(Chase());
-        }
-        else
-        {
-            StartCoroutine(Patrol());
-        }
-    }
-
-    //Obtiene un punto aleatorio del escenario para la navegacion
-    private Vector3 RandomPosition()
-    {
-        return new Vector3(Random.Range(-areaSize, areaSize), 0, Random.Range(-areaSize, areaSize)); ;
-    }
-
-    //Realiza una patrulla dirigiendose a un punto aleatorio del escenario
-    //si ve al jugador en este trayecto lo perseguira
-    private IEnumerator Patrol()
-    {
-
-        Move(RandomPosition());
-
-        while (_isMoving)
-        {
-            yield return new WaitForFixedUpdate();
-
-            if (_targetFound)
-            {
-                break;
-            }
-        }
+    //    if (_targetFound)
+    //    {
+    //        StartCoroutine(Chase());
+    //    }
+    //    else
+    //    {
+    //        StartCoroutine(Patrol());
+    //    }
+    //}
+
+    ////Obtiene un punto aleatorio del escenario para la navegacion
+    //private Vector3 RandomPosition()
+    //{
+    //    return new Vector3(Random.Range(-areaSize, areaSize), 0, Random.Range(-areaSize, areaSize)); ;
+    //}
+
+    ////Realiza una patrulla dirigiendose a un punto aleatorio del escenario
+    ////si ve al jugador en este trayecto lo perseguira
+    //private IEnumerator Patrol()
+    //{
+
+    //    Move(RandomPosition());
+
+    //    while (_isMoving)
+    //    {
+    //        yield return new WaitForFixedUpdate();
+
+    //        if (_targetFound)
+    //        {
+    //            break;
+    //        }
+    //    }
 
-        Stop();
+    //    Stop();
 
-        if (_targetFound)
-        {
-            StartCoroutine(Chase());
-        }
-        else
-        {
-            StartCoroutine(SearchPlayer());
-        }
+    //    if (_targetFound)
+    //    {
+    //        StartCoroutine(Chase());
+    //    }
+    //    else
+    //    {
+    //        StartCoroutine(SearchPlayer());
+    //    }
 
-    }
+    //}
 
-    //Se indica a que posicion debe moverse la ia
-    private void Move(Vector3 destination)
-    {
+    ////Se indica a que posicion debe moverse la ia
+    //private void Move(Vector3 destination)
+    //{
 
-        if (destination != Vector3.zero)
-        {
-            StartCoroutine(GoTo(destination));
-        }
+    //    if (destination != Vector3.zero)
+    //    {
+    //        StartCoroutine(GoTo(destination));
+    //    }
 
-    }
+    //}
 
-    //Se persigue al jugador con un margen indicado al final del while
-    private IEnumerator Chase()
-    {
-        //Como ya ha encontrado al jugador empieza a correr asi que se le asigna la velocidad de correr
-        _nvAgent.speed = _runSpeed;
+    ////Se persigue al jugador con un margen indicado al final del while
+    //private IEnumerator Chase()
+    //{
+    //    //Como ya ha encontrado al jugador empieza a correr asi que se le asigna la velocidad de correr
+    //    _nvAgent.speed = _runSpeed;
 
-        if (_playerGameObject)
-        {
+    //    if (_playerGameObject)
+    //    {
 
-            while (Vector3.Distance(transform.position, _playerGameObject.transform.position) >= _actorData.stats.MinDistanceAttack)
-            {
-                yield return new WaitForFixedUpdate();
+    //        while (Vector3.Distance(transform.position, _playerGameObject.transform.position) >= _actorData.stats.MinDistanceAttack)
+    //        {
+    //            yield return new WaitForFixedUpdate();
 
-                Move(_playerGameObject.transform.position);
-            }
+    //            Move(_playerGameObject.transform.position);
+    //        }
 
-            Stop();
+    //        Stop();
 
-            StartCoroutine(Attack());
+    //        StartCoroutine(Attack());
 
-        }
+    //    }
 
-    }
+    //}
 
-    //La ia se mueve a la poscion indicada
-    private IEnumerator GoTo(Vector3 destination)
-    {
-        _isMoving = true;
+    ////La ia se mueve a la poscion indicada
+    //private IEnumerator GoTo(Vector3 destination)
+    //{
+    //    _isMoving = true;
 
-        _nvAgent.SetDestination(destination);
+    //    _nvAgent.SetDestination(destination);
 
-        while (Vector3.Distance(transform.position, destination) >= _actorData.stats.MinDistanceAttack)
-        {
-            yield return new WaitForFixedUpdate();
-        }
+    //    while (Vector3.Distance(transform.position, destination) >= _actorData.stats.MinDistanceAttack)
+    //    {
+    //        yield return new WaitForFixedUpdate();
+    //    }
 
-        _isMoving = false;
-    }
+    //    _isMoving = false;
+    //}
 
-    private IEnumerator LookAtPlayer()
-    {
-        // Mientras esté atacando, rota hacia el jugador
-        while (_isAttacking)
-        {
-            Vector3 direction = (_playerGameObject.transform.position - transform.position).normalized;
-            direction.y = 0;
+    //private IEnumerator LookAtPlayer()
+    //{
+    //    // Mientras esté atacando, rota hacia el jugador
+    //    while (_isAttacking)
+    //    {
+    //        Vector3 direction = (_playerGameObject.transform.position - transform.position).normalized;
+    //        direction.y = 0;
 
-            if (direction != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(
-                    transform.rotation,
-                    targetRotation,
-                    Time.deltaTime * _actorData.stats.MovementSpeed
-                );
-            }
-            yield return null;
-        }
-    }
+    //        if (direction != Vector3.zero)
+    //        {
+    //            Quaternion targetRotation = Quaternion.LookRotation(direction);
+    //            transform.rotation = Quaternion.Slerp(
+    //                transform.rotation,
+    //                targetRotation,
+    //                Time.deltaTime * _actorData.stats.MovementSpeed
+    //            );
+    //        }
+    //        yield return null;
+    //    }
+    //}
 
-    //Para el movimiento y cualquier estado de la ia
-    private void Stop()
-    {
-        _nvAgent.SetDestination(this.transform.position);
+    ////Para el movimiento y cualquier estado de la ia
+    //private void Stop()
+    //{
+    //    _nvAgent.SetDestination(this.transform.position);
 
-        _isMoving = false;
+    //    _isMoving = false;
+
+    //    _isAttacking = false;
 
-        _isAttacking = false;
+    //    _isSearching = false;
 
-        _isSearching = false;
+    //}
 
-    }
+    //#endregion END Movimiento
 
-    #endregion END Movimiento
+    //#region Ataque
 
-    #region Ataque
+    //private IEnumerator Attack()
+    //{
+    //    _isAttacking = true;
 
-    private IEnumerator Attack()
-    {
-        _isAttacking = true;
+    //    StartCoroutine(RangeAttack());
 
-        StartCoroutine(RangeAttack());
+    //    yield return null;
+    //}
 
-        yield return null;
-    }
+    //private IEnumerator RangeAttack()
+    //{
+    //    //Ajustar cuando realmente tiene municion y cuando no 
 
+    //    StartCoroutine(LookAtPlayer());
 
-    private IEnumerator RangeAttack()
-    {
-        //Ajustar cuando realmente tiene municion y cuando no 
+    //    //Si sigue estando al alcance de golpear otra vez espera 1.5 segundos y vuelve a atacar
+    //    while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= _actorData.stats.MinDistanceAttack)
+    //    {
+    //        // Disparar
+    //        _animator.ResetTrigger("ReloadTrigger");
+    //        _animator.SetTrigger("ShootTrigger");
 
-        StartCoroutine(LookAtPlayer());
+    //        //Se dispara la flecha segun la animacion controlado por un evento y el script IAEventsBridge                        
+    //        yield return WaitForCurrentAnimation();
 
-        //Si sigue estando al alcance de golpear otra vez espera 1.5 segundos y vuelve a atacar
-        while (Vector3.Distance(transform.position, _playerGameObject.transform.position) <= _actorData.stats.MinDistanceAttack)
-        {
-            // Disparar
-            _animator.ResetTrigger("ReloadTrigger");
-            _animator.SetTrigger("ShootTrigger");
+    //        // Recargar
+    //        _animator.ResetTrigger("ShootTrigger");
+    //        _animator.SetTrigger("ReloadTrigger");
+    //        yield return WaitForCurrentAnimation();
 
-            //Se dispara la flecha segun la animacion controlado por un evento y el script IAEventsBridge                        
-            yield return WaitForCurrentAnimation();
+    //    }
 
-            // Recargar
-            _animator.ResetTrigger("ShootTrigger");
-            _animator.SetTrigger("ReloadTrigger");
-            yield return WaitForCurrentAnimation();
+    //    Stop();
+    //    StartCoroutine(Chase());
+    //}
 
-        }
+    //public void TrhowSpell()
+    //{
+    //    if (!_spellSpawnPoint)
+    //    {
+    //        _spellSpawnPoint = FindChildRecursive(transform, "root/handIK.r/SpellCastOrigin");
 
-        Stop();
-        StartCoroutine(Chase());
-    }
+    //        _spellGameObject = FindChildRecursive(transform, "root/handIK.r");
 
-    public void TrhowSpell()
-    {
-        if (!_spellSpawnPoint)
-        {
-            _spellSpawnPoint = FindChildRecursive(transform, "root/handIK.r/SpellCastOrigin");
+    //        _spellGameObject = _spellGameObject.GetComponentInChildren<SpellController>(true).gameObject;
+    //    }
 
-            _spellGameObject = FindChildRecursive(transform, "root/handIK.r");
+    //    float randomOffsetX = Random.Range(-0.35f, 0.35f);
+    //    float randomOffsetY = Random.Range(-0.35f, 0.35f);
 
-            _spellGameObject = _spellGameObject.GetComponentInChildren<SpellController>(true).gameObject;
-        }
+    //    // Crear nueva posición de spawn con dispersion
+    //    Vector3 randomOffset = new Vector3(randomOffsetX, randomOffsetY, 0);
+    //    Vector3 spawnPosition = _spellSpawnPoint.transform.position + randomOffset;
 
-        float randomOffsetX = Random.Range(-0.35f, 0.35f);
-        float randomOffsetY = Random.Range(-0.35f, 0.35f);
+    //    GameObject spell = Instantiate(_spellGameObject, spawnPosition, _spellGameObject.transform.rotation);
+    //    spell.SetActive(true);
 
-        // Crear nueva posición de spawn con dispersion
-        Vector3 randomOffset = new Vector3(randomOffsetX, randomOffsetY, 0);
-        Vector3 spawnPosition = _spellSpawnPoint.transform.position + randomOffset;
+    //    Rigidbody spellRigiBody = spell.GetComponent<Rigidbody>();
 
-        GameObject spell = Instantiate(_spellGameObject, spawnPosition, _spellGameObject.transform.rotation);
-        spell.SetActive(true);
+    //    if (spellRigiBody != null)
+    //    {
+    //        spellRigiBody.AddForce(_spellGameObject.transform.forward * 6, ForceMode.Impulse);
+    //    }
 
-        Rigidbody spellRigiBody = spell.GetComponent<Rigidbody>();
+    //}
 
-        if (spellRigiBody != null)
-        {
-            spellRigiBody.AddForce(_spellGameObject.transform.forward * 6, ForceMode.Impulse);
-        }
+    ////Esto hace que aparezca en los 3 puntos en el componente script este metodo para ejecutar 
+    //[ContextMenu("Dead")]
+    //public void Dead()
+    //{
+    //    if (!_isDead)
+    //    {
+    //        _nvAgent.enabled = false;
+    //        _isDead = true;
+    //        Stop();
+    //        StopAllCoroutines();
+    //        _animator.SetTrigger("DieTrigger");
+    //    }
+    //}
 
-    }
+    //[ContextMenu("TakeDamage")]
+    //public void TakeDamage()
+    //{
+    //    StartCoroutine(IsDamaged());
+    //}
 
-    //Esto hace que aparezca en los 3 puntos en el componente script este metodo para ejecutar 
-    [ContextMenu("Dead")]
-    public void Dead()
-    {
-        if (!_isDead)
-        {
-            _nvAgent.enabled = false;
-            _isDead = true;
-            Stop();
-            StopAllCoroutines();
-            _animator.SetTrigger("DieTrigger");
-        }
-    }
+    //private IEnumerator IsDamaged()
+    //{
+    //    Stop();
 
-    [ContextMenu("TakeDamage")]
-    public void TakeDamage()
-    {
-        StartCoroutine(IsDamaged());
-    }
+    //    _animator.SetTrigger("HitTrigger");
 
-    private IEnumerator IsDamaged()
-    {
-        Stop();
+    //    //Hace que el enemigo no se mueva al recibir el daño
+    //    _nvAgent.isStopped = true;
 
-        _animator.SetTrigger("HitTrigger");
+    //    yield return WaitForCurrentAnimation();
 
-        //Hace que el enemigo no se mueva al recibir el daño
-        _nvAgent.isStopped = true;
+    //    //Hace que el enemigo pueda seguir moviendose
+    //    _nvAgent.isStopped = false;
 
-        yield return WaitForCurrentAnimation();
+    //    if (_targetFound)
+    //    {
+    //        StartCoroutine(Chase());
+    //    }
+    //    else
+    //    {
+    //        StartCoroutine(SearchPlayer());
+    //    }
 
-        //Hace que el enemigo pueda seguir moviendose
-        _nvAgent.isStopped = false;
+    //}
 
-        if (_targetFound)
-        {
-            StartCoroutine(Chase());
-        }
-        else
-        {
-            StartCoroutine(SearchPlayer());
-        }
+    //#endregion END Ataque
 
-    }
+    //#region Animaciones
 
-    #endregion END Ataque
+    //private void UpdateAnimationsVariables()
+    //{
+    //    if (_animator)
+    //    {
+    //        _animator.SetBool("_isMoving", _isMoving);
+    //        _animator.SetBool("_isAttacking", _isAttacking);
+    //        _animator.SetBool("_isSearching", _isSearching);
+    //        _animator.SetBool("_targetFound", _targetFound);
 
-    #region Animaciones
+    //    }
 
-    private void UpdateAnimationsVariables()
-    {
-        if (_animator)
-        {
-            _animator.SetBool("_isMoving", _isMoving);
-            _animator.SetBool("_isAttacking", _isAttacking);
-            _animator.SetBool("_isSearching", _isSearching);
-            _animator.SetBool("_targetFound", _targetFound);
+    //}
 
-        }
+    //#endregion
 
-    }
+    //#region Tools
 
-    #endregion
+    //private IEnumerator WaitForCurrentAnimation()
+    //{
+    //    // Esperar un frame para que el Animator se actualice
+    //    yield return null;
 
-    #region Tools
+    //    // Obtener duración real del clip activo
+    //    AnimatorClipInfo[] clipInfo = _animator.GetCurrentAnimatorClipInfo(0);
 
-    private IEnumerator WaitForCurrentAnimation()
-    {
-        // Esperar un frame para que el Animator se actualice
-        yield return null;
+    //    if (clipInfo.Length > 0)
+    //    {
+    //        float duration = clipInfo[0].clip.length;
+    //        yield return new WaitForSeconds(duration);
+    //    }
+    //}
 
-        // Obtener duración real del clip activo
-        AnimatorClipInfo[] clipInfo = _animator.GetCurrentAnimatorClipInfo(0);
+    //// Encuentra un hijo dentro de una jerarquía especificada usando una ruta.
+    ////Devuelve null si no se encuentra alguno de los nodos. 
+    //private GameObject FindChildRecursive(Transform parentTransform, string path)
+    //{
+    //    string[] segments = path.Split('/');
 
-        if (clipInfo.Length > 0)
-        {
-            float duration = clipInfo[0].clip.length;
-            yield return new WaitForSeconds(duration);
-        }
-    }
+    //    Transform currentTransform = parentTransform;
 
-    // Encuentra un hijo dentro de una jerarquía especificada usando una ruta.
-    //Devuelve null si no se encuentra alguno de los nodos. 
-    private GameObject FindChildRecursive(Transform parentTransform, string path)
-    {
-        string[] segments = path.Split('/');
+    //    foreach (string segment in segments)
+    //    {
+    //        currentTransform = currentTransform.Find(segment);
 
-        Transform currentTransform = parentTransform;
+    //        if (currentTransform == null)
+    //        {
+    //            return null;
+    //        }
+    //    }
 
-        foreach (string segment in segments)
-        {
-            currentTransform = currentTransform.Find(segment);
+    //    return currentTransform.gameObject;
+    //}
 
-            if (currentTransform == null)
-            {
-                return null;
-            }
-        }
+    //#endregion END Tools
 
-        return currentTransform.gameObject;
-    }
+    //public ActorDataSO ActorData
+    //{
+    //    set
+    //    {
+    //        _actorData = value;
+    //        OnActorDataSetted();
+    //    }
 
-    #endregion END Tools
-
-    public ActorDataSO ActorData
-    {
-        set
-        {
-            _actorData = value;
-            OnActorDataSetted();
-        }
-
-        get
-        {
-            return _actorData;
-        }
-    }
+    //    get
+    //    {
+    //        return _actorData;
+    //    }
+    //}
 }
 

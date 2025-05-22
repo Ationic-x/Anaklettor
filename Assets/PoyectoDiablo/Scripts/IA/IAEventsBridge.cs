@@ -1,18 +1,13 @@
+using System;
 using UnityEngine;
 
 public class IAEventsBridge : MonoBehaviour
 {
-    IAController iaController;
-
-    private void Start()
-    {
-        iaController = transform.GetComponentInChildren<IAController>();
-
-    }
+    public Action isShooting;
 
     public void ShootArrow()
     {
-        iaController.SpawnArrow();
+        isShooting.Invoke();
     }
 
 }

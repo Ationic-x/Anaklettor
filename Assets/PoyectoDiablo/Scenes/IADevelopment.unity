@@ -384,7 +384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2037934953490764131, guid: c5e013cb9c0bdf1439b20de2c01c2f03, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2925101023360168804, guid: c5e013cb9c0bdf1439b20de2c01c2f03, type: 3}
       propertyPath: m_LocalPosition.x
@@ -446,6 +446,10 @@ PrefabInstance:
     - target: {fileID: 4369120169878162334, guid: df4f21b1f11666d45abfaa8b6464628b, type: 3}
       propertyPath: m_Name
       value: IA_Skeleton_Minion_Armed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369120169878162334, guid: df4f21b1f11666d45abfaa8b6464628b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7774524329596426683, guid: df4f21b1f11666d45abfaa8b6464628b, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1991,7 +1991,7 @@ Transform:
   m_GameObject: {fileID: 4369120169878162334}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.333835, y: 0.0000019073486, z: 18.178312}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2314,6 +2314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4493138791873208065}
+  - component: {fileID: 1425813464771493485}
   m_Layer: 0
   m_Name: RayCastEyes
   m_TagString: Untagged
@@ -2343,6 +2344,18 @@ Transform:
   - {fileID: 3066047806650105053}
   m_Father: {fileID: 4131665077595392030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1425813464771493485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270528528561605019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b4a77f1b4c5f549a6e8e5183852d84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5394786167496418017
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,7 +2494,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7851667949406728424}
   - component: {fileID: 6429882432362805216}
-  - component: {fileID: 107755559432716715}
   m_Layer: 0
   m_Name: Rig
   m_TagString: Untagged
@@ -2512,7 +2524,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5961693020609317914}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -2527,20 +2539,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &107755559432716715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5961693020609317914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eda95400ffe4f24e9c5d78c1d8962ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _arrowGameObject: {fileID: 2173545139428971142, guid: adab96fe1eb1cb040813f9e7e5730921, type: 3}
-  _attackDelay: 0.5
 --- !u!1 &6044328432025514459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2972,6 +2970,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 406564251816546054}
+  - component: {fileID: 4214757534208158614}
   m_Layer: 0
   m_Name: ArrowSpawnPoint
   m_TagString: Untagged
@@ -2994,6 +2993,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1289048422053656675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4214757534208158614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7612230679379775275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20338bdc2039de04f99b52c561780057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8068610520010779800
 GameObject:
   m_ObjectHideFlags: 0

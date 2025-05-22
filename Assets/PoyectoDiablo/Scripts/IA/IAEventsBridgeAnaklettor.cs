@@ -3,15 +3,15 @@ using UnityEngine;
 public class IAEventsBridgeAnaklettor : MonoBehaviour
 {
 
-    AnaklettorIAController anaklettorIAController;
+    //AnaklettorIAController anaklettorIAController;
 
-    private void Start()
-    {
-        anaklettorIAController = transform.GetComponentInChildren<AnaklettorIAController>();
-    }
+    //private void Start()
+    //{
+    //    anaklettorIAController = transform.GetComponentInChildren<AnaklettorIAController>();
+    //}
 
-    public void TrhowSpell()
-    {
-        anaklettorIAController.TrhowSpell();
-    }
+    //public void TrhowSpell()
+    //{
+    //    anaklettorIAController.TrhowSpell();
+    //}
 }

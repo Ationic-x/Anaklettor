@@ -12074,6 +12074,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5049044465792274480, guid: 43c9171f2e24e0d4ebf775a9617a3489, type: 3}
+      propertyPath: _enemy
+      value: 
+      objectReference: {fileID: 5864823655341688357, guid: fa01e319a25d01b42a35c5b39260390a, type: 3}
+    - target: {fileID: 5049044465792274480, guid: 43c9171f2e24e0d4ebf775a9617a3489, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[0].Key
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5049044465792274480, guid: 43c9171f2e24e0d4ebf775a9617a3489, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[0].Value
+      value: 
+      objectReference: {fileID: 11400000, guid: 133279381c19fbc4b82651b01dd2dbd9, type: 2}
     - target: {fileID: 7748004471074913366, guid: 43c9171f2e24e0d4ebf775a9617a3489, type: 3}
       propertyPath: m_Name
       value: Load
