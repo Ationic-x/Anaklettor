@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9087533adbeb2644f8d852dfed2a4997
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _warpPrefab: {fileID: 2467427411415663709, guid: a90a87b873e593f41901024272600090, type: 3}
+  - _player: {fileID: 3068678621140226955, guid: f2bf87cd4fafa6d4787bfd5674d6c003, type: 3}
+  - _playerCamera: {fileID: 3244676993770304018, guid: c4f6a40382eb1614281aa2602f28e289, type: 3}
+  - _spawnRules: {fileID: 11400000, guid: 7eb91242054a53643b78c8b515922d3c, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
