@@ -1,0 +1,61 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
+
+public static class SaveController
+{
+    private static LevelGenerator _levelInstance;
+
+	public static void Initialize(LevelGenerator newLevelInstance)
+    {
+        _levelInstance = newLevelInstance;
+    }
+
+	// This method is used to save all the enemies in the current room
+	// We're currently hardcoding the actor data but should be gotten from the enemycontroller or with other methods
+	public static void SaveEnemies(ActorData actorData)
+    {
+		bool firstTime = false;
+		GameObject enemyContainer = GameObject.FindGameObjectWithTag(Tags.Spawn);
+		RoomData roomData;
+
+
+
+		if (!_levelInstance.TryGetCurrentRoomData(out roomData))
+		{
+			firstTime = true;
+			roomData = _levelInstance.NewRoomData(_levelInstance.PlayerCurrentRoom);
+		}
+
+		// First element of child count is always the gameobject (itself)
+		for (int i = 0; i < enemyContainer.transform.childCount; i++)
+		{
+            Transform child = enemyContainer.transform.GetChild(i);
+            if (firstTime)
+			{
+				EnemyData enemyData = new EnemyData();
+				enemyData.position = child.position;
+				enemyData.rotation = child.rotation;
+				enemyData.actorData = actorData;
+				enemyData.name = EnemyNames.enemyNameID[i % EnemyNames.enemyNameID.Length];
+				roomData.enemies.Add(enemyData);
+			}
+			else
+			{
+                roomData.enemies[i].position = child.position;
+				roomData.enemies[i].rotation = child.rotation;
+				// Should be stored the hp also
+				// Should be store if is alive also
+			}
+		}
+    }
+
+    public static void SavePlayer(Vector2Int newRoom, Vector2Int direction)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag(Tags.Player);
+        _levelInstance.PlayerCurrentRoom = newRoom;
+        _levelInstance.MoveDirection = direction;
+        _levelInstance.PlayerPosition = player.transform.position;
+        _levelInstance.PlayerRotation = player.transform.rotation;
+    }
+}

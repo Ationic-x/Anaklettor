@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - EnemySpawnPoint
+  - Warp
+  - Floor
+  - Spawn
+  - Map
   layers:
   - Default
   - TransparentFX
