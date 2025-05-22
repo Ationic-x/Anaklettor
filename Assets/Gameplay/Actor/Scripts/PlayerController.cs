@@ -12,24 +12,37 @@ public class PlayerController : ActorController
 
     private Vector2 _moveInput;
     
-	private float _rotationMultiplier = 30f; // Rotation speed is slower than movement
-	private float _immuneTime = 1.5f; 
+	private float _rotationMultiplier = 40f; // Rotation speed is slower than movement
+	private float _immuneTime = 1.5f;
+	private float _blockSpeed = 1f;
+	private float _blockDelay = 0.5f;
+	private float _blockBlendProgress = 0f;
 
 	private bool _isAttacking = false;
 	private bool _isImmune = false;
+	private bool _isDead = false;
+	private bool _isRecovering = false;
+	private bool _isBlocking = false;
+	private bool _initBlock = false;
 
 	public bool smallDamage = false;
 	public bool hugeDamage = false;
+
+	private Coroutine _blockCoroutine = null;
 
 	#region Events
 	[Header("Actions")]
 	[SerializeField] private InputActionReference _moveAction;
 	[SerializeField] private InputActionReference _attackAction;
+	[SerializeField] private InputActionReference _blockAction;
 
 	private void OnEnable()
     {
 		_moveAction.action.performed += OnMoveInput;
 		_moveAction.action.canceled += OnMoveInput;
+
+		_blockAction.action.performed += OnBlockInput;
+		_blockAction.action.canceled += OnBlockInput;
 
 		_attackAction.action.performed += OnAttackInput;
 	}
@@ -38,6 +51,9 @@ public class PlayerController : ActorController
     {
 		_moveAction.action.performed -= OnMoveInput;
 		_moveAction.action.canceled -= OnMoveInput;
+
+		_blockAction.action.performed -= OnBlockInput;
+		_blockAction.action.canceled -= OnBlockInput;
 
 		_attackAction.action.performed -= OnAttackInput;
 	}
@@ -49,12 +65,28 @@ public class PlayerController : ActorController
 
     private void OnAttackInput(InputAction.CallbackContext context = default)
     {
-        Attack();
+		Attack();
+	}
+
+	private void OnBlockInput(InputAction.CallbackContext context = default)
+	{
+		switch (context.phase)
+		{
+			case InputActionPhase.Performed:
+				Block();
+				break;
+			case InputActionPhase.Canceled:
+				UnBlock();
+				break;
+			default:
+				break;
+		}
 	}
 	#endregion
 
 	private void FixedUpdate()
     {
+		// Tests
 		if (smallDamage)
 		{
 			smallDamage = false;
@@ -65,6 +97,7 @@ public class PlayerController : ActorController
 			hugeDamage = false;
 			TakeDamage(10);
 		}
+		// End of tests
 
 		if (!CanMotion()) return;
 
@@ -72,10 +105,13 @@ public class PlayerController : ActorController
 		Rotate();
 	}
 
-	// Move is handle in a different way between AI(navmesh) and Player(rigidbody + rotation)
+	#region Input Actions
 	private void Move()
 	{
 		float speedDirection = _moveInput.y < 0 ? _moveInput.y / 2 : _moveInput.y;
+
+		speedDirection *= _blockSpeed; // Slow down the player when blocking
+
 		rb.MovePosition(rb.position + (transform.forward * speedDirection * stats.MovementSpeed * Time.fixedDeltaTime));
 		animator.SetFloat("Speed", _moveInput.y); // Animation works better with input value instead speed
 	}
@@ -83,6 +119,8 @@ public class PlayerController : ActorController
 	private void Rotate()
 	{
 		float rotationAmount = _moveInput.x * stats.MovementSpeed * _rotationMultiplier * Time.fixedDeltaTime;
+
+		rotationAmount *= _blockSpeed; // Slow down the player when blocking
 		Quaternion turnOffset = Quaternion.Euler(0, rotationAmount, 0);
 		rb.MoveRotation(rb.rotation * turnOffset);
 	}
@@ -91,21 +129,83 @@ public class PlayerController : ActorController
 	// Require a adaption between AI and Player
 	private void Attack()
 	{
-		if (_isAttacking) return; // Prevents multiple attacks at the same time
+		if (!CanAttack()) return;
+
 		_isAttacking = true;
 		animator.SetTrigger("Attack");
 		StartCoroutine(AttackCooldown());
+	}
+
+	void Block()
+	{
+		if (!CanBlock()) return;
+
+		_initBlock = true;
+
+		if (_blockCoroutine != null)
+			StopCoroutine(_blockCoroutine);
+
+		_blockCoroutine = StartCoroutine(LerpBlock(_blockBlendProgress, 1f));
+	}
+
+	void UnBlock()
+	{
+		_isBlocking = _initBlock = false;
+		animator.SetBool("IsBlocking", false);
+
+		if (_blockCoroutine != null)
+			StopCoroutine(_blockCoroutine);
+
+		_blockCoroutine = StartCoroutine(LerpBlock(_blockBlendProgress, 0f));
+	}
+	#endregion
+
+	#region Cooldowns, Delays and Waits
+	IEnumerator LerpBlock(float start, float end)
+	{
+		float duration = _blockDelay;
+		float t = 0f;
+
+		while (t < 1f)
+		{
+			_blockBlendProgress = Mathf.Lerp(start, end, t);
+
+			float wbValue = Mathf.Lerp(0, 0.75f, _blockBlendProgress);
+			float wbbValue = Mathf.Lerp(0, 0.75f, _blockBlendProgress);
+			_blockSpeed = Mathf.Lerp(1f, 0.5f, _blockBlendProgress);
+
+			animator.SetFloat("BlendWB", wbValue);
+			animator.SetFloat("BlendWBB", wbbValue);
+			animator.SetFloat("BlendIB", _blockBlendProgress);
+
+			t += Time.deltaTime / duration;
+			yield return null;
+		}
+
+		animator.SetBool("IsBlocking", _initBlock);
+		_isBlocking = _initBlock;
+		_blockBlendProgress = end;
 	}
 
 	IEnumerator AttackCooldown()
 	{
 		animator.SetFloat("AttackSpeed", stats.Speed);
 		
-		float attackDuration = animator.GetCurrentAnimatorClipInfo(1)[0].clip.length;
+		float attackDuration = animator.GetCurrentAnimatorClipInfo(1)[0].clip.length; // Attack layer 1
 		float actualDuration = attackDuration / stats.Speed;
 		
 		yield return new WaitForSeconds(actualDuration);
 		_isAttacking = false;
+	}
+
+	IEnumerator RecoveringCooldown()
+	{
+		_isRecovering = true;
+		animator.SetBool("IsRecovering", true);
+		float recoveringDuration = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+		yield return new WaitForSeconds(recoveringDuration);
+		_isRecovering = false;
+		animator.SetBool("IsRecovering", false);
 	}
 
 	IEnumerator ImmuneCooldown()
@@ -114,8 +214,10 @@ public class PlayerController : ActorController
 		yield return new WaitForSeconds(_immuneTime);
 		_isImmune = false;
 	}
+	#endregion
 
-	// Enemies cannot be healed, we dont have a healer job or something
+	// Skeletons be healing? That sound like a hex
+	// Let the player be the only one that can heal
 	public void Heal(int amount)
 	{
 		stats.HP += amount;
@@ -124,15 +226,26 @@ public class PlayerController : ActorController
 
 	public override void TakeDamage(int amount)
 	{
-		if (_isImmune) return;
+		if (!CanTakeDamage()) return;
+
+		stats.HP -= amount;
+		animator.SetInteger("Damaged", amount);
+		
+		if (stats.HP <= 0)
+		{
+			stats.HP = 0;
+			_isDead = true;
+			animator.SetBool("IsDead", true);
+			animator.SetTrigger("Die");
+
+			return; // Dead people cannot be hitted
+		}
+
 
 		_damageBlink.TriggerBlink();
+		StartCoroutine(RecoveringCooldown());
 		StartCoroutine(ImmuneCooldown());
-		
-		animator.SetInteger("Damaged", amount);
 		animator.SetTrigger("IsHitted");
-		stats.HP -= amount;
-		if (stats.HP < 0) stats.HP = 0;
 	}
 
 
@@ -148,13 +261,32 @@ public class PlayerController : ActorController
 		_damageBlink = GetComponentInChildren<ChangeMaterialColor>();
 	}
 
+	#region Checks
 	private bool CanMotion()
 	{
-		string AnimationName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-
-		// If you're hitted or dead you cannot do anything
-		return !(AnimationName.Equals("Hit_A") || AnimationName.Equals("Hit_B"));
+		// Only skeletons can move when they are dead
+		return !(_isRecovering || _isDead);
 	}
+
+	private bool CanAttack()
+	{
+		// Alive people that aren't attacking or attacked can attack
+		// Currently we cant attack blocking
+		return !(_isAttacking || _isDead || _isRecovering || _isBlocking);
+	}
+
+	private bool CanTakeDamage()
+	{
+		// Only humans can take damage, people that avoid metaphysics laws can't be here
+		return !(_isDead || _isImmune || _isBlocking);
+	}
+
+	private bool CanBlock()
+	{
+		// Only humans can block, people that avoid metaphysics laws can't be here
+		return !(_isDead || _isAttacking || _isBlocking);
+	}
+	#endregion
 
 	void LevelUp() 
     {
