@@ -14,9 +14,13 @@ public class PlayerController : ActorController
     
 	private float _rotationMultiplier = 40f; // Rotation speed is slower than movement
 	private float _immuneTime = 1.5f;
+
 	private float _blockSpeed = 1f;
 	private float _blockDelay = 0.5f;
 	private float _blockBlendProgress = 0f;
+
+	private float _speedDelay = 0.5f;
+	private float _speedBlendProgress = 0f;
 
 	private bool _isAttacking = false;
 	private bool _isImmune = false;
@@ -187,7 +191,27 @@ public class PlayerController : ActorController
 		_blockBlendProgress = end;
 	}
 
-	IEnumerator AttackCooldown()
+    IEnumerator LerpSpeed(float start, float end)
+    {
+        float duration = _speedDelay;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            _blockBlendProgress = Mathf.Lerp(start, end, t);
+
+            float speedValue = Mathf.Lerp(0, 1f, _speedBlendProgress);
+
+            animator.SetFloat("BlendSpeed", speedValue);
+
+            t += Time.deltaTime / duration;
+            yield return null;
+        }
+
+        _speedBlendProgress = end;
+    }
+
+    IEnumerator AttackCooldown()
 	{
 		animator.SetFloat("AttackSpeed", stats.Speed);
 		
