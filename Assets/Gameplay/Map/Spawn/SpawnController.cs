@@ -54,7 +54,7 @@ public static class SpawnController
 		Object.Instantiate(playerCamera);
     }
 
-	public static void SpawnEnemies(SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
+	public static void SpawnEnemies(GameObject enemy, SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
 	{
 		if (_mapManager.LevelInstance.TryGetCurrentRoomData(out RoomData roomData))
 		{
@@ -65,7 +65,7 @@ public static class SpawnController
 		} else
 		{
             
-			FirstTimeSpawn(rules, enemiesDictionary);
+			FirstTimeSpawn(enemy, rules, enemiesDictionary);
 
             _enemyContainer.transform.rotation = _map.transform.rotation;
             _enemyContainer.transform.localScale = _map.transform.localScale;
@@ -80,7 +80,7 @@ public static class SpawnController
 		}
 	}
 
-	private static void FirstTimeSpawn(SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
+	private static void FirstTimeSpawn(GameObject enemy, SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
 	{
 		Vector3 floorPostion = _floor.transform.position;
 		Vector3 floorScale = _floor.transform.localScale;
@@ -137,9 +137,10 @@ public static class SpawnController
 			}
 
 			Quaternion randomYRotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
-			GameObject model = enemiesDictionary[selectedRoles[i]].model;
 
-			GameObject enemy = Object.Instantiate(model, randomPosition, randomYRotation, _enemyContainer.transform);
+			GameObject enemy2 = Object.Instantiate(enemy, randomPosition, randomYRotation, _enemyContainer.transform);
+			enemy2.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedRoles[i]]);
+
 
 			existingEnemies.Add(new Enemy(randomPosition, randomYRotation));
 		}
