@@ -15,10 +15,12 @@ public class Stats : IStats
     [SerializeField] private float _mulAttack;
     [SerializeField] private float _mulDefense;
     [SerializeField] private float _mulHP;
+    [SerializeField] private float _mulSpeed;
+    [SerializeField] private float _minDistanceAttack;
 
-	#region [Integers]
+    #region [Integers]
 
-	public int Speed
+    public int Speed
     {
         get => _speed;
         set => _speed = value;
@@ -78,15 +80,29 @@ public class Stats : IStats
         get => _mulDefense;
         set => _mulDefense = value;
     }
-	public float MulHP 
-    { 
-        get => _mulHP; 
-        set => _mulHP = value; 
-    }
-	#endregion
 
-	#region [Update]
-	public void UpdateStats(IStats stats)
+    public float MulSpeed
+    {
+        get => _mulSpeed;
+        set => _mulSpeed = value;
+    } 
+    
+    public float MinDistanceAttack
+    {
+        get => _minDistanceAttack;
+        set => _minDistanceAttack = value;
+    }
+
+    public float MulHP
+    {
+        get => _mulHP;
+        set => _mulHP = value;
+    }
+    #endregion
+
+
+    #region [Update]
+    public void UpdateStats(IStats stats)
     {
         this.MaxHP = stats.MaxHP;
         this.HP = stats.HP;

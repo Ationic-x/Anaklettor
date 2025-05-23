@@ -5,7 +5,8 @@ public enum Jobs
 	Knight,
 	Mage,
 	Rogue,
-	Barbarian
+	Barbarian,
+    Archer,
 }
 
 public abstract class ActorController : MonoBehaviour, IActor
@@ -32,7 +33,7 @@ public abstract class ActorController : MonoBehaviour, IActor
 		stats = actorData.stats;
 		model = actorData.model;
 
-        model = Instantiate(model, transform.position, Quaternion.identity, transform);
+        model = Instantiate(model, transform.position, transform.rotation, transform);
 
 		// Get default components inside the model prefab
 		animator = model.GetComponentInChildren<Animator>();

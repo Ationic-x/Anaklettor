@@ -16,7 +16,9 @@ public class LoadSceneController : MonoBehaviour
 	
 	// Curently we're hardcoding the player prefab, but in future will use a reference of the choosen one (select scene)
 	[SerializeField] private GameObject _player;
-	[SerializeField] private GameObject _playerCamera;
+	[SerializeField] private GameObject _enemy;
+
+    [SerializeField] private GameObject _playerCamera;
 	[SerializeField] private ActorData _playerData;
 
 	[SerializeField] private SerializableDictionary<Rol, ActorData> _listEnemies;
@@ -79,7 +81,7 @@ public class LoadSceneController : MonoBehaviour
 		// Spawn
 		SpawnController.Initialize(_mapManager, floor, spawn, map);
 		SpawnController.SpawnPlayer(_player, _playerData, _playerCamera);
-		SpawnController.SpawnEnemies(_spawnRules, _listEnemies.ToDictionary());
+		SpawnController.SpawnEnemies(_enemy, _spawnRules, _listEnemies.ToDictionary());
 
 		// Save
 		SaveController.Initialize(levelInstance);
