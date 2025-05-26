@@ -9,22 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b07a83b9d10e06e4a9d6682c53ecbf6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 18d440353ee949849b9b5bd59b84e4c1, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
-  model: {fileID: 8968352993222510600, guid: d689cf2303d5c9741839b79f3708c209, type: 3}
-  job:
-    jobType: 0
+  model: {fileID: 8968352993222510600, guid: ace82fbd20aa6ee4e95ec8e87f133237, type: 3}
+  job: 0
+  nickname: Testor
   stats:
-    characterName: Luismi
-    speed: 5
-    maxHP: 100
-    hp: 100
-    mana: 0
-    maxMana: 0
-    attack: 3
-    defense: 5
-    movementSpeed: 0
-    mulAttack: 0
-    mulDefense: 0
-  animatorController: {fileID: 9100000, guid: cc26029fae6d38c40ab6d9581f927c13, type: 2}
+    _speed: 1
+    _maxHP: 50
+    _hp: 50
+    _mana: 1
+    _maxMana: 1
+    _attack: 1
+    _defense: 1
+    _movementSpeed: 5
+    _mulAttack: 1
+    _mulDefense: 1
+    _mulHP: 1
+    _mulSpeed: 0
+    _minDistanceAttack: 0

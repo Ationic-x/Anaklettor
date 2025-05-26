@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07a83b9d10e06e4a9d6682c53ecbf6a, type: 3}
+  m_Name: Minion
+  m_EditorClassIdentifier: 
+  model: {fileID: 4369120169878162334, guid: df4f21b1f11666d45abfaa8b6464628b, type: 3}
+  job:
+    jobType: 3
+  stats:
+    characterName: David
+    speed: 2
+    maxHP: 100
+    hp: 100
+    mana: 0
+    maxMana: 0
+    attack: 2
+    defense: 1
+    movementSpeed: 4.5
+    mulAttack: 0
+    mulDefense: 0
+    mulSpeed: 1
+    minDistanceAttack: 8
+  animatorController: {fileID: 9100000, guid: 1bb2e785716beb8498cb3c44242b2c34, type: 2}

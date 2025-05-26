@@ -3,98 +3,109 @@ using UnityEngine;
 [System.Serializable]
 public class Stats : IStats
 {
-    [SerializeField] protected string characterName;
-
-    [SerializeField] protected int speed;
-    [SerializeField] protected int maxHP;
-    [SerializeField] protected int hp;
-    [SerializeField] protected int mana;
-    [SerializeField] protected int maxMana;
-    [SerializeField] protected int attack;
-    [SerializeField] protected int defense;
-
-    [SerializeField] protected float movementSpeed;
-    [SerializeField] protected float mulAttack;
-    [SerializeField] protected float mulDefense;
+    [SerializeField] private int _speed;
+    [SerializeField] private int _maxHP;
+    [SerializeField] private int _hp;
+    [SerializeField] private int _mana;
+    [SerializeField] private int _maxMana;
+    [SerializeField] private int _attack;
+    [SerializeField] private int _defense;
+                     
+    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _mulAttack;
+    [SerializeField] private float _mulDefense;
+    [SerializeField] private float _mulHP;
+    [SerializeField] private float _mulSpeed;
+    [SerializeField] private float _minDistanceAttack;
 
     #region [Integers]
 
     public int Speed
     {
-        get => speed;
-        set => speed = value;
+        get => _speed;
+        set => _speed = value;
     }
 
     public int MaxHP
     {
-        get => maxHP;
-        set => maxHP = value;
+        get => _maxHP;
+        set => _maxHP = value;
     }
 
     public int HP
     {
-        get => hp;
-        set => hp = value;
+        get => _hp;
+        set => _hp = value;
     }
     public int Mana
     {
-        get => mana;
-        set => mana = value;
+        get => _mana;
+        set => _mana = value;
     }
 
     public int MaxMana
     {
-        get => maxMana;
-        set => maxMana = value;
+        get => _maxMana;
+        set => _maxMana = value;
     }
 
     public int Attack
     {
-        get => attack;
-        set => attack = value;
+        get => _attack;
+        set => _attack = value;
     }
 
     public int Defense
     {
-        get => defense;
-        set => defense = value;
+        get => _defense;
+        set => _defense = value;
     }
     #endregion
-
 
     #region [Floats]
     public float MovementSpeed
     {
-        get => movementSpeed;
-        set => movementSpeed = value;
+        get => _movementSpeed;
+        set => _movementSpeed = value;
     }
 
     public float MulAttack
     {
-        get => mulAttack;
-        set => mulAttack = value;
+        get => _mulAttack;
+        set => _mulAttack = value;
     }
 
     public float MulDefense
     {
-        get => mulDefense;
-        set => mulDefense = value;
+        get => _mulDefense;
+        set => _mulDefense = value;
+    }
+
+    public float MulSpeed
+    {
+        get => _mulSpeed;
+        set => _mulSpeed = value;
+    } 
+    
+    public float MinDistanceAttack
+    {
+        get => _minDistanceAttack;
+        set => _minDistanceAttack = value;
+    }
+
+    public float MulHP
+    {
+        get => _mulHP;
+        set => _mulHP = value;
     }
     #endregion
 
-    #region [Strings]
-    public string CharacterName
-    {
-        get => characterName;
-        set => characterName = value;
-    }
-    #endregion
 
     #region [Update]
     public void UpdateStats(IStats stats)
     {
-        this.CharacterName = stats.CharacterName;
-        this.MaxHP = stats.MaxHP;
+        this.Speed = stats.Speed;
+		this.MaxHP = stats.MaxHP;
         this.HP = stats.HP;
         this.Mana = stats.Mana;
         this.MaxMana = stats.MaxMana;
@@ -104,6 +115,8 @@ public class Stats : IStats
         this.MovementSpeed = stats.MovementSpeed;
         this.MulAttack = stats.MulAttack;
         this.MulDefense = stats.MulDefense;
-    }
+        this.MulHP = stats.MulHP;
+        this.MinDistanceAttack = stats.MinDistanceAttack;
+	}
     #endregion
 }

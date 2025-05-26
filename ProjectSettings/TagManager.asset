@@ -4,17 +4,21 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - EnemySpawnPoint
+  - Warp
+  - Floor
+  - Spawn
+  - Map
+  - Soul
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
+  - Enemy
   - deco
   - Floor
-  - 
   - 
   - 
   - 

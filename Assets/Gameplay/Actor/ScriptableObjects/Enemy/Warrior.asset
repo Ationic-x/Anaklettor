@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d440353ee949849b9b5bd59b84e4c1, type: 3}
+  m_Name: Warrior
+  m_EditorClassIdentifier: 
+  model: {fileID: 4753647390675033221, guid: 832fb5e34aa3f48499ce8cfa104de0e5, type: 3}
+  job: 0
+  nickname: Antonio
+  stats:
+    _speed: 3
+    _maxHP: 3
+    _hp: 3
+    _mana: 3
+    _maxMana: 3
+    _attack: 3
+    _defense: 3
+    _movementSpeed: 3
+    _mulAttack: 3
+    _mulDefense: 3
+    _mulHP: 3
+    _mulSpeed: 3
+    _minDistanceAttack: 2
