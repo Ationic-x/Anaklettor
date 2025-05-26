@@ -21,7 +21,7 @@ public class EnemyController : ActorController
 
     [SerializeField] private GameObject _soul; // Objeto de muerte del enemigo
 
-	private IAEventsBridge _iaEventsBridge;
+    protected IAEventsBridge _iaEventsBridge;
 
     private Transform _eyeSpawnPoint;
 
@@ -31,7 +31,7 @@ public class EnemyController : ActorController
     //Bools
     private bool _isMoving = false;
 
-    private bool _isAttacking = false;
+    protected bool _isAttacking = false;
 
     private bool _targetFound = false;
 
@@ -39,14 +39,15 @@ public class EnemyController : ActorController
 
     private bool _isDead = false;
 
-    private bool _hasHit = false; // Ha golpeado al jugador? Evitamos multiple llamadas
+    protected bool _hasHit = false; // Ha golpeado al jugador? Evitamos multiple llamadas
 
     private uint _wasHittedID = 999; // Evita que se pueda recibir daño varias veces del mismo ataque
 
-	//Variables
-	[SerializeField] private float _attackDelay = 0.5f;
+    //Variables
+    [SerializeField] private float _attackDelay = 0.5f;
 
     private float _runSpeed = 1f;
+
 
     protected override void Awake()
     {
@@ -64,13 +65,23 @@ public class EnemyController : ActorController
         _runSpeed = _nvAgent.speed + stats.MulSpeed;
 
         _eyeSpawnPoint = GetComponentInChildren<EyeMarker>().transform;
-        GetEyes();
 
         _arrowSpawnPoint = GetComponentInChildren<ProjectileMarker>();
         _iaEventsBridge = GetComponentInChildren<IAEventsBridge>();
         SubscribeToEvents();
 
-        StartCoroutine(Idle(3));
+        if (actorData.stats.HP <= 0)
+        {
+            animator.SetLayerWeight(1, 1f);
+
+            _isDead = false;
+            Dead();
+        }
+        else
+        {
+            GetEyes();
+            StartCoroutine(Idle(3));
+        }
     }
 
     void Update()
@@ -87,7 +98,7 @@ public class EnemyController : ActorController
         }
     }
 
-    private void SubscribeToEvents()
+    protected virtual void SubscribeToEvents()
     {
         if (_iaEventsBridge != null)
         {
@@ -95,7 +106,7 @@ public class EnemyController : ActorController
         }
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         if (_iaEventsBridge != null)
         {
@@ -103,31 +114,16 @@ public class EnemyController : ActorController
         }
     }
 
-	//private void AssingScriptableObjectStats()
-	//{
+    protected virtual void Start()
+    {
+        _playerGameObject = GameObject.FindGameObjectWithTag(Tags.Player);
+    }
 
-	//    if (_nvAgent)
-	//    {
-	//        //Se asigna la velocidad de movimiento
-	//        _nvAgent.speed = stats.MovementSpeed;
 
-	//        //Se guarda la velocidad que debe tener el enemigo al correr
-	//        _runSpeed = _nvAgent.speed + stats.MulSpeed;
+    #region Vista
 
-	//    }
-
-	//}
-
-	//private void OnActorDataSetted()
-	//{
-	//    AssingScriptableObjectStats();
-	//    StartCoroutine(Idle(3));
-	//}
-
-	#region Vista
-
-	//Se obtiene los transforms donde se lanzaran los rayos
-	private void GetEyes()
+    //Se obtiene los transforms donde se lanzaran los rayos
+    private void GetEyes()
     {
         _eyeArray = new Transform[_eyeSpawnPoint.childCount];
 
@@ -144,6 +140,7 @@ public class EnemyController : ActorController
     //Se lanzan los rayos y se comprueba si colisiona con el jugador
     private void RayDetector()
     {
+        int rayDistance = 10;
 
         if (!_targetFound && !_isDead)
         {
@@ -158,7 +155,7 @@ public class EnemyController : ActorController
                     Vector3 direction = eye.forward;
 
                     //Esto permite que los rallos colisionen on todo
-                    if (Physics.Raycast(origin, direction, out hit, 20))
+                    if (Physics.Raycast(origin, direction, out hit, rayDistance))
                     {
 
                         Debug.DrawRay(origin, direction * hit.distance, Color.red);
@@ -166,15 +163,13 @@ public class EnemyController : ActorController
                         //Aqui se comprueba si el rayo colisiona con el jugador
                         if (hit.transform.gameObject.tag.Equals(Tags.Player))
                         {
-                            _playerGameObject = hit.transform.GameObject();
-
                             _targetFound = true;
                         }
 
                     }
                     else
                     {
-                        Debug.DrawRay(origin, direction * 20, Color.green);
+                        Debug.DrawRay(origin, direction * rayDistance, Color.green);
                     }
                 }
             }
@@ -302,8 +297,8 @@ public class EnemyController : ActorController
             while (Vector2.Distance(src, dst) >= stats.MinDistanceAttack)
             {
                 src = new Vector2(transform.position.x, transform.position.z);
-				dst = new Vector2(_playerGameObject.transform.position.x, _playerGameObject.transform.position.z);
-				yield return new WaitForFixedUpdate();
+                dst = new Vector2(_playerGameObject.transform.position.x, _playerGameObject.transform.position.z);
+                yield return new WaitForFixedUpdate();
 
                 Move(_playerGameObject.transform.position);
             }
@@ -372,10 +367,10 @@ public class EnemyController : ActorController
 
     #region Ataque
 
-    private IEnumerator Attack()
+    protected virtual IEnumerator Attack()
     {
-		_hasHit = false;
-		_isAttacking = true;
+        _hasHit = false;
+        _isAttacking = true;
 
         if (job == Jobs.Archer)
         {
@@ -399,7 +394,7 @@ public class EnemyController : ActorController
         StartCoroutine(LookAtPlayer());
         Vector2 src = new Vector2(transform.position.x, transform.position.z);
         Vector2 dst = new Vector2(_playerGameObject.transform.position.x, _playerGameObject.transform.position.z);
-        
+
         ////Si sigue estando al alcance de golpear otra vez espera 1.5 segundos y vuelve a atacar
         while (Vector2.Distance(src, dst) <= stats.MinDistanceAttack)
         {
@@ -417,20 +412,20 @@ public class EnemyController : ActorController
 
     // Esto solo se lanza si es un esqueleto cuerpo a cuerpo
     // El arquero u otro instancia un proyectil con sus propios calculos
-   	private void OnTriggerEnter(Collider other)
-	{
-		if (_hasHit) return; // Evita múltiples llamadas
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_hasHit) return; // Evita múltiples llamadas
 
-		// Debería estar filtrado por layer gracias al ridgidbody del enemigo, pero por si acaso
+        // Debería estar filtrado por layer gracias al ridgidbody del enemigo, pero por si acaso
         if (other.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
         {
             int damage = 0;
             player.Hit(transform, damage);
         }
-	}
+    }
 
 
-	private IEnumerator RangeAttack()
+    protected IEnumerator RangeAttack()
     {
         //Ajustar cuando realmente tiene municion y cuando no 
 
@@ -472,7 +467,9 @@ public class EnemyController : ActorController
         Vector3 randomOffset = new Vector3(randomOffsetX, randomOffsetY, 0);
         Vector3 spawnPosition = _arrowSpawnPoint.transform.position + randomOffset;
 
-        GameObject arrow = Instantiate(_arrowGameObject, spawnPosition, _arrowSpawnPoint.transform.rotation);
+        Vector3 _arrowAttackRotationOffset = new Vector3(-90, 0, 0);
+
+        GameObject arrow = Instantiate(_arrowGameObject, spawnPosition, Quaternion.Euler(_arrowAttackRotationOffset + transform.rotation.eulerAngles));
 
         Rigidbody arrowRigiBody = arrow.GetComponent<Rigidbody>();
 
@@ -482,8 +479,6 @@ public class EnemyController : ActorController
         {
             arrowRigiBody.AddForce(-arrow.transform.up * 6, ForceMode.Impulse);
         }
-
-        Destroy(arrow, 2.25f);
 
     }
 
@@ -499,7 +494,7 @@ public class EnemyController : ActorController
             _nvAgent.enabled = false;
             animator.SetTrigger("DieTrigger");
             GetComponent<BoxCollider>().enabled = false;
-		}
+        }
     }
 
     [ContextMenu("TakeDamage")]
@@ -507,21 +502,23 @@ public class EnemyController : ActorController
     {
         if (_wasHittedID == attackID) return;
 
-		_wasHittedID = attackID;
+        _wasHittedID = attackID;
         stats.HP -= damage;
 
         if (stats.HP <= 0)
-		{
-			DropSoul();
-			Dead();
-		} else 
+        {
+            DropSoul();
+            Dead();
+        }
+        else
             StartCoroutine(IsDamaged());
+
     }
 
     private void DropSoul()
     {
         Instantiate(_soul, new Vector3(transform.position.x, 2, transform.position.z), Quaternion.identity);
-	}
+    }
 
     private IEnumerator IsDamaged()
     {
@@ -534,17 +531,12 @@ public class EnemyController : ActorController
 
         yield return WaitForCurrentAnimation();
 
-		//Hace que el enemigo pueda seguir moviendose
-		_nvAgent.isStopped = false;
+        //Hace que el enemigo pueda seguir moviendose
+        _nvAgent.isStopped = false;
 
-        if (_targetFound)
-        {
-            StartCoroutine(Chase());
-        }
-        else
-        {
-            StartCoroutine(SearchPlayer());
-        }
+        _targetFound = true;
+
+        StartCoroutine(Chase());
 
     }
 

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Anaklettor
   m_EditorClassIdentifier: 
   model: {fileID: 1724856405812896380, guid: 6f871afa40e10194b8ae55fd22ee79d6, type: 3}
-  job: 0
-  nickname: Anaklettor
+  job: 1
   stats:
     _speed: 3
     _maxHP: 3
@@ -28,4 +27,4 @@ MonoBehaviour:
     _mulDefense: 3
     _mulHP: 3
     _mulSpeed: 3
-    _minDistanceAttack: 2
+    _minDistanceAttack: 5

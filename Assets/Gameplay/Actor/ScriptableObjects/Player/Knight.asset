@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 8968352993222510600, guid: ace82fbd20aa6ee4e95ec8e87f133237, type: 3}
   job: 0
-  nickname: Testor
   stats:
     _speed: 1
-    _maxHP: 50
-    _hp: 50
+    _maxHP: 2
+    _hp: 2
     _mana: 1
     _maxMana: 1
     _attack: 1

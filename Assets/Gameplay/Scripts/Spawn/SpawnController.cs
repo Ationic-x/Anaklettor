@@ -58,7 +58,7 @@ public static class SpawnController
 		Object.Instantiate(playerCamera);
     }
 
-	public static void SpawnEnemies(GameObject enemy, SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
+	public static void SpawnEnemies(GameObject enemy, SpawnRules rules, Dictionary<Jobs, ActorData> enemiesDictionary)
 	{
 		if (_mapManager.LevelInstance.TryGetCurrentRoomData(out RoomData roomData))
 		{
@@ -87,7 +87,7 @@ public static class SpawnController
 		}
 	}
 
-	private static void FirstTimeSpawn(GameObject enemy, SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
+	private static void FirstTimeSpawn(GameObject enemy, SpawnRules rules, Dictionary<Jobs, ActorData> enemiesDictionary)
 	{
 		Vector3 floorPostion = _floor.transform.position;
 		Vector3 floorScale = _floor.transform.localScale;
@@ -111,12 +111,12 @@ public static class SpawnController
 		int min = Mathf.Max(rules.minEnemies, predefinedEnemies.Count);
 		int count = Random.Range(min, rules.maxEnemies + 1);
 
-		List<Rol> selectedRoles = new();
+		List<Jobs> selectedRoles = new();
 
 		for (int i = 0; i < count; i++)
 		{
-			// Radom rol or iterative rol
-			Rol role = rules.randomizeRoles ? rules.roles[Random.Range(0, rules.roles.Count)] : rules.roles[i % rules.roles.Count];
+            // Radom rol or iterative rol
+            Jobs role = rules.randomizeRoles ? rules.roles[Random.Range(0, rules.roles.Count)] : rules.roles[i % rules.roles.Count];
 			selectedRoles.Add(role);
 		}
 

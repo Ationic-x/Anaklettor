@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: cae3db0ed1e0aa844870ec8798c3e52c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _arrowGameObject: {instanceID: 0}
+  - _soul: {instanceID: 0}
+  - _spellPrefab: {fileID: 7494600305606845566, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

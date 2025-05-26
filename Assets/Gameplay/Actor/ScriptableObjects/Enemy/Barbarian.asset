@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 8042736114080510047, guid: f343ace926347d44aade34f6dcdcd693, type: 3}
   job: 3
-  nickname: Deivid
   stats:
     _speed: 3
     _maxHP: 3
@@ -28,4 +27,4 @@ MonoBehaviour:
     _mulDefense: 3
     _mulHP: 3
     _mulSpeed: 3
-    _minDistanceAttack: 2
+    _minDistanceAttack: 1.5

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _playerCamera;
 	[SerializeField] private ActorData _playerData;
 
-	[SerializeField] private SerializableDictionary<Rol, ActorData> _listEnemies;
+	[SerializeField] private SerializableDictionary<Jobs, ActorData> _listEnemies;
 	[SerializeField] private SpawnRules _spawnRules;
 
 	// Loading elements & variables
