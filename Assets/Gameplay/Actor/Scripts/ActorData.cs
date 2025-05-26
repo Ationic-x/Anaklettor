@@ -5,6 +5,13 @@ public class ActorData : ScriptableObject
 {
     public GameObject model;
     public Jobs job;
-    public string nickname;
     public Stats stats;
+
+    public ActorData SetData(GameObject model, Jobs job, Stats stats)
+    {
+        this.model = model;
+        this.job = job;
+        this.stats = stats;
+        return this;
+    }
 }

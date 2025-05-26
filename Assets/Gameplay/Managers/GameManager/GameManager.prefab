@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &114154418169945800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7091069037955569101}
+  - component: {fileID: 6940611651657775770}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7091069037955569101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114154418169945800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2428312, y: -28.05026, z: 12.843383}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6940611651657775770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114154418169945800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726a2e291e8ec0743a8dfae2468e8ab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _warpPrefab: {fileID: 2467427411415663709, guid: a90a87b873e593f41901024272600090, type: 3}
+  _player: {fileID: 7787937590747192945, guid: fcda40ec4f073f145ab705e891e74f77, type: 3}
+  _enemy: {fileID: 5864823655341688357, guid: fa01e319a25d01b42a35c5b39260390a, type: 3}
+  _playerCamera: {fileID: 3244676993770304018, guid: c4f6a40382eb1614281aa2602f28e289, type: 3}
+  _playerData: {fileID: 11400000, guid: 6f1357e5ce897224e864dbfef724a299, type: 2}
+  _listEnemies:
+    entries:
+    - Key: 0
+      Value: {fileID: 11400000, guid: 7569012dc476f22409adabd448dda286, type: 2}
+  _spawnRules: {fileID: 11400000, guid: dd6445d40dde5f34380a995aef080ffa, type: 2}

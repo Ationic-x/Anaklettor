@@ -15,7 +15,7 @@ public abstract class ActorController : MonoBehaviour, IActor
 
     // Scriptable object values
     protected string nickname;
-    protected Stats stats;
+    protected Stats stats = new Stats();
 	protected Jobs job;
 	protected GameObject model;
 
@@ -26,37 +26,33 @@ public abstract class ActorController : MonoBehaviour, IActor
         rb = GetComponent<Rigidbody>();
     }
 
-    public virtual void Initialize(ActorData actorData)
+    public virtual void Initialize(ActorData actorData, string name)
     {
-        nickname = actorData.nickname;
         job = actorData.job;
-		stats = actorData.stats;
+		stats.UpdateStats(actorData.stats);
 		model = actorData.model;
+		nickname = name;
 
-        model = Instantiate(model, transform.position, transform.rotation, transform);
+		GameObject modelGO = Instantiate(model, transform.position, transform.rotation, transform);
 
 		// Get default components inside the model prefab
-		animator = model.GetComponentInChildren<Animator>();
+		animator = modelGO.GetComponentInChildren<Animator>();
 	}
 
-    public void Interact()
+	// We need to refactor in future the code between
+	// Player and Enemy, so we can use the same actor controller
+
+	public void Interact()
     {
         throw new System.NotImplementedException();
     }
 
-    public virtual void TakeDamage(int amount)
-    {
-		stats.HP -= amount;
-        if (stats.HP < 0) stats.HP = 0;
-    }
+	public Jobs Job { get { return job; } }
 
-    public Jobs GetJob()
-	{
-		return job;
-	}
+	public Stats Stats { get { return stats; } }
 
-    public string GetNickname()
-    {
-		return nickname;
-	}
+	public string Name { get { return nickname; } }
+
+	public GameObject Model { get { return model; } }
+
 }
