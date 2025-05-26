@@ -3178,7 +3178,7 @@ MonoBehaviour:
   m_MatchTargetFields: 63
   m_RemoveStartOffset: 1
   m_ApplyFootIK: 1
-  m_Loop: 0
+  m_Loop: 2
   m_Version: 1
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!74 &3940230842674670863
@@ -5192,7 +5192,7 @@ MonoBehaviour:
     m_Start: 27.016666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 3818599699818758038}
-    m_Duration: 1
+    m_Duration: 2.9833333333333343
     m_TimeScale: 1
     m_ParentTrack: {fileID: 6851515020981691519}
     m_EaseInDuration: 0
