@@ -6459,7 +6459,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: f4d2623e64a95f94886ef897a114d43f, type: 2}
   m_InitialState: 1
-  m_WrapMode: 2
+  m_WrapMode: 0
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -15203,7 +15203,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5c27f0bdda6c0c848b8de1fa9f3a9dce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.4
+      value: -4.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c27f0bdda6c0c848b8de1fa9f3a9dce, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15211,7 +15211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c27f0bdda6c0c848b8de1fa9f3a9dce, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 18.92
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c27f0bdda6c0c848b8de1fa9f3a9dce, type: 3}
       propertyPath: m_LocalRotation.w
