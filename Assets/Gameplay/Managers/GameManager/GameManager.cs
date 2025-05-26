@@ -1,68 +1,165 @@
+using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Cinemachine;
-using UnityEditor;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject playerPrefab;
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] CinemachineCamera gameCamera;
+	private const float _AnimationDelay = 0.5f;
 
-    GameObject player;
+	// Load elements
+	[SerializeField] private GameObject _warpPrefab;
+	
+	// Curently we're hardcoding the player prefab, but in future will use a reference of the choosen one (select scene)
+	[SerializeField] private GameObject _player;
+	[SerializeField] private GameObject _enemy;
 
-    private List<ScriptableObject> FindAll<T>(string path = "")
-    {
-        var availableJobs = new List<ScriptableObject>();
-        var searchFilter = $"t:{typeof(ScriptableObject).Name}";
-        var soNames = path == "" ? AssetDatabase.FindAssets(searchFilter) : AssetDatabase.FindAssets(searchFilter, new[] { path });
+    [SerializeField] private GameObject _playerCamera;
+	[SerializeField] private ActorData _playerData;
 
-        foreach (var soName in soNames)
-        { 
-            var soPath = AssetDatabase.GUIDToAssetPath(soName);
-            var script = AssetDatabase.LoadAssetAtPath<ScriptableObject>(soPath);
-            if (script == null)    
-                continue;
-            availableJobs.Add(script);
-        }
+	[SerializeField] private SerializableDictionary<Rol, ActorData> _listEnemies;
+	[SerializeField] private SpawnRules _spawnRules;
 
-        return availableJobs;
-    }
+	// Loading elements & variables
+	private HUDController _hudController;
+	private bool _isLoading;
+	private Vector2Int _direction;
 
-    void Start()
-    {
-        // Ñapa: This is a workaround to get the selected character from the PlayerSelectManager.
-        // In a real scenario, you would use a more robust method to pass data between scenes.
-        string selectedPlayerJob = FindAnyObjectByType<PlayerSelectManager>().selectedCharacter.ToString();
+	// Map variables
+	private MapManager _mapManager;
 
-        InstantiatePlayer(selectedPlayerJob);
-        InstantiateEnemies();
+    #region Preload
+    private void Awake()
+	{
+		_isLoading = false;
+	}
 
-        gameCamera.Follow = player.transform;
+	private void Start()
+	{
 
-        Debug.Log(selectedPlayerJob);
-    }
+		if (_mapManager.LevelInstance.MoveDirection != Vector2Int.zero) StartCoroutine(ExitAnimationDelayed());
+	}
 
-    void InstantiatePlayer(string playerJob) {
-        List<ScriptableObject> availablePlayerJobs = FindAll<ScriptableObject>("Assets/Gameplay/Actor/ScriptableObjects/Player/");
+	public MapManager MapManager { set
+		{
+			_mapManager = value;		
+			StartCoroutine(WaitForGameObjects());
+		}
+	}
+	IEnumerator WaitForGameObjects()
+	{
+		_hudController = null;
+		GameObject floor = null;
+		GameObject map = null;
+		GameObject spawn = null;
+		GameObject warp = null;
 
-        GameObject playerSpawnPoint = GameObject.FindGameObjectWithTag("Respawn");
-        ActorDataSO actorData = availablePlayerJobs.Find(x => x.name == playerJob) as ActorDataSO;
-        playerPrefab.GetComponent<PlayerController>().ActorData = actorData;
+		LevelGenerator levelInstance = _mapManager.LevelInstance;
+		while (floor == null || _mapManager == null || _hudController == null || map == null || spawn == null)
+		{
+			floor = GameObject.FindGameObjectWithTag(Tags.Floor);
+			map = GameObject.FindGameObjectWithTag(Tags.Map);
+			spawn = GameObject.FindGameObjectWithTag(Tags.Spawn);
+			warp = GameObject.FindGameObjectWithTag(Tags.Warp);
+			_hudController = FindFirstObjectByType<HUDController>();
+			yield return null;
+		}
 
-        player = Instantiate(playerPrefab, playerSpawnPoint.transform.position, Quaternion.identity, playerSpawnPoint.transform);
-        player.SetActive(true);
-    }
+		// Warp
+		WarpGenerator.Generate(levelInstance, floor, _warpPrefab, warp);
 
-    void InstantiateEnemies() {
-        List<ScriptableObject> availableEnemyJobs = FindAll<ScriptableObject>("Assets/Gameplay/Actor/ScriptableObjects/Enemy/");
-        GameObject[] enemySpawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
+		// Rotate Map
+		MapController.RotateMap(levelInstance.CurrentRoomId, floor, map);
 
-        foreach (GameObject spawnPoint in enemySpawnPoints) {
-            ActorDataSO actorData = availableEnemyJobs[Random.Range(0, availableEnemyJobs.Count)] as ActorDataSO;
-            GameObject enemy = Instantiate(enemyPrefab, spawnPoint.transform.position, Quaternion.identity, spawnPoint.transform);
-            enemy.GetComponent<EnemyController>().ActorData = actorData;
-            enemy.SetActive(true);
-        }
-    }
+		// Spawn
+		SpawnController.Initialize(_mapManager, floor, spawn, map);
+		SpawnController.SpawnPlayer(_player, _playerData, _playerCamera);
+		SpawnController.SpawnEnemies(_enemy, _spawnRules, _listEnemies.ToDictionary());
+
+		// Save
+		SaveController.Initialize(levelInstance);
+
+		// Minimap
+		_hudController.Minimap.SetMinimap(levelInstance);
+	}
+    #endregion
+
+    #region Load and Loading
+    public void ChangeScene(Vector2Int newRoom, Vector2Int direction)
+	{
+		if (_isLoading) return; // Avoid enter multiple times
+
+		_isLoading = true;
+		_direction = direction;
+		StartCoroutine(LoadSceneAsync(newRoom));
+	}
+
+
+	IEnumerator LoadSceneAsync(Vector2Int newRoom)
+	{
+		// Apply animation and pause
+		Time.timeScale = 0f;
+		
+		foreach (GameObject soul in GameObject.FindGameObjectsWithTag(Tags.Soul))
+		{
+			soul.GetComponent<SoulController>().ForcedSearchPlayer();
+		}
+
+		while (GameObject.FindGameObjectWithTag(Tags.Soul) != null)
+		{
+			yield return null; // Wait until all souls are collected
+		}
+
+		// Save values
+		SaveController.SaveEnemies();
+		SaveController.SavePlayer(newRoom, _direction);
+
+		yield return new WaitForEndOfFrame(); // synch animation
+		_hudController.Load.LoadAnimationDirection(_mapManager.LevelInstance.MoveDirection);
+		yield return new WaitForEndOfFrame();
+
+
+		// Wait Async Load end
+		string sceneName = MapController.GetSceneName(_mapManager.LevelInstance.CurrentRoomId, _mapManager.LevelInstance.IsCurrentOrigin());
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+		asyncLoad.allowSceneActivation = false;
+
+		while (asyncLoad.progress < 0.9f)
+		{
+			yield return null;
+		}
+
+		// Wait animation end
+		yield return new WaitForSecondsRealtime(_hudController.Load.GetClipDuration());
+
+		// Return default values and synch all
+		asyncLoad.allowSceneActivation = true;
+
+		yield return new WaitForEndOfFrame();
+	}
+    #endregion
+
+    #region End Load
+    IEnumerator ExitAnimationDelayed()
+	{
+		// Is required enable the animation because the animator is reseted when the scene is loaded
+		_hudController.Load.Enable();
+		
+		// Apply animation and making sure is applied
+		yield return new WaitForEndOfFrame(); // synch animation
+		_hudController.Load.LoadAnimationDirection(_mapManager.LevelInstance.MoveDirection);
+
+		// Wait animation end + CD
+		yield return new WaitForEndOfFrame();
+		yield return new WaitForSecondsRealtime(_hudController.Load.GetClipDuration() + _AnimationDelay);
+
+		// Return game control
+		Time.timeScale = 1f;
+		yield return new WaitForEndOfFrame();
+	}
+    #endregion
 }
