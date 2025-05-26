@@ -104,7 +104,8 @@ public class Stats : IStats
     #region [Update]
     public void UpdateStats(IStats stats)
     {
-        this.MaxHP = stats.MaxHP;
+        this.Speed = stats.Speed;
+		this.MaxHP = stats.MaxHP;
         this.HP = stats.HP;
         this.Mana = stats.Mana;
         this.MaxMana = stats.MaxMana;
@@ -115,6 +116,7 @@ public class Stats : IStats
         this.MulAttack = stats.MulAttack;
         this.MulDefense = stats.MulDefense;
         this.MulHP = stats.MulHP;
-    }
+        this.MinDistanceAttack = stats.MinDistanceAttack;
+	}
     #endregion
 }

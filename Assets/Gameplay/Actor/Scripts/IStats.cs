@@ -2,10 +2,12 @@ using UnityEngine.Rendering;
 
 public interface IStats
 {
-    /// <summary>
-    /// Maximum ammount of life
-    /// </summary>
-    public int MaxHP { get; set; }
+    public int Speed { get; set; }
+
+	/// <summary>
+	/// Maximum ammount of life
+	/// </summary>
+	public int MaxHP { get; set; }
     /// <summary>
     /// Current ammount of life
     /// </summary>

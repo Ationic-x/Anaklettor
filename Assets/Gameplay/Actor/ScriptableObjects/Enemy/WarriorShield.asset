@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 8408203670452184517, guid: 624a745e6c06b134e82c1b01724d6960, type: 3}
   job: 0
-  nickname: Manuel
   stats:
     _speed: 3
     _maxHP: 3
