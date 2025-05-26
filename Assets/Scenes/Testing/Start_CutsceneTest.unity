@@ -6179,8 +6179,39 @@ Transform:
   m_Children:
   - {fileID: 897930774}
   - {fileID: 478482641}
-  - {fileID: 1382013098}
   - {fileID: 357424757}
+  m_Father: {fileID: 848442202}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &813595847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 813595848}
+  m_Layer: 0
+  m_Name: VFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &813595848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813595847}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1382013098}
   m_Father: {fileID: 848442202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &823287901
@@ -6447,6 +6478,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 813163112}
+  - {fileID: 813595848}
   m_Father: {fileID: 1749856511}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!320 &848442203
@@ -11833,7 +11865,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 813163112}
+    m_TransformParent: {fileID: 813595848}
     m_Modifications:
     - target: {fileID: 79030823788310246, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
       propertyPath: m_LocalPosition.x
