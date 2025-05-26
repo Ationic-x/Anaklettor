@@ -5,7 +5,7 @@ public class SoulController : MonoBehaviour
 {
 	[SerializeField] private float _delay;
 
-	private int _exp = 0;
+	private int _exp = 100;
 	private Coroutine _searchPlayer;
 
 	private void OnEnable()

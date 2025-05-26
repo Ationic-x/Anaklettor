@@ -45,8 +45,15 @@ public class PlayerController : ActorController
 
 	private CinemachineCamera _mapCamera;
 
-	#region Events
-	[Header("Actions")]
+    // Warp control
+	private bool _forward;
+    private bool _backWard;
+    private bool _left;
+    private bool _right;
+    private MapManager _mapManager;
+    private Vector3 _enterPosition;
+    #region Events
+    [Header("Actions")]
 	[SerializeField] private InputActionReference _moveAction;
 	[SerializeField] private InputActionReference _attackAction;
 	[SerializeField] private InputActionReference _blockAction;
@@ -306,12 +313,15 @@ public class PlayerController : ActorController
 		float sourceAngle = sourceRef.transform.eulerAngles.y;
 		float angleDif = sourceAngle > playerAngle ? sourceAngle - playerAngle : playerAngle - sourceAngle;
 
+        Debug.Log(angleDif);
 		if (_isBlocking && angleDif > 80)
 			animator.SetTrigger("Block");
 		else
 		{
-			TakeDamage(damage);
-			rb.AddForce(sourceRef.forward * (damage + 3), ForceMode.Impulse); // currently the +3 is hardcode for testing purposes
+			float radians = sourceAngle * Mathf.Deg2Rad;
+			Vector3 direction = new Vector3(Mathf.Sin(radians), 0, Mathf.Cos(radians));
+            TakeDamage(damage);
+			rb.AddForce(direction * (damage + 3), ForceMode.Impulse); // currently the +3 is hardcode for testing purposes
 		}
 
 	}
@@ -399,20 +409,15 @@ public class PlayerController : ActorController
         
 		if (_exp >= _maxExp) 
         {
-			_exp = 0;
+			_exp -= _maxExp;
             LevelUp();
         }
     }
 
-	#region Should be changed
-	private bool _forward = false;
-	private bool _backWard = false;
-	private bool _left = false;
-	private bool _right = false;
-	private MapManager _mapManager;
-	private Vector3 _enterPosition;
+    #region Should be changed
 
-	private void OnTriggerEnter(Collider other)
+    #region Triggers & Collisions
+    private void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.TryGetComponent<EnemyController>(out EnemyController enemy))
 			enemy.TakeDamage(_attackID++, 1);
@@ -446,16 +451,9 @@ public class PlayerController : ActorController
 		if (shouldWarp)
 			_mapManager.ChangeScene(warp.NewRoom, direction);
 	}
+    #endregion
 
-	public void ChangeScene()
-	{
-		_backWard = false;
-		_forward = false;
-		_left = false;
-		_right = false;
-	}
-
-	public void SetMapManager(MapManager newMapManager)
+    public void SetMapManager(MapManager newMapManager)
 	{
 		_mapManager = newMapManager;
 	}

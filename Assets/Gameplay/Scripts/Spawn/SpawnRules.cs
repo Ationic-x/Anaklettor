@@ -4,12 +4,6 @@ using UnityEngine;
 
 // Called Rol to avoid conflicts, should be unified with Job Enum as a public Enum
 // Shouldnt be used like a interface
-public enum Rol
-{
-	Swordman,
-	Archer,
-	Mage,
-}
 
 [CreateAssetMenu(fileName = "NewSpawnRules", menuName = "Spawn/SpawnRules")]
 public class SpawnRules : ScriptableObject
@@ -23,7 +17,7 @@ public class SpawnRules : ScriptableObject
 	[Range(0, 1)] public float spawnAreaRatio = 1f;
 
 	[Header("Roles")]
-	public List<Rol> roles;
+	public List<Jobs> jobs;
 
-	public bool randomizeRoles = true; // true = random proportional, false = iterate
+	public bool randomizeJobs = true; // true = random proportional, false = iterate
 }
