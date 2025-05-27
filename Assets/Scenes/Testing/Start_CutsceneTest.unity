@@ -208,13 +208,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15535398}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.074073076, y: -0.52495044, z: 0.045927238, w: 0.84665865}
-  m_LocalPosition: {x: 6, y: 3, z: -3}
+  m_LocalRotation: {x: 0.07470709, y: -0.51307815, z: 0.04488854, w: 0.85390556}
+  m_LocalPosition: {x: 6.6, y: 3, z: -2.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 981363503}
-  m_LocalEulerAnglesHint: {x: 10, y: -63.6, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: -62, z: 0}
 --- !u!114 &15535400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6635,6 +6635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 848442202}
   - component: {fileID: 848442203}
+  - component: {fileID: 848442204}
   m_Layer: 0
   m_Name: TestCutscene_3
   m_TagString: Untagged
@@ -6697,8 +6698,40 @@ PlayableDirector:
     value: {fileID: 436626625}
   - key: {fileID: 1874607953894044137, guid: f4d2623e64a95f94886ef897a114d43f, type: 2}
     value: {fileID: 15535398}
+  - key: {fileID: 4440008968915230772, guid: f4d2623e64a95f94886ef897a114d43f, type: 2}
+    value: {fileID: 848442204}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &848442204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848442201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 305b79b95ebb95445a5f156424149b4f, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 848442201}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &851624023
 PrefabInstance:
   m_ObjectHideFlags: 0
