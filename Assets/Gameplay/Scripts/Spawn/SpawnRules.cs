@@ -16,7 +16,7 @@ public class SpawnRules : ScriptableObject
 	public float minSpacingBetweenEnemies = 1f;
 	[Range(0, 1)] public float spawnAreaRatio = 1f;
 
-	[Header("Roles")]
+	[Header("Jobs")]
 	public List<Jobs> jobs;
 
 	public bool randomizeJobs = true; // true = random proportional, false = iterate

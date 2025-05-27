@@ -43,9 +43,6 @@ public class EnemyController : ActorController
 
     private uint _wasHittedID = 999; // Evita que se pueda recibir daño varias veces del mismo ataque
 
-	//Variables
-	[SerializeField] private float _attackDelay = 0.5f;
-
     private float _runSpeed = 1f;
 
     protected override void Awake()
@@ -60,7 +57,7 @@ public class EnemyController : ActorController
         base.Initialize(actorData, name);
 
         _nvAgent = GetComponentInChildren<NavMeshAgent>();
-        _nvAgent.speed = stats.MovementSpeed;
+        _nvAgent.speed = stats.Speed;
         _runSpeed = _nvAgent.speed + stats.MulSpeed;
 
         _eyeSpawnPoint = GetComponentInChildren<EyeMarker>().transform;
@@ -348,7 +345,7 @@ public class EnemyController : ActorController
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation,
                     targetRotation,
-                    Time.deltaTime * stats.MovementSpeed
+                    Time.deltaTime * stats.Speed
                 );
             }
             yield return null;
@@ -404,7 +401,7 @@ public class EnemyController : ActorController
         while (Vector2.Distance(src, dst) <= stats.MinDistanceAttack)
         {
             animator.SetTrigger("AttackTrigger");
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length + _attackDelay);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length + stats.AtkDelay);
 
             src = new Vector2(transform.position.x, transform.position.z);
             dst = new Vector2(_playerGameObject.transform.position.x, _playerGameObject.transform.position.z);
@@ -442,9 +439,6 @@ public class EnemyController : ActorController
         //Si sigue estando al alcance de golpear otra vez espera 1.5 segundos y vuelve a atacar
         while (Vector2.Distance(src, dst) <= stats.MinDistanceAttack)
         {
-            src = new Vector2(transform.position.x, transform.position.z);
-            dst = new Vector2(_playerGameObject.transform.position.x, _playerGameObject.transform.position.z);
-
             // Disparar
             animator.ResetTrigger("ReloadTrigger");
             animator.SetTrigger("ShootTrigger");
@@ -456,7 +450,10 @@ public class EnemyController : ActorController
             animator.ResetTrigger("ShootTrigger");
             animator.SetTrigger("ReloadTrigger");
             yield return WaitForCurrentAnimation();
+            yield return new WaitForSeconds(stats.AtkDelay);
 
+			src = new Vector2(transform.position.x, transform.position.z);
+            dst = new Vector2(_playerGameObject.transform.position.x, _playerGameObject.transform.position.z);
         }
 
         Stop();
