@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 4292297364743637603, guid: 700599b8d1f71b84fa58784e60f25a5d, type: 3}
   job: 3
-  nickname: Rober
   stats:
     _speed: 3
     _maxHP: 3
@@ -28,4 +27,4 @@ MonoBehaviour:
     _mulDefense: 3
     _mulHP: 3
     _mulSpeed: 3
-    _minDistanceAttack: 2
+    _minDistanceAttack: 1.5

@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
+    [SerializeField] private int _arrowDamage = 0;
+
+    public int ArrowDamage { get => _arrowDamage; set => _arrowDamage = value; }
 
     private void OnEnable()
     {
@@ -12,19 +15,18 @@ public class ArrowController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("Hit Player");
-            //other.GetComponent<PlayerController>().TakeDamage(10);
-
+        // Debería estar filtrado por layer gracias al ridgidbody del enemigo, pero por si acaso
+        if (other.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
+        {                        
+            player.Hit(transform, ArrowDamage);
+            Destroy(gameObject);
         }
-
-        Destroy(gameObject);
+        
     }
 
     IEnumerator lifeTime()
     {
-        yield return new WaitForSeconds(5);        
+        yield return new WaitForSeconds(5);
         Destroy(this.gameObject);
     }
 
