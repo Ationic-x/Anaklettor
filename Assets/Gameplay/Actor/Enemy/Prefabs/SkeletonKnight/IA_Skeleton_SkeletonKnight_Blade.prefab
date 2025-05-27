@@ -2001,7 +2001,7 @@ GameObject:
   - component: {fileID: 3202883379705626593}
   - component: {fileID: 6622724975758089034}
   m_Layer: 0
-  m_Name: IA_Skeleton_Warrior_Blade
+  m_Name: IA_Skeleton_SkeletonKnight_Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2971,7 +2971,7 @@ GameObject:
   - component: {fileID: 3962012392603933677}
   - component: {fileID: 250812028668887953}
   m_Layer: 0
-  m_Name: IA_Skeleton_Warrior_Blade_Shield
+  m_Name: IA_Skeleton_SkeletonKnight_Blade_Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

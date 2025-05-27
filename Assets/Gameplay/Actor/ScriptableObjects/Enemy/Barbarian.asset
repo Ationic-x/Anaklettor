@@ -15,16 +15,18 @@ MonoBehaviour:
   model: {fileID: 8042736114080510047, guid: f343ace926347d44aade34f6dcdcd693, type: 3}
   job: 3
   stats:
-    _speed: 3
-    _maxHP: 3
-    _hp: 3
-    _mana: 3
-    _maxMana: 3
-    _attack: 3
-    _defense: 3
-    _movementSpeed: 3
-    _mulAttack: 3
-    _mulDefense: 3
-    _mulHP: 3
-    _mulSpeed: 3
+    _maxHP: 4
+    _hp: 4
+    _attack: 4
+    _defense: 2
+    _aspd: 0
+    _bspd: 0
+    _speed: 2.5
+    _atkDelay: 1.15
     _minDistanceAttack: 1.5
+    _addAttack: 0
+    _addHP: 0
+    _mulAspd: 0
+    _mulBspd: 0
+    _mulSpeed: 1.5
+    _mulAtkDelay: 0

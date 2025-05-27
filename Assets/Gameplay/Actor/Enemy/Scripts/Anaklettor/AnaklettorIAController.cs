@@ -49,18 +49,13 @@ public class AnaklettorIAController : EnemyController
         Vector3 randomOffset = new Vector3(randomOffsetX, randomOffsetY, 0);
         Vector3 spawnPosition = _spellSpawnPoint.transform.position + randomOffset;
 
-        //Vector3 _spellAttackRotationOffset = new Vector3(0, 265, 0);
-
-        Quaternion rotation = new Quaternion(_spellSpawnPoint.transform.rotation.x, _spellSpawnPoint.transform.rotation.y, _spellSpawnPoint.transform.rotation.z, _spellSpawnPoint.transform.rotation.w);
-
-        GameObject spell = Instantiate(_spellPrefab, spawnPosition, rotation);
-        //Debug.Break();
+        GameObject spell = Instantiate(_spellPrefab, spawnPosition, _spellSpawnPoint.transform.rotation);        
 
         Rigidbody spellRigiBody = spell.GetComponent<Rigidbody>();
 
         if (spellRigiBody != null)
         {
-            spellRigiBody.AddForce(_spellPrefab.transform.forward * 6, ForceMode.Impulse);
+            spellRigiBody.AddForce(spell.transform.forward * 6, ForceMode.Impulse);
         }
 
     }

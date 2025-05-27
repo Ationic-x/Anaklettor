@@ -16,5 +16,5 @@ MonoBehaviour:
   maxEnemies: 1
   minSpacingBetweenEnemies: 3
   spawnAreaRatio: 1
-  jobs: 00000000
+  jobs: 01000000
   randomizeJobs: 1

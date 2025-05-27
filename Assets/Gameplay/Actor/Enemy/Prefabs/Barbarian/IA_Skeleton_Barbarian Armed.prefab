@@ -1302,7 +1302,7 @@ GameObject:
   - component: {fileID: 5693462717834611211}
   - component: {fileID: 521095457237778392}
   m_Layer: 0
-  m_Name: IA_Skeleton_Rogue Armed
+  m_Name: IA_Skeleton_Barbarian Armed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
