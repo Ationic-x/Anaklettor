@@ -2970,6 +2970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3962012392603933677}
   - component: {fileID: 250812028668887953}
+  - component: {fileID: 2046937488605364631}
   m_Layer: 0
   m_Name: IA_Skeleton_SkeletonKnight_Blade_Shield
   m_TagString: Untagged
@@ -3024,6 +3025,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2046937488605364631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408203670452184517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb5b9ed8aea5b343b974b5183315f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8598022846048141324
 GameObject:
   m_ObjectHideFlags: 0
