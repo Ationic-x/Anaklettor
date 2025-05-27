@@ -50,6 +50,7 @@ MonoBehaviour:
   _arrowGameObject: {fileID: 2173545139428971142, guid: adab96fe1eb1cb040813f9e7e5730921, type: 3}
   _soul: {fileID: 5317525548059721113, guid: 56ecac00ccd096a47bbe929ac64967b3, type: 3}
   _attackDelay: 0.5
+  _arrowAttackRotationOffset: {x: -90, y: 0, z: 0}
 --- !u!195 &6941475715393521252
 NavMeshAgent:
   m_ObjectHideFlags: 0
