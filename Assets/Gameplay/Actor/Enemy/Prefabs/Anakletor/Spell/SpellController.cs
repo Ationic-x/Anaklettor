@@ -5,6 +5,10 @@ public class SpellController : MonoBehaviour
 {
     Animator _animator;
 
+    [SerializeField] private int _spellDamage = 0;
+
+    public int SpellDamage { get => _spellDamage; set => _spellDamage = value; }
+
     private void OnEnable()
     {
         StartCoroutine(lifeTime());
@@ -16,16 +20,16 @@ public class SpellController : MonoBehaviour
     {
         transform.GetComponent<Collider>().enabled = false;
 
-        if (other.tag == "Player")
+        // Debería estar filtrado por layer gracias al ridgidbody del enemigo, pero por si acaso
+        if (other.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
         {
-            //Ejecutar metodo de hacer daño al jugador
+            player.Hit(transform, SpellDamage);
+            transform.GetComponent<Rigidbody>().isKinematic = true;
+
+            _animator.SetBool("ExplotionTrigger", true);
+
+            Destroy(this.gameObject, 5f);
         }
-
-        transform.GetComponent<Rigidbody>().isKinematic = true;
-
-        _animator.SetBool("ExplotionTrigger", true);
-
-        Destroy(this.gameObject, 5f);
     }
 
     IEnumerator lifeTime()
