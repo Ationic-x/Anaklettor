@@ -25,8 +25,6 @@ public class EnemyController : ActorController
 
     private Transform _eyeSpawnPoint;
 
-    private ChangeMaterialColor _damageBlink;
-
     //Tamanyo del mapa
     private int areaSize = 18;
 
@@ -67,9 +65,6 @@ public class EnemyController : ActorController
 
         _arrowSpawnPoint = GetComponentInChildren<ProjectileMarker>();
         _iaEventsBridge = GetComponentInChildren<IAEventsBridge>();
-
-        _damageBlink = GetComponentInChildren<ChangeMaterialColor>();
-
         SubscribeToEvents();
 
         if (actorData.stats.HP <= 0)
@@ -513,11 +508,8 @@ public class EnemyController : ActorController
             Dead();
         }
         else
-        {
             StartCoroutine(IsDamaged());
-            _damageBlink.TriggerBlink();
-        }
-            
+
     }
 
     private void DropSoul()
