@@ -3409,6 +3409,46 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c447976d6246c58418e98d7542cb5fcd, type: 3}
   m_PrefabInstance: {fileID: 435376964}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &436626621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7306136006319337995, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
+  m_PrefabInstance: {fileID: 1382013097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &436626624 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9092333610358934106, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
+  m_PrefabInstance: {fileID: 1382013097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &436626625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436626621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 7c844a2afd1044941b5a4039d93b05aa, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 436626624}
+          m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
 --- !u!1 &442447569
 GameObject:
   m_ObjectHideFlags: 0
@@ -6515,6 +6555,8 @@ PlayableDirector:
     value: {fileID: 1382013100}
   - key: {fileID: 6851515020981691519, guid: f4d2623e64a95f94886ef897a114d43f, type: 2}
     value: {fileID: 1635502095}
+  - key: {fileID: -4443427270737995657, guid: f4d2623e64a95f94886ef897a114d43f, type: 2}
+    value: {fileID: 436626625}
   m_ExposedReferences:
     m_References: []
 --- !u!1001 &851624023
@@ -12092,18 +12134,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3989345436233230875, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3989345436233230875, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
+      propertyPath: m_RenderMode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3989345436233230875, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
+      propertyPath: m_MeshDistribution
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7494600305606845566, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
       propertyPath: m_Name
       value: SpellPrefab
       objectReference: {fileID: 0}
-    - target: {fileID: 7494600305606845566, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 9092333610358934106, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
+      propertyPath: prewarm
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7306136006319337995, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 436626625}
   m_SourcePrefab: {fileID: 100100000, guid: 2a07b3a22c40999489e495e17da30637, type: 3}
 --- !u!4 &1382013098 stripped
 Transform:
