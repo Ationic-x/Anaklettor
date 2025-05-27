@@ -10,9 +10,7 @@ public class PlayerController : ActorController
 {
 	private ChangeMaterialColor _damageBlink;
 
-	private int _level;
-	private int _exp;
-    private int _maxExp;
+    private readonly int _maxExp = 100;
 
 	private Vector2 _moveInput;
     
@@ -36,9 +34,6 @@ public class PlayerController : ActorController
 	private bool _initMove = false;
 	private bool _initBlock = false;
 
-	public bool smallDamage = false;
-	public bool hugeDamage = false;
-
 	private Coroutine _blockCoroutine = null;
 	private Coroutine _speedCoroutine = null;
 
@@ -52,6 +47,7 @@ public class PlayerController : ActorController
     // Event launched
 	public event Action OnLevelUp;
 	public event Action OnUpgradeSelected;
+	public event Action OnHPChange;
 
 	// Eevent received
 	[Header("Actions")]
@@ -122,19 +118,6 @@ public class PlayerController : ActorController
 
 	private void FixedUpdate()
     {
-		// Tests
-		if (smallDamage)
-		{
-			smallDamage = false;
-			TakeDamage(1);
-		}
-		if (hugeDamage)
-		{
-			hugeDamage = false;
-			TakeDamage(10);
-		}
-		// End of tests
-
 		if (!CanMotion()) return;
 
 		Move();
@@ -300,8 +283,10 @@ public class PlayerController : ActorController
 	// Let the player be the only one that can heal
 	public void Heal(int amount)
 	{
-		stats.HP += amount;
-		if (stats.HP > stats.MaxHP) stats.HP = stats.MaxHP;
+		int resultHP = stats.HP + amount;
+		if (resultHP > stats.MaxHP) amount = stats.MaxHP - resultHP;
+		
+		ChangeCurrentHP(amount);
 	}
 
 	public void Hit(Transform sourceRef, int damage)
@@ -326,12 +311,16 @@ public class PlayerController : ActorController
 	{
 		if (!CanTakeDamage()) return;
 
-		stats.HP -= amount;
-		animator.SetInteger("Damaged", amount);
+        int resultHP = stats.HP - amount;
+        if (resultHP < 0) amount = stats.HP;
+        ChangeCurrentHP(-amount);
+
+        animator.SetInteger("Damaged", amount);
 		
-		if (stats.HP <= 0)
+		if (resultHP <= 0)
 		{
-			stats.HP = 0;
+            gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
 			_isDead = true;
 			animator.SetLayerWeight(1, 0f);
 			animator.SetLayerWeight(2, 0f);
@@ -349,21 +338,27 @@ public class PlayerController : ActorController
 	}
 
 
-	public override void Initialize(ActorData actorData, string name)
+	public void Initialize(ActorData actorData, PlayerData playerData)
     {
-        // Initialize default values
-        base.Initialize(actorData, name);
+		_immuneTime = playerData.immuneTime;
+        base.Initialize(actorData, playerData.nickname);
+		stats.UpdateStats(playerData.stats);
 
-        // Initialize unique player values
-		_level = 1;
-		_exp = 0;
-		_maxExp = 100;
+
 		_damageBlink = GetComponentInChildren<ChangeMaterialColor>();
 	}
-	#endregion
 
-	#region Checks
-	private bool CanMotion()
+
+    public void SetMapManager(MapManager newMapManager)
+    {
+        _mapManager = newMapManager;
+    }
+
+	public float ImmuneTime { get { return _immuneTime; } }
+    #endregion
+
+    #region Checks
+    private bool CanMotion()
 	{
 		// Only skeletons can move when they are dead
 		return !(_isDead);
@@ -393,18 +388,18 @@ public class PlayerController : ActorController
 	#region LevelUP system
 	private void LevelUp() 
     {
-        _level++;
-        Stats.HP = Stats.MaxHP;
-		OnLevelUp.Invoke();
+		Stats.Level += 1;
+        ChangeCurrentHP(Stats.MaxHP - Stats.HP);
+        OnLevelUp.Invoke();
 	}
 
     public void GainExperience(int amount) 
     {
-        _exp += amount;
+        Stats.Exp += amount;
         
-		if (_exp >= _maxExp) 
+		if (Stats.Exp >= _maxExp) 
         {
-			_exp -= _maxExp;
+            Stats.Exp -= _maxExp;
             LevelUp();
         }
     }
@@ -412,6 +407,12 @@ public class PlayerController : ActorController
 	public void IncreaseAspd()
 	{
 		stats.Aspd *= stats.MulAspd;
+		OnUpgradeSelected.Invoke();
+	}
+	
+	public void IncreaseBspd()
+	{
+		stats.Bspd *= stats.MulBspd;
 		OnUpgradeSelected.Invoke();
 	}
 
@@ -433,7 +434,7 @@ public class PlayerController : ActorController
 		OnUpgradeSelected.Invoke();
 	}
 
-	public void IncreaseInv()
+	public void IncreaseImmunity()
 	{
 		_immuneTime++;
 		OnUpgradeSelected.Invoke();
@@ -483,8 +484,9 @@ public class PlayerController : ActorController
 	}
     #endregion
 
-    public void SetMapManager(MapManager newMapManager)
+	private void ChangeCurrentHP(int amount)
 	{
-		_mapManager = newMapManager;
+		Stats.HP += amount;
+		OnHPChange.Invoke();
 	}
 }

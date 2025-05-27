@@ -15,18 +15,21 @@ MonoBehaviour:
   model: {fileID: 8968352993222510600, guid: ace82fbd20aa6ee4e95ec8e87f133237, type: 3}
   job: 0
   stats:
-    _maxHP: 50
-    _hp: 50
+    _level: 2
+    _exp: 3
+    _maxHP: 10
+    _hp: 10
     _attack: 3
     _defense: 3
-    _aspd: 1
-    _bspd: 1
-    _speed: 3
+    _aspd: 3
+    _bspd: 3
+    _speed: 9
     _atkDelay: 3
     _minDistanceAttack: 3
+    _addExp: 3
     _addAttack: 3
     _addHP: 3
     _mulAspd: 3
-    _mulBspd: 1
-    _mulSpeed: 1
-    _mulAtkDelay: 1
+    _mulBspd: 3
+    _mulSpeed: 3
+    _mulAtkDelay: 3

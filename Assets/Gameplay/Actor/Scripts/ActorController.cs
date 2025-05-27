@@ -15,7 +15,7 @@ public abstract class ActorController : MonoBehaviour, IActor
 
     // Scriptable object values
     protected string nickname;
-    protected Stats stats = new Stats();
+    [SerializeField] protected Stats stats = new Stats();
 	protected Jobs job;
 	protected GameObject model;
 

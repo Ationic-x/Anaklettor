@@ -47,8 +47,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84cfeb6642864634cb8538904dc630cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallDamage: 0
-  hugeDamage: 0
+  stats:
+    _level: 1
+    _exp: 3
+    _maxHP: 50
+    _hp: 50
+    _attack: 3
+    _defense: 3
+    _aspd: 3
+    _bspd: 3
+    _speed: 3
+    _atkDelay: 3
+    _minDistanceAttack: 3
+    _addExp: 3
+    _addAttack: 3
+    _addHP: 3
+    _mulAspd: 3
+    _mulBspd: 3
+    _mulSpeed: 3
+    _mulAtkDelay: 3
   _moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _attackAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _blockAction: {fileID: -2167736269604774346, guid: 052faaac586de48259a63d0c4782560b, type: 3}

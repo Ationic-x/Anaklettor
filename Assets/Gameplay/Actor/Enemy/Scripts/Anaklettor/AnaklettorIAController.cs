@@ -54,7 +54,7 @@ public class AnaklettorIAController : EnemyController
         Quaternion rotation = new Quaternion(_spellSpawnPoint.transform.rotation.x, _spellSpawnPoint.transform.rotation.y, _spellSpawnPoint.transform.rotation.z, _spellSpawnPoint.transform.rotation.w);
 
         GameObject spell = Instantiate(_spellPrefab, spawnPosition, rotation);
-        //Debug.Break();
+        Debug.Break();
 
         Rigidbody spellRigiBody = spell.GetComponent<Rigidbody>();
 
