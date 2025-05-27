@@ -1,7 +1,8 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class LoadAnimatorController : MonoBehaviour
+public class LoadGUIController : MonoBehaviour
 {
     private Animator _animator;
 
@@ -13,11 +14,10 @@ public class LoadAnimatorController : MonoBehaviour
 
 	public void LoadAnimationDirection(Vector2Int direction)
 	{
-
 		string animationDirection = direction == Vector2Int.up ? "Top" :
-					  direction == Vector2Int.down ? "Bottom" :
-					  direction == Vector2Int.left ? "Left" :
-					  "Right";
+						direction == Vector2Int.down ? "Bottom" :
+						direction == Vector2Int.left ? "Left" :
+						"Right";
 
 		_animator.SetTrigger(animationDirection);
 	}

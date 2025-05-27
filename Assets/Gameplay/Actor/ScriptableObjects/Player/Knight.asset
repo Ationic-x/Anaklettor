@@ -14,18 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 8968352993222510600, guid: ace82fbd20aa6ee4e95ec8e87f133237, type: 3}
   job: 0
-  nickname: Testor
   stats:
-    _speed: 1
     _maxHP: 50
     _hp: 50
-    _mana: 1
-    _maxMana: 1
-    _attack: 1
-    _defense: 1
-    _movementSpeed: 5
-    _mulAttack: 1
-    _mulDefense: 1
-    _mulHP: 1
-    _mulSpeed: 0
-    _minDistanceAttack: 0
+    _attack: 3
+    _defense: 3
+    _aspd: 1
+    _bspd: 1
+    _speed: 3
+    _atkDelay: 3
+    _minDistanceAttack: 3
+    _addAttack: 3
+    _addHP: 3
+    _mulAspd: 3
+    _mulBspd: 1
+    _mulSpeed: 1
+    _mulAtkDelay: 1

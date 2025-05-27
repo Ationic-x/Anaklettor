@@ -58,7 +58,7 @@ public static class SpawnController
 		Object.Instantiate(playerCamera);
     }
 
-	public static void SpawnEnemies(GameObject enemy, SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
+	public static void SpawnEnemies(GameObject enemy, SpawnRules rules, Dictionary<Jobs, ActorData> enemiesDictionary)
 	{
 		if (_mapManager.LevelInstance.TryGetCurrentRoomData(out RoomData roomData))
 		{
@@ -87,7 +87,7 @@ public static class SpawnController
 		}
 	}
 
-	private static void FirstTimeSpawn(GameObject enemy, SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
+	private static void FirstTimeSpawn(GameObject enemy, SpawnRules rules, Dictionary<Jobs, ActorData> enemiesDictionary)
 	{
 		Vector3 floorPostion = _floor.transform.position;
 		Vector3 floorScale = _floor.transform.localScale;
@@ -107,17 +107,17 @@ public static class SpawnController
 			Object.DestroyImmediate(child.gameObject);
 		}
 
-		// Randomize roles using the rules
+		// Randomize jobs using the rules
 		int min = Mathf.Max(rules.minEnemies, predefinedEnemies.Count);
 		int count = Random.Range(min, rules.maxEnemies + 1);
-
-		List<Rol> selectedRoles = new();
+		 
+		List<Jobs> selectedJob = new();
 
 		for (int i = 0; i < count; i++)
 		{
-			// Radom rol or iterative rol
-			Rol role = rules.randomizeRoles ? rules.roles[Random.Range(0, rules.roles.Count)] : rules.roles[i % rules.roles.Count];
-			selectedRoles.Add(role);
+            // Radom rol or iterative rol
+            Jobs job = rules.randomizeJobs ? rules.jobs[Random.Range(0, rules.jobs.Count)] : rules.jobs[i % rules.jobs.Count];
+			selectedJob.Add(job);
 		}
 
 		// Spawn enemies using floor rules and spawnpoints
@@ -130,7 +130,7 @@ public static class SpawnController
 			Quaternion spawnRotation = predefinedEnemies[i].rotation;
 
 			GameObject enemyGO = Object.Instantiate(enemy, spawnPos, spawnRotation, _enemyContainer.transform);
-			enemyGO.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedRoles[i]], EnemyNames.GetRandomName());
+			enemyGO.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedJob[i]], EnemyNames.GetRandomName());
 		}
 
 		// Default behaviour
@@ -147,7 +147,7 @@ public static class SpawnController
 			Quaternion randomYRotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
 
 			GameObject enemyGO = Object.Instantiate(enemy, randomPosition, randomYRotation, _enemyContainer.transform);
-			enemyGO.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedRoles[i]], EnemyNames.GetRandomName());
+			enemyGO.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedJob[i]], EnemyNames.GetRandomName());
 
 
 			existingEnemies.Add(new Enemy(randomPosition, randomYRotation));

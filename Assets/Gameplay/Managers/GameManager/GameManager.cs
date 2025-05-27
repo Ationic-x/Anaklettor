@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _playerCamera;
 	[SerializeField] private ActorData _playerData;
 
-	[SerializeField] private SerializableDictionary<Rol, ActorData> _listEnemies;
+	[SerializeField] private SerializableDictionary<Jobs, ActorData> _listEnemies;
 	[SerializeField] private SpawnRules _spawnRules;
 
 	// Loading elements & variables
@@ -109,21 +109,20 @@ public class GameManager : MonoBehaviour
 			soul.GetComponent<SoulController>().ForcedSearchPlayer();
 		}
 
-		while (GameObject.FindGameObjectWithTag(Tags.Soul) != null)
-		{
-			yield return null; // Wait until all souls are collected
-		}
+		while (GameObject.FindGameObjectWithTag(Tags.Soul) != null)	yield return null; // Wait for souls to be collected
+		yield return new WaitForSecondsRealtime(0.1f); // Small delay to ensure if player has level up
+		while (HUDController.isBusy) yield return null; // Wait for HUD to be free
 
 		// Save values
 		SaveController.SaveEnemies();
 		SaveController.SavePlayer(newRoom, _direction);
 
-		yield return new WaitForEndOfFrame(); // synch animation
+		// Load animation
 		_hudController.Load.LoadAnimationDirection(_mapManager.LevelInstance.MoveDirection);
 		yield return new WaitForEndOfFrame();
 
 
-		// Wait Async Load end
+		// Wait Async Load scene
 		string sceneName = MapController.GetSceneName(_mapManager.LevelInstance.CurrentRoomId, _mapManager.LevelInstance.IsCurrentOrigin());
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 		asyncLoad.allowSceneActivation = false;
