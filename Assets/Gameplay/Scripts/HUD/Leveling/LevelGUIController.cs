@@ -84,6 +84,9 @@ public class LevelGUIController : MonoBehaviour
 			{
 				case "HigherAspd":
 					button.onClick.AddListener(() => _player.IncreaseAspd());
+					break;
+				case "HigherBspd":
+					button.onClick.AddListener(() => _player.IncreaseAspd());
 					break;													
 				case "HigherAtk":
 					button.onClick.AddListener(() => _player.IncreaseAtk());
@@ -92,7 +95,7 @@ public class LevelGUIController : MonoBehaviour
 					button.onClick.AddListener(() => _player.IncreaseHP());
 					break;													
 				case "HigherInvTime":
-					button.onClick.AddListener(() => _player.IncreaseInv());
+					button.onClick.AddListener(() => _player.IncreaseImmunity());
 					break;													
 				case "HigherSpeed":
 					button.onClick.AddListener(() => _player.IncreaseSpeed());

@@ -411,13 +411,12 @@ public class EnemyController : ActorController
     // El arquero u otro instancia un proyectil con sus propios calculos
     private void OnTriggerEnter(Collider other)
     {
-        if (_hasHit) return; // Evita m�ltiples llamadas
+        if (_hasHit) return; // Evita multiples llamadas
 
-        // Deber�a estar filtrado por layer gracias al ridgidbody del enemigo, pero por si acaso
+        // Deberia estar filtrado por layer gracias al ridgidbody del enemigo, pero por si acaso
         if (other.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
         {
-            int damage = 0;
-            player.Hit(transform, damage);
+            player.Hit(transform, stats.Attack);
         }
     }
 

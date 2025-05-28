@@ -30,15 +30,16 @@ public static class SpawnController
 	}
 
 	// Currently using prefab for testing
-	public static void SpawnPlayer(GameObject player, ActorData playerData, GameObject playerCamera)
+	public static void SpawnPlayer(GameObject player, ActorData actorData, GameObject playerCamera)
 	{
-		LevelGenerator levelInstance = _mapManager.LevelInstance;
+		PlayerData playerData = _mapManager.LevelInstance.PlayerData;
+        
 		Vector3 floorPostion = _floor.transform.position;
 		Vector3 floorScale = _floor.transform.localScale;
-		Vector2Int dir = levelInstance.MoveDirection;
+		Vector2Int dir = playerData.MoveDirection;
 
-		Vector3 position = dir == Vector2Int.zero ? new Vector3(floorPostion.x ,floorPostion.y + floorScale.y * 0.5f, floorPostion.z) : levelInstance.PlayerPosition;
-		Quaternion rotation = dir == Vector2Int.zero ? new Quaternion(0f, 0f, 0f, 0f) : levelInstance.PlayerRotation;
+		Vector3 position = dir == Vector2Int.zero ? new Vector3(floorPostion.x ,floorPostion.y + floorScale.y * 0.5f, floorPostion.z) : playerData.PlayerPosition;
+		Quaternion rotation = dir == Vector2Int.zero ? new Quaternion(0f, 0f, 0f, 0f) : playerData.PlayerRotation;
 		Vector3 flip = Vector3.one;
 
 		if (dir == Vector2Int.up || dir == Vector2Int.down)
@@ -48,7 +49,16 @@ public static class SpawnController
 
 		player = Object.Instantiate(player, Vector3.Scale(position, flip), rotation);
 		PlayerController pc = player.GetComponent<PlayerController>(); 
-		pc.Initialize(playerData, "Hero");
+		
+		if (playerData.nickname == null)
+		{
+			playerData.nickname = "Hero";
+			playerData.immuneTime = 1.5f;
+            playerData.stats = actorData.stats;
+		}
+
+		pc.Initialize(actorData, playerData);
+
 
 		//player.GetComponent<BlinkPlayer>().BlinkEffect();
 

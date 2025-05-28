@@ -18,12 +18,14 @@ MonoBehaviour:
     _maxHP: 10
     _hp: 10
     _attack: 6
-    _defense: 7
+    _level: 0
+    _exp: 0
     _aspd: 0
     _bspd: 0
     _speed: 3
     _atkDelay: 0
     _minDistanceAttack: 6
+    _addExp: 0
     _addAttack: 0
     _addHP: 0
     _mulAspd: 0

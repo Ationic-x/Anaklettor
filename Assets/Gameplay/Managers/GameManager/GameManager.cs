@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 
-		if (_mapManager.LevelInstance.MoveDirection != Vector2Int.zero) StartCoroutine(ExitAnimationDelayed());
+		if (_mapManager.LevelInstance.PlayerData.MoveDirection != Vector2Int.zero) StartCoroutine(ExitAnimationDelayed());
 	}
 
 	public MapManager MapManager { set
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
 		SaveController.SavePlayer(newRoom, _direction);
 
 		// Load animation
-		_hudController.Load.LoadAnimationDirection(_mapManager.LevelInstance.MoveDirection);
+		_hudController.Load.LoadAnimationDirection(_mapManager.LevelInstance.PlayerData.MoveDirection);
 		yield return new WaitForEndOfFrame();
 
 
@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
 		
 		// Apply animation and making sure is applied
 		yield return new WaitForEndOfFrame(); // synch animation
-		_hudController.Load.LoadAnimationDirection(_mapManager.LevelInstance.MoveDirection);
+		_hudController.Load.LoadAnimationDirection(_mapManager.LevelInstance.PlayerData.MoveDirection);
 
 		// Wait animation end + CD
 		yield return new WaitForEndOfFrame();

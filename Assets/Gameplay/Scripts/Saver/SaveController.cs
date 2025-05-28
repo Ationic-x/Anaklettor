@@ -58,10 +58,21 @@ public static class SaveController
 
     public static void SavePlayer(Vector2Int newRoom, Vector2Int direction)
     {
-        GameObject player = GameObject.FindGameObjectWithTag(Tags.Player);
-        _levelInstance.PlayerCurrentRoom = newRoom;
-        _levelInstance.MoveDirection = direction;
-        _levelInstance.PlayerPosition = player.transform.position;
-        _levelInstance.PlayerRotation = player.transform.rotation;
+        GameObject playerGO = GameObject.FindGameObjectWithTag(Tags.Player);
+        PlayerController playerController = playerGO.GetComponent<PlayerController>();
+		PlayerData playerData = _levelInstance.PlayerData;
+        
+		// Position and Transformation
+		_levelInstance.PlayerCurrentRoom = newRoom;
+        
+		playerData.MoveDirection = direction;
+        playerData.PlayerPosition = playerGO.transform.position;
+        playerData.PlayerRotation = playerGO.transform.rotation;
+
+		// Stats
+		playerData.nickname = playerController.Name;
+		playerData.stats = playerController.Stats;
+		playerData.immuneTime = playerController.ImmuneTime;
+
     }
 }
