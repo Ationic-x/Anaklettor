@@ -12500,9 +12500,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[1].Key
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
       propertyPath: _listEnemies.entries.Array.data[0].Value
       value: 
       objectReference: {fileID: 11400000, guid: 0daae3fb783ebcb42aaaf7cc0c12b751, type: 2}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[1].Value
+      value: 
+      objectReference: {fileID: 11400000, guid: d21b9773b0ee95546a234116435a4691, type: 2}
     - target: {fileID: 7091069037955569101, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2428312

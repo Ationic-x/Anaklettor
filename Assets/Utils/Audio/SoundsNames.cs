@@ -11,6 +11,10 @@ public static class SoundsNames
     public const string SkeletonSlash = "snd_skeleton_slash";
     public const string SkeletonHit = "snd_skeleton_hit";
     public const string SkeletonStep = "snd_skeleton_step";    
+    public const string SkeletonShootArrow = "snd_skeleton_shootarrow";    
+    public const string SkeletonShootSpell = "snd_skeleton_shootspell";    
+    public const string SkeletonRechargingSpell = "snd_skeleton_rechargingspell";    
+    public const string SkeletonSpellExplosion = "snd_skeleton_spellexplosion";    
 
     #endregion END Skeletons
 

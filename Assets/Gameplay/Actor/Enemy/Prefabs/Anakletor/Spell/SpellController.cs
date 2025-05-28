@@ -5,6 +5,8 @@ public class SpellController : MonoBehaviour
 {
     Animator _animator;
 
+    private AudioManager _audioManager;
+
     [SerializeField] private int _spellDamage = 0;
 
     public int SpellDamage { get => _spellDamage; set => _spellDamage = value; }
@@ -14,6 +16,8 @@ public class SpellController : MonoBehaviour
         StartCoroutine(lifeTime());
 
         _animator = GetComponent<Animator>();
+
+        _audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,5 +42,16 @@ public class SpellController : MonoBehaviour
         _animator.SetBool("ExplotionTrigger", true);
         Destroy(this.gameObject, 5f);
     }
+
+    public void SpellExplosion()
+    {
+        _audioManager.Play3D(SoundsNames.SkeletonSpellExplosion, this.transform.gameObject, pitch: RandomPitch(2f, 7f), volume: 0.5f);
+    }
+
+    public float RandomPitch(float min = 0.9f, float max = 1.1f)
+    {
+        return UnityEngine.Random.Range(min, max);
+    }
+
 
 }
