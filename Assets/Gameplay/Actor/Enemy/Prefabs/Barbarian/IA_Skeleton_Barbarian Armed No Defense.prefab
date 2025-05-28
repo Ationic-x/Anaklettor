@@ -2341,6 +2341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5796591464820700886}
   - component: {fileID: 4891935845608480272}
+  - component: {fileID: -894856487070421913}
   m_Layer: 0
   m_Name: IA_Skeleton_Barbarian Armed No Defense
   m_TagString: Untagged
@@ -2394,6 +2395,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-894856487070421913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042736114080510047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5499064dd6a5ae74b8ce05ed44537201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8124605299660554879
 GameObject:
   m_ObjectHideFlags: 0

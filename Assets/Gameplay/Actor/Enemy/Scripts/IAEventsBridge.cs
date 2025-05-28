@@ -14,7 +14,7 @@ public class IAEventsBridge : MonoBehaviour
 
     public void ThrowSpell()
     {
-        spellThrow.Invoke();
+        spellThrow.Invoke();        
     }
 
 }

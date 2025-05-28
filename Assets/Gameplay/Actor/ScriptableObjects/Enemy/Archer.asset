@@ -15,8 +15,8 @@ MonoBehaviour:
   model: {fileID: 4369120169878162334, guid: df4f21b1f11666d45abfaa8b6464628b, type: 3}
   job: 4
   stats:
-    _maxHP: 1
-    _hp: 1
+    _maxHP: 2
+    _hp: 2
     _attack: 2
     _defense: 1
     _aspd: 0

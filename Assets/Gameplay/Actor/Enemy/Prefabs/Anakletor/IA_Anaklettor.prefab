@@ -393,6 +393,7 @@ GameObject:
   - component: {fileID: 793048654110708222}
   - component: {fileID: 9009311921630250923}
   - component: {fileID: 3757999983654238684}
+  - component: {fileID: 6951355974326283452}
   m_Layer: 0
   m_Name: IA_Anaklettor
   m_TagString: Untagged
@@ -456,6 +457,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 159f4750f8541be4db01254ad289622c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6951355974326283452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724856405812896380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d35872da08179439366deda12277d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1755091821282409693
