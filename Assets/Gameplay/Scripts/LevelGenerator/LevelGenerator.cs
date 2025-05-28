@@ -41,7 +41,9 @@ public class LevelGenerator : MonoBehaviour
     private Quaternion _playerRotation;
     private Vector2Int _moveDirection = Vector2Int.zero;
 
+    // GameData
     private Dictionary<Vector2Int, RoomData> _roomMap = new();
+    private PlayerData _playerData = new PlayerData();
 
     private int[,] _mapData;
     private ArrayQueue<Vector4> _visitedRooms = new(MaxVisited, new Vector4(-1, -1, -1, -1));
@@ -201,7 +203,9 @@ public class LevelGenerator : MonoBehaviour
 	#endregion
 
 	#region Getters and Setters
-	public bool TryGetRoomData(Vector2Int position, out RoomData roomData)
+	public PlayerData PlayerData { get { return _playerData; } }
+    
+    public bool TryGetRoomData(Vector2Int position, out RoomData roomData)
 	{
 		return _roomMap.TryGetValue(position, out roomData);
 	}
@@ -228,18 +232,6 @@ public class LevelGenerator : MonoBehaviour
         get => _mapData[_playerCurrentRoom.x, _playerCurrentRoom.y]; 
     }
 
-	public Vector3 PlayerPosition
-	{
-		get { return _playerPosition; }
-		set { _playerPosition = value; }
-	}
-    
-    public Quaternion PlayerRotation
-	{
-		get { return _playerRotation; }
-		set { _playerRotation = value; }
-	}
-
 	public Vector2Int PlayerCurrentRoom
     {
         get { return _playerCurrentRoom; }
@@ -249,12 +241,6 @@ public class LevelGenerator : MonoBehaviour
 			_playerCurrentRoom = value; 
         }
     }
-
-    public Vector2Int MoveDirection
-    {
-		get { return _moveDirection; }
-		set { _moveDirection = value; }
-	}
 
 	public int MapWidth
 	{

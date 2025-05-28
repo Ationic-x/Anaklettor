@@ -2,6 +2,8 @@ using UnityEngine.Rendering;
 
 public interface IStats
 {
+	int Level { get; set; }
+	int Exp { get; set; }
 	int MaxHP { get; set; }
 	int HP { get; set; }
 	int Attack { get; set; }
@@ -13,6 +15,7 @@ public interface IStats
 	float MinDistanceAttack { get; set; }
 
 	// Adders
+	int AddExp { get; set; }
 	int AddAttack { get; set; }
 	int AddHP { get; set; }
 
