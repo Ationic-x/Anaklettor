@@ -81,6 +81,21 @@ public class EnemyController : ActorController
         }
     }
 
+    public void ApplyLevelDifficulty(int level)
+    {
+        stats.Level = level;
+
+        int factor = level - 1;
+
+        stats.HP += stats.AddHP * factor;
+        stats.Attack += stats.AddAttack * factor;
+        stats.Exp += stats.AddExp * factor;
+
+        stats.Speed *= Mathf.Pow(stats.MulSpeed, factor);
+        stats.Aspd *= Mathf.Pow(stats.MulAspd, factor);
+        stats.AtkDelay *= Mathf.Pow(stats.MulAtkDelay, factor);
+    }
+
     void Update()
     {
         if (!_isDead)
@@ -513,7 +528,8 @@ public class EnemyController : ActorController
 
     private void DropSoul()
     {
-        Instantiate(_soul, new Vector3(transform.position.x, 2, transform.position.z), Quaternion.identity);
+        GameObject soul = Instantiate(_soul, new Vector3(transform.position.x, 2, transform.position.z), Quaternion.identity);
+        soul.GetComponent<SoulController>().SetAmountExp(stats.Exp);
     }
 
     private IEnumerator IsDamaged()

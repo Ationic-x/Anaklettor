@@ -90,7 +90,6 @@ public static class SpawnController
 	{
 		foreach (EnemyData enemyData in roomData.enemies)
 		{
-
 			GameObject enemyGO = Object.Instantiate(enemy, enemyData.position, enemyData.rotation, _enemyContainer.transform);
 			
 			enemyGO.GetComponent<EnemyController>().Initialize(enemyData.actorData, enemyData.name);
@@ -102,8 +101,10 @@ public static class SpawnController
 		Vector3 floorPostion = _floor.transform.position;
 		Vector3 floorScale = _floor.transform.localScale;
 
-		// Find enemy container and redefined spawn positions/size (have spawn points)
-		List<Enemy> predefinedEnemies = new();
+		int roomDifficulty = _mapManager.LevelInstance.RoomDifficulty();
+
+        // Find enemy container and redefined spawn positions/size (have spawn points)
+        List<Enemy> predefinedEnemies = new();
 
 		while (_enemyContainer.transform.childCount > 0)
 		{
@@ -140,8 +141,11 @@ public static class SpawnController
 			Quaternion spawnRotation = predefinedEnemies[i].rotation;
 
 			GameObject enemyGO = Object.Instantiate(enemy, spawnPos, spawnRotation, _enemyContainer.transform);
-			enemyGO.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedJob[i]], EnemyNames.GetRandomName());
-		}
+			
+			EnemyController enemyController = enemyGO.GetComponent<EnemyController>();
+            enemyController.Initialize(enemiesDictionary[selectedJob[i]], EnemyNames.GetRandomName());
+			enemyController.ApplyLevelDifficulty(roomDifficulty);
+        }
 
 		// Default behaviour
 		for (int i = predefinedEnemies.Count; i < count; i++)
@@ -157,10 +161,13 @@ public static class SpawnController
 			Quaternion randomYRotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
 
 			GameObject enemyGO = Object.Instantiate(enemy, randomPosition, randomYRotation, _enemyContainer.transform);
-			enemyGO.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedJob[i]], EnemyNames.GetRandomName());
+
+            EnemyController enemyController = enemyGO.GetComponent<EnemyController>();
+            enemyController.Initialize(enemiesDictionary[selectedJob[i]], EnemyNames.GetRandomName());
+            enemyController.ApplyLevelDifficulty(roomDifficulty);
 
 
-			existingEnemies.Add(new Enemy(randomPosition, randomYRotation));
+            existingEnemies.Add(new Enemy(randomPosition, randomYRotation));
 		}
 	}
 
