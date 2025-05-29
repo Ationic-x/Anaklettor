@@ -18,7 +18,7 @@ MonoBehaviour:
     _level: 2
     _exp: 3
     _maxHP: 1
-    _hp: 1
+    _hp: 9999
     _attack: 3
     _defense: 3
     _aspd: 3
