@@ -13,5 +13,18 @@ MonoBehaviour:
   m_Name: SFX_Player
   m_EditorClassIdentifier: 
   soundEntries:
-  - soundName: snd_chara_atk
+  - soundName: snd_chara_slash
     clip: {fileID: 8300000, guid: 987c29b725c58d344b13fb2989e9e5f6, type: 3}
+    category: 0
+  - soundName: snd_chara_step
+    clip: {fileID: 8300000, guid: 987c29b725c58d344b13fb2989e9e5f6, type: 3}
+    category: 0
+  - soundName: snd_chara_death
+    clip: {fileID: 8300000, guid: 987c29b725c58d344b13fb2989e9e5f6, type: 3}
+    category: 0
+  - soundName: snd_chara_hit
+    clip: {fileID: 8300000, guid: 987c29b725c58d344b13fb2989e9e5f6, type: 3}
+    category: 0
+  - soundName: snd_chara_talk
+    clip: {fileID: 8300000, guid: 987c29b725c58d344b13fb2989e9e5f6, type: 3}
+    category: 0

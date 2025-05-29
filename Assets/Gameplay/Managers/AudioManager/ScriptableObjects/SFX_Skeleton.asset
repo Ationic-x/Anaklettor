@@ -16,12 +16,6 @@ MonoBehaviour:
   - soundName: snd_skeleton_talk
     clip: {fileID: 8300000, guid: 869637c0bcd1ab842964fb9985fef89a, type: 3}
     category: 0
-  - soundName: snd_skeleton_move1
-    clip: {fileID: 8300000, guid: c2dbd0a4ad7476041a6aaeafb1b70adf, type: 3}
-    category: 0
-  - soundName: snd_skeleton_move2
-    clip: {fileID: 8300000, guid: 3f889ead58220974fb1f45ba29facce5, type: 3}
-    category: 0
   - soundName: snd_skeleton_death1
     clip: {fileID: 8300000, guid: 7db56c10688ec5f44b18f2e4ab7f8640, type: 3}
     category: 0
