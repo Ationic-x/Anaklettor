@@ -1772,6 +1772,7 @@ MonoBehaviour:
   uiAudioGroup: {fileID: -3566386864536669647, guid: 5a2a06330eb24554d82e0d590f98af14, type: 2}
   soundLibsList:
   - {fileID: 11400000, guid: 158d3cda6dfd68f438686332e7bc2f2f, type: 2}
+  - {fileID: 11400000, guid: 0b9e8fed2e2e36247b4f971a60bf5c04, type: 2}
   - {fileID: 11400000, guid: 21ae7a9be6f0ab14da27836184ebc98a, type: 2}
   - {fileID: 11400000, guid: 6da71db29072ab14bbac1c657658f243, type: 2}
   - {fileID: 11400000, guid: 2b8a8fade38213b42a32d017676a10bf, type: 2}
