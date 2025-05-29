@@ -3,120 +3,82 @@ using UnityEngine;
 [System.Serializable]
 public class Stats : IStats
 {
-    [SerializeField] private int _speed;
+	// General stats
+	[SerializeField] private int _level;
+	[SerializeField] private int _exp;
     [SerializeField] private int _maxHP;
     [SerializeField] private int _hp;
-    [SerializeField] private int _mana;
-    [SerializeField] private int _maxMana;
     [SerializeField] private int _attack;
     [SerializeField] private int _defense;
-                     
-    [SerializeField] private float _movementSpeed;
-    [SerializeField] private float _mulAttack;
-    [SerializeField] private float _mulDefense;
-    [SerializeField] private float _mulHP;
-    [SerializeField] private float _mulSpeed;
+    [SerializeField] private float _aspd;
+    [SerializeField] private float _bspd;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _atkDelay;
     [SerializeField] private float _minDistanceAttack;
 
-    #region [Integers]
+	// Add
+	[SerializeField] private int _addExp;
+	[SerializeField] private int _addAttack;
+    [SerializeField] private int _addHP;
 
-    public int Speed
-    {
-        get => _speed;
-        set => _speed = value;
-    }
+    // Multipliers
+    [SerializeField] private float _mulAspd;
+    [SerializeField] private float _mulBspd;
+    [SerializeField] private float _mulSpeed;
+    [SerializeField] private float _mulAtkDelay;
 
-    public int MaxHP
-    {
-        get => _maxHP;
-        set => _maxHP = value;
-    }
+	#region Integers
+	public int Level { get => _level; set => _level = value; }
+	public int MaxHP { get => _maxHP; set => _maxHP = value; }
+	public int HP { get => _hp; set => _hp = value; }
+	public int Attack { get => _attack; set => _attack = value; }
+	public int Defense { get => _defense; set => _defense = value; }
+	public int Exp { get => _exp; set => _exp = value; }
+	#endregion
+	
+    #region Floats
+	public float Speed { get => _speed; set => _speed = value; }
+	public float AtkDelay { get => _atkDelay; set => _atkDelay = value; }
+	public float MinDistanceAttack { get => _minDistanceAttack; set => _minDistanceAttack = value; }
+	#endregion
 
-    public int HP
-    {
-        get => _hp;
-        set => _hp = value;
-    }
-    public int Mana
-    {
-        get => _mana;
-        set => _mana = value;
-    }
+	#region Adders
+	public int AddAttack { get => _addAttack; set => _addAttack = value; }
+	public int AddHP { get => _addHP; set => _addHP = value; }
+	public int AddExp { get => _addExp; set => _addExp = value; }
+	#endregion
 
-    public int MaxMana
-    {
-        get => _maxMana;
-        set => _maxMana = value;
-    }
-
-    public int Attack
-    {
-        get => _attack;
-        set => _attack = value;
-    }
-
-    public int Defense
-    {
-        get => _defense;
-        set => _defense = value;
-    }
-    #endregion
-
-    #region [Floats]
-    public float MovementSpeed
-    {
-        get => _movementSpeed;
-        set => _movementSpeed = value;
-    }
-
-    public float MulAttack
-    {
-        get => _mulAttack;
-        set => _mulAttack = value;
-    }
-
-    public float MulDefense
-    {
-        get => _mulDefense;
-        set => _mulDefense = value;
-    }
-
-    public float MulSpeed
-    {
-        get => _mulSpeed;
-        set => _mulSpeed = value;
-    } 
-    
-    public float MinDistanceAttack
-    {
-        get => _minDistanceAttack;
-        set => _minDistanceAttack = value;
-    }
-
-    public float MulHP
-    {
-        get => _mulHP;
-        set => _mulHP = value;
-    }
-    #endregion
+	#region Multipliers
+	public float Aspd { get => _aspd; set => _aspd = value; }
+	public float Bspd { get => _bspd; set => _bspd = value; }
+	public float MulAspd { get => _mulAspd; set => _mulAspd = value; }
+	public float MulBspd { get => _mulBspd; set => _mulBspd = value; }
+	public float MulSpeed { get => _mulSpeed; set => _mulSpeed = value; }
+	public float MulAtkDelay { get => _mulAtkDelay; set => _mulAtkDelay = value; }
+	#endregion
 
 
-    #region [Update]
-    public void UpdateStats(IStats stats)
-    {
-        this.Speed = stats.Speed;
-		this.MaxHP = stats.MaxHP;
-        this.HP = stats.HP;
-        this.Mana = stats.Mana;
-        this.MaxMana = stats.MaxMana;
-        this.Attack = stats.Attack;
-        this.Defense = stats.Defense;
 
-        this.MovementSpeed = stats.MovementSpeed;
-        this.MulAttack = stats.MulAttack;
-        this.MulDefense = stats.MulDefense;
-        this.MulHP = stats.MulHP;
-        this.MinDistanceAttack = stats.MinDistanceAttack;
+	#region [Update]
+	public void UpdateStats(IStats stats)
+    {
+		_level				= stats.Level;
+		_exp				= stats.Exp;
+		_aspd				= stats.Aspd;
+		_bspd				= stats.Bspd;
+		_maxHP				= stats.MaxHP;
+		_hp					= stats.HP;
+		_attack				= stats.Attack;
+		_defense			= stats.Defense;
+		_speed				= stats.Speed;
+		_atkDelay			= stats.AtkDelay;
+		_minDistanceAttack	= stats.MinDistanceAttack;
+		_mulAspd			= stats.MulAspd;
+		_addAttack			= stats.AddAttack;
+		_addHP				= stats.AddHP;
+		_addExp				= stats.AddExp;
+		_mulSpeed			= stats.MulSpeed;
+		_mulAtkDelay		= stats.MulAtkDelay;
 	}
     #endregion
 }

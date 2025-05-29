@@ -14,18 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 4292297364743637603, guid: 700599b8d1f71b84fa58784e60f25a5d, type: 3}
   job: 3
-  nickname: Rober
   stats:
-    _speed: 3
-    _maxHP: 3
-    _hp: 3
-    _mana: 3
-    _maxMana: 3
-    _attack: 3
-    _defense: 3
-    _movementSpeed: 3
-    _mulAttack: 3
-    _mulDefense: 3
-    _mulHP: 3
-    _mulSpeed: 3
-    _minDistanceAttack: 2
+    _maxHP: 5
+    _hp: 5
+    _attack: 4
+    _defense: 4
+    _aspd: 0
+    _bspd: 0
+    _speed: 2
+    _atkDelay: 1.5
+    _minDistanceAttack: 1.5
+    _addAttack: 0
+    _addHP: 0
+    _mulAspd: 0
+    _mulBspd: 0
+    _mulSpeed: 1
+    _mulAtkDelay: 0

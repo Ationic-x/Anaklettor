@@ -30,15 +30,16 @@ public static class SpawnController
 	}
 
 	// Currently using prefab for testing
-	public static void SpawnPlayer(GameObject player, ActorData playerData, GameObject playerCamera)
+	public static void SpawnPlayer(GameObject player, ActorData actorData, GameObject playerCamera)
 	{
-		LevelGenerator levelInstance = _mapManager.LevelInstance;
+		PlayerData playerData = _mapManager.LevelInstance.PlayerData;
+        
 		Vector3 floorPostion = _floor.transform.position;
 		Vector3 floorScale = _floor.transform.localScale;
-		Vector2Int dir = levelInstance.MoveDirection;
+		Vector2Int dir = playerData.MoveDirection;
 
-		Vector3 position = dir == Vector2Int.zero ? new Vector3(floorPostion.x ,floorPostion.y + floorScale.y * 0.5f, floorPostion.z) : levelInstance.PlayerPosition;
-		Quaternion rotation = dir == Vector2Int.zero ? new Quaternion(0f, 0f, 0f, 0f) : levelInstance.PlayerRotation;
+		Vector3 position = dir == Vector2Int.zero ? new Vector3(floorPostion.x ,floorPostion.y + floorScale.y * 0.5f, floorPostion.z) : playerData.PlayerPosition;
+		Quaternion rotation = dir == Vector2Int.zero ? new Quaternion(0f, 0f, 0f, 0f) : playerData.PlayerRotation;
 		Vector3 flip = Vector3.one;
 
 		if (dir == Vector2Int.up || dir == Vector2Int.down)
@@ -48,7 +49,16 @@ public static class SpawnController
 
 		player = Object.Instantiate(player, Vector3.Scale(position, flip), rotation);
 		PlayerController pc = player.GetComponent<PlayerController>(); 
-		pc.Initialize(playerData, "Hero");
+		
+		if (playerData.nickname == null)
+		{
+			playerData.nickname = "Hero";
+			playerData.immuneTime = 1.5f;
+            playerData.stats = actorData.stats;
+		}
+
+		pc.Initialize(actorData, playerData);
+
 
 		//player.GetComponent<BlinkPlayer>().BlinkEffect();
 
@@ -58,7 +68,7 @@ public static class SpawnController
 		Object.Instantiate(playerCamera);
     }
 
-	public static void SpawnEnemies(GameObject enemy, SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
+	public static void SpawnEnemies(GameObject enemy, SpawnRules rules, Dictionary<Jobs, ActorData> enemiesDictionary)
 	{
 		if (_mapManager.LevelInstance.TryGetCurrentRoomData(out RoomData roomData))
 		{
@@ -87,7 +97,7 @@ public static class SpawnController
 		}
 	}
 
-	private static void FirstTimeSpawn(GameObject enemy, SpawnRules rules, Dictionary<Rol, ActorData> enemiesDictionary)
+	private static void FirstTimeSpawn(GameObject enemy, SpawnRules rules, Dictionary<Jobs, ActorData> enemiesDictionary)
 	{
 		Vector3 floorPostion = _floor.transform.position;
 		Vector3 floorScale = _floor.transform.localScale;
@@ -107,17 +117,17 @@ public static class SpawnController
 			Object.DestroyImmediate(child.gameObject);
 		}
 
-		// Randomize roles using the rules
+		// Randomize jobs using the rules
 		int min = Mathf.Max(rules.minEnemies, predefinedEnemies.Count);
 		int count = Random.Range(min, rules.maxEnemies + 1);
-
-		List<Rol> selectedRoles = new();
+		 
+		List<Jobs> selectedJob = new();
 
 		for (int i = 0; i < count; i++)
 		{
-			// Radom rol or iterative rol
-			Rol role = rules.randomizeRoles ? rules.roles[Random.Range(0, rules.roles.Count)] : rules.roles[i % rules.roles.Count];
-			selectedRoles.Add(role);
+            // Radom rol or iterative rol
+            Jobs job = rules.randomizeJobs ? rules.jobs[Random.Range(0, rules.jobs.Count)] : rules.jobs[i % rules.jobs.Count];
+			selectedJob.Add(job);
 		}
 
 		// Spawn enemies using floor rules and spawnpoints
@@ -130,7 +140,7 @@ public static class SpawnController
 			Quaternion spawnRotation = predefinedEnemies[i].rotation;
 
 			GameObject enemyGO = Object.Instantiate(enemy, spawnPos, spawnRotation, _enemyContainer.transform);
-			enemyGO.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedRoles[i]], EnemyNames.GetRandomName());
+			enemyGO.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedJob[i]], EnemyNames.GetRandomName());
 		}
 
 		// Default behaviour
@@ -147,7 +157,7 @@ public static class SpawnController
 			Quaternion randomYRotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
 
 			GameObject enemyGO = Object.Instantiate(enemy, randomPosition, randomYRotation, _enemyContainer.transform);
-			enemyGO.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedRoles[i]], EnemyNames.GetRandomName());
+			enemyGO.GetComponent<EnemyController>().Initialize(enemiesDictionary[selectedJob[i]], EnemyNames.GetRandomName());
 
 
 			existingEnemies.Add(new Enemy(randomPosition, randomYRotation));

@@ -15,11 +15,37 @@ MonoBehaviour:
   soundEntries:
   - soundName: snd_skeleton_talk
     clip: {fileID: 8300000, guid: 869637c0bcd1ab842964fb9985fef89a, type: 3}
+    category: 0
   - soundName: snd_skeleton_move1
     clip: {fileID: 8300000, guid: c2dbd0a4ad7476041a6aaeafb1b70adf, type: 3}
+    category: 0
   - soundName: snd_skeleton_move2
     clip: {fileID: 8300000, guid: 3f889ead58220974fb1f45ba29facce5, type: 3}
+    category: 0
   - soundName: snd_skeleton_death1
     clip: {fileID: 8300000, guid: 7db56c10688ec5f44b18f2e4ab7f8640, type: 3}
+    category: 0
   - soundName: snd_skeleton_death2
     clip: {fileID: 8300000, guid: 6cffee0853a54864c9866a671215378e, type: 3}
+    category: 0
+  - soundName: snd_skeleton_slash
+    clip: {fileID: 8300000, guid: fc1d2ef98dac46c4f8b918464a816e37, type: 3}
+    category: 0
+  - soundName: snd_skeleton_step
+    clip: {fileID: 8300000, guid: 3f889ead58220974fb1f45ba29facce5, type: 3}
+    category: 0
+  - soundName: snd_skeleton_hit
+    clip: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
+    category: 0
+  - soundName: snd_skeleton_shootspell
+    clip: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
+    category: 0
+  - soundName: snd_skeleton_shootarrow
+    clip: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
+    category: 0
+  - soundName: snd_skeleton_shootarrow
+    clip: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
+    category: 0
+  - soundName: snd_skeleton_spellexplosion
+    clip: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
+    category: 0

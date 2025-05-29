@@ -83,8 +83,8 @@ public class AudioManager : MonoBehaviour
 
             audioSource.clip = entry.clip;
             audioSource.outputAudioMixerGroup = GetGroup(entry.category);
-			audioSource.volume = volume;
-			audioSource.spatialBlend = spatialBlend;
+            audioSource.volume = volume;
+            audioSource.spatialBlend = spatialBlend;
             audioSource.dopplerLevel = dopplerLevel;
             audioSource.pitch = pitch;
             audioSource.loop = loop;
@@ -102,7 +102,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     /// <param name="soundName">El nombre del sonido que se desea reproducir.</param>
     /// <param name="targetObject">El GameObject al que el sonido debe seguir.</param>
-    public void Play3D(string soundName, GameObject targetObject, float spatialBlend = 1.0f, float pitch = 1.0f, float dopplerLevel = 0.0f, bool loop = false, float volume = 1.0f)
+    public void Play3D(string soundName, GameObject targetObject, float spatialBlend = 1.0f, float pitch = 1.0f, float dopplerLevel = 0.0f, bool loop = false, float volume = 1.0f, bool playIfAlreadyPlaying = false)
     {
         // Busca el AudioClip correspondiente en el diccionario global.
         if (globalSoundDictionary.TryGetValue(soundName, out var entry))
@@ -111,13 +111,21 @@ public class AudioManager : MonoBehaviour
 
             audioSource.clip = entry.clip;
             audioSource.outputAudioMixerGroup = GetGroup(entry.category);
-			audioSource.volume = volume;
-			audioSource.spatialBlend = spatialBlend;
+            audioSource.volume = volume;
+            audioSource.spatialBlend = spatialBlend;
             audioSource.dopplerLevel = dopplerLevel;
-			audioSource.pitch = pitch;
-			audioSource.loop = loop; // Para testeo
+            audioSource.pitch = pitch;
+            audioSource.loop = loop; // Para testeo
 
-            if (!audioSource.isPlaying) audioSource.Play();
+            if (playIfAlreadyPlaying)
+            {
+                audioSource.Play();
+            }
+            else
+            {
+                if (!audioSource.isPlaying) audioSource.Play();
+            }
+
         }
         else
         {
@@ -145,8 +153,8 @@ public class AudioManager : MonoBehaviour
             AudioSource tempAudioSource = tempAudioObject.AddComponent<AudioSource>();
             tempAudioSource.clip = entry.clip;
             tempAudioSource.outputAudioMixerGroup = GetGroup(entry.category);
-			tempAudioSource.volume = volume;
-			tempAudioSource.pitch = pitch;
+            tempAudioSource.volume = volume;
+            tempAudioSource.pitch = pitch;
             tempAudioSource.spatialBlend = spatialBlend;
             tempAudioSource.dopplerLevel = dopplerLevel;
             tempAudioSource.loop = loop; // Para testeo
@@ -178,12 +186,13 @@ public class AudioManager : MonoBehaviour
     /// <param name="volume">El volumen de la música, un valor entre 0.0 (silencio) y 1.0 (volumen máximo).</param>
     public void SetMusicVolume(float volume)
     {
-        if (volume == 0) {
+        if (volume == 0)
+        {
             audioMixer.SetFloat("MusicVolume", -80.0f);
         }
-        else 
-        { 
-            audioMixer.SetFloat("MusicVolume", (float)(Math.Log10(volume) * 20)); 
+        else
+        {
+            audioMixer.SetFloat("MusicVolume", (float)(Math.Log10(volume) * 20));
         }
     }
     /// <summary>

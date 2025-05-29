@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -9,20 +10,16 @@ public class PlayerController : ActorController
 {
 	private ChangeMaterialColor _damageBlink;
 
-	private int _level;
-	private int _exp;
-    private int _maxExp;
+    private readonly int _maxExp = 100;
 
 	private Vector2 _moveInput;
     
 	private float _rotationMultiplier = 40f; // Rotation speed is slower than movement
 	private float _immuneTime = 1.5f;
 
-	private float _blockSpeed = 1f;
-	private float _blockDelay = 0.5f; // Time required from 0 to block
+	private float _speedDelay = 0.5f;
+	private float _blockMovementSpeed = 1f;
 	private float _blockBlendProgress = 0f;
-
-	private float _speedDelay = 0.5f; // Time required from 0 to full speed
 	private float _speedBlendProgress = 0f;
 
 	private uint _attackID = 0; // Used to avoid multiple instances of the same attack
@@ -37,15 +34,22 @@ public class PlayerController : ActorController
 	private bool _initMove = false;
 	private bool _initBlock = false;
 
-	public bool smallDamage = false;
-	public bool hugeDamage = false;
-
 	private Coroutine _blockCoroutine = null;
 	private Coroutine _speedCoroutine = null;
 
 	private CinemachineCamera _mapCamera;
 
-	#region Events
+    // Warp control
+    private MapManager _mapManager;
+    private Vector3 _enterPosition;
+
+    #region Events
+    // Event launched
+	public event Action OnLevelUp;
+	public event Action OnUpgradeSelected;
+	public event Action OnHPChange;
+
+	// Eevent received
 	[Header("Actions")]
 	[SerializeField] private InputActionReference _moveAction;
 	[SerializeField] private InputActionReference _attackAction;
@@ -76,28 +80,23 @@ public class PlayerController : ActorController
 
     private void OnMoveInput(InputAction.CallbackContext context = default)
     {
+		if (HUDController.isBusy) return;
+
 		_moveInput = context.action.ReadValue<Vector2>();
 		MoveAnimation();
-
-		// Modified in future
-		_forward = false;
-		_backWard = false;
-		_left = false;
-		_right = false;
-
-		if (_moveInput.y > 0) _forward = true;
-		if (_moveInput.y < 0) _backWard = true;
-		if (_moveInput.x < 0) _left = true;
-		if (_moveInput.x > 0) _right = true;
 	}
 
     private void OnAttackInput(InputAction.CallbackContext context = default)
     {
+		if (HUDController.isBusy) return;
+
 		Attack();
 	}
 
 	private void OnBlockInput(InputAction.CallbackContext context = default)
 	{
+		if (HUDController.isBusy) return;
+
 		switch (context.phase)
 		{
 			case InputActionPhase.Performed:
@@ -119,19 +118,6 @@ public class PlayerController : ActorController
 
 	private void FixedUpdate()
     {
-		// Tests
-		if (smallDamage)
-		{
-			smallDamage = false;
-			TakeDamage(1);
-		}
-		if (hugeDamage)
-		{
-			hugeDamage = false;
-			TakeDamage(10);
-		}
-		// End of tests
-
 		if (!CanMotion()) return;
 
 		Move();
@@ -167,17 +153,17 @@ public class PlayerController : ActorController
 	{
 		float speedDirection = _moveInput.y < 0 ? _moveInput.y / 2 : _moveInput.y;
 
-		speedDirection *= _blockSpeed * _speedBlendProgress; // Slow down the player when blocking
+		speedDirection *= _blockMovementSpeed * _speedBlendProgress; // Slow down the player when blocking
 
-		rb.MovePosition(rb.position + (transform.forward * speedDirection * stats.MovementSpeed * Time.fixedDeltaTime));
+		rb.MovePosition(rb.position + (transform.forward * speedDirection * stats.Speed * Time.fixedDeltaTime));
 		animator.SetFloat("Speed", _moveInput.y); // Animation works better with input value instead speed
 	}
 
 	private void Rotate()
 	{
-		float rotationAmount = _moveInput.x * stats.MovementSpeed * _rotationMultiplier * Time.fixedDeltaTime;
+		float rotationAmount = _moveInput.x * stats.Speed * _rotationMultiplier * Time.fixedDeltaTime;
 
-		rotationAmount *= _blockSpeed; // Slow down the player when blocking
+		rotationAmount *= _blockMovementSpeed; // Slow down the player when blocking
 		Quaternion turnOffset = Quaternion.Euler(0, rotationAmount, 0);
 		rb.MoveRotation(rb.rotation * turnOffset);
 	}
@@ -189,6 +175,7 @@ public class PlayerController : ActorController
 		if (!CanAttack()) return;
 
 		_isAttacking = true;
+		_attackID++;
 		animator.SetTrigger("Attack");
 		StartCoroutine(AttackCooldown());
 	}
@@ -220,7 +207,7 @@ public class PlayerController : ActorController
 	#region Cooldowns, Delays and Waits
 	IEnumerator LerpBlock(float start, float end)
 	{
-		float duration = _blockDelay;
+		float duration = stats.Bspd;
 		float t = 0f;
 
 		while (t < 1f)
@@ -229,7 +216,7 @@ public class PlayerController : ActorController
 
 			float wbValue = Mathf.Lerp(0f, 0.75f, _blockBlendProgress);
 			float wbbValue = Mathf.Lerp(0f, 0.75f, _blockBlendProgress);
-			_blockSpeed = Mathf.Lerp(1f, 0.75f, _blockBlendProgress);
+			_blockMovementSpeed = Mathf.Lerp(1f, 0.75f, _blockBlendProgress);
 
 			animator.SetFloat("BlendWB", wbValue);
 			animator.SetFloat("BlendWBB", wbbValue);
@@ -274,10 +261,10 @@ public class PlayerController : ActorController
 
     IEnumerator AttackCooldown()
 	{
-		animator.SetFloat("AttackSpeed", stats.Speed);
+		animator.SetFloat("AttackSpeed", stats.Aspd);
 		
 		float attackDuration = animator.GetCurrentAnimatorClipInfo(1)[0].clip.length; // Attack layer 1
-		float actualDuration = attackDuration / stats.Speed;
+		float actualDuration = attackDuration / stats.Aspd;
 		
 		yield return new WaitForSeconds(actualDuration);
 		_isAttacking = false;
@@ -296,8 +283,10 @@ public class PlayerController : ActorController
 	// Let the player be the only one that can heal
 	public void Heal(int amount)
 	{
-		stats.HP += amount;
-		if (stats.HP > stats.MaxHP) stats.HP = stats.MaxHP;
+		int resultHP = stats.HP + amount;
+		if (resultHP > stats.MaxHP) amount = stats.MaxHP - resultHP;
+		
+		ChangeCurrentHP(amount);
 	}
 
 	public void Hit(Transform sourceRef, int damage)
@@ -310,8 +299,10 @@ public class PlayerController : ActorController
 			animator.SetTrigger("Block");
 		else
 		{
-			TakeDamage(damage);
-			rb.AddForce(sourceRef.forward * (damage + 3), ForceMode.Impulse); // currently the +3 is hardcode for testing purposes
+			float radians = sourceAngle * Mathf.Deg2Rad;
+			Vector3 direction = new Vector3(Mathf.Sin(radians), 0, Mathf.Cos(radians));
+            TakeDamage(damage);
+			rb.AddForce(direction * (damage + 3), ForceMode.Impulse); // currently the +3 is hardcode for testing purposes
 		}
 
 	}
@@ -320,12 +311,16 @@ public class PlayerController : ActorController
 	{
 		if (!CanTakeDamage()) return;
 
-		stats.HP -= amount;
-		animator.SetInteger("Damaged", amount);
+        int resultHP = stats.HP - amount;
+        if (resultHP < 0) amount = stats.HP;
+        ChangeCurrentHP(-amount);
+
+        animator.SetInteger("Damaged", amount);
 		
-		if (stats.HP <= 0)
+		if (resultHP <= 0)
 		{
-			stats.HP = 0;
+            gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
 			_isDead = true;
 			animator.SetLayerWeight(1, 0f);
 			animator.SetLayerWeight(2, 0f);
@@ -343,21 +338,27 @@ public class PlayerController : ActorController
 	}
 
 
-	public override void Initialize(ActorData actorData, string name)
+	public void Initialize(ActorData actorData, PlayerData playerData)
     {
-        // Initialize default values
-        base.Initialize(actorData, name);
+		_immuneTime = playerData.immuneTime;
+        base.Initialize(actorData, playerData.nickname);
+		stats.UpdateStats(playerData.stats);
 
-        // Initialize unique player values
-		_level = 1;
-		_exp = 0;
-		_maxExp = 100;
+
 		_damageBlink = GetComponentInChildren<ChangeMaterialColor>();
 	}
-	#endregion
 
-	#region Checks
-	private bool CanMotion()
+
+    public void SetMapManager(MapManager newMapManager)
+    {
+        _mapManager = newMapManager;
+    }
+
+	public float ImmuneTime { get { return _immuneTime; } }
+    #endregion
+
+    #region Checks
+    private bool CanMotion()
 	{
 		// Only skeletons can move when they are dead
 		return !(_isDead);
@@ -383,39 +384,74 @@ public class PlayerController : ActorController
 	}
 	#endregion
 
-	void LevelUp() 
+
+	#region LevelUP system
+	private void LevelUp() 
     {
-        //Level++;
-        //Stats.MaxHP += 10;
-        //health = Stats.MaxHP; 
-        //MaxExperience += 100;
-        //attackPower += 3;
-        //defense += 5;
-    }
+		Stats.Level += 1;
+        ChangeCurrentHP(Stats.MaxHP - Stats.HP);
+        OnLevelUp.Invoke();
+	}
 
     public void GainExperience(int amount) 
     {
-        _exp += amount;
+        Stats.Exp += amount;
         
-		if (_exp >= _maxExp) 
+		if (Stats.Exp >= _maxExp) 
         {
-			_exp = 0;
+            Stats.Exp -= _maxExp;
             LevelUp();
         }
     }
 
-	#region Should be changed
-	private bool _forward = false;
-	private bool _backWard = false;
-	private bool _left = false;
-	private bool _right = false;
-	private MapManager _mapManager;
-	private Vector3 _enterPosition;
+	public void IncreaseAspd()
+	{
+		stats.Aspd *= stats.MulAspd;
+		OnUpgradeSelected.Invoke();
+	}
+	
+	public void IncreaseBspd()
+	{
+		stats.Bspd *= stats.MulBspd;
+		OnUpgradeSelected.Invoke();
+	}
 
+	public void IncreaseHP()
+	{
+		stats.MaxHP += stats.AddHP;
+		OnUpgradeSelected.Invoke();
+	}
+
+	public void IncreaseAtk()
+	{
+		stats.Attack += stats.AddAttack;
+		OnUpgradeSelected.Invoke();
+	}
+
+	public void IncreaseSpeed()
+	{
+		stats.Speed *= stats.MulSpeed;
+		OnUpgradeSelected.Invoke();
+	}
+
+	public void IncreaseImmunity()
+	{
+		_immuneTime++;
+		OnUpgradeSelected.Invoke();
+	}
+
+	public void LowerAtkCD()
+	{
+		stats.AtkDelay *= stats.MulAtkDelay;
+		OnUpgradeSelected.Invoke();
+	}
+	#endregion
+
+	#region Triggers & Collisions
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.TryGetComponent<EnemyController>(out EnemyController enemy))
-			enemy.TakeDamage(_attackID++, 1);
+			enemy.TakeDamage(_attackID, 1);
 		
 		if (other.gameObject.TryGetComponent<WarpData>(out WarpData warp))
 		{
@@ -427,37 +463,30 @@ public class PlayerController : ActorController
 	// This code have a lesser misstake, my test scenario is reversed so X and Z are positive when should be negative
 	private void OnTriggerExit(Collider other)
 	{
-		WarpData warp = other.GetComponentInChildren<WarpData>();
-		if (warp == null) return;
+		if (other.gameObject.TryGetComponent<WarpData>(out WarpData warp))
+		{
 
+			float offset = 1.1f;
+			warp.GetComponentInChildren<Animator>().SetTrigger("Out");
 
-		float offset = 1.1f;
-		other.GetComponentInChildren<Animator>()?.SetTrigger("Out");
+			Vector3 position = transform.position;
+			Vector2Int direction = warp.Direction;
 
-		Vector3 position = transform.position;
-		Vector2Int direction = warp.Direction;
+			bool shouldWarp =
+				(direction == Vector2Int.up && _enterPosition.z * offset < position.z) ||
+				(direction == Vector2Int.down && _enterPosition.z * offset > position.z) ||
+				(direction == Vector2Int.right && _enterPosition.x * offset < position.x) ||
+				(direction == Vector2Int.left && _enterPosition.x * offset > position.x);
 
-		bool shouldWarp =
-			(direction == Vector2Int.up && _enterPosition.z * offset < position.z) ||
-			(direction == Vector2Int.down && _enterPosition.z * offset > position.z) ||
-			(direction == Vector2Int.right && _enterPosition.x * offset < position.x) ||
-			(direction == Vector2Int.left && _enterPosition.x * offset > position.x);
-
-		if (shouldWarp)
-			_mapManager.ChangeScene(warp.NewRoom, direction);
+			if (shouldWarp)
+				_mapManager.ChangeScene(warp.NewRoom, direction);
+		}
 	}
+    #endregion
 
-	public void ChangeScene()
+	private void ChangeCurrentHP(int amount)
 	{
-		_backWard = false;
-		_forward = false;
-		_left = false;
-		_right = false;
+		Stats.HP += amount;
+		OnHPChange.Invoke();
 	}
-
-	public void SetMapManager(MapManager newMapManager)
-	{
-		_mapManager = newMapManager;
-	}
-	#endregion
 }

@@ -5559,6 +5559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d419aee0fd36146b583565578bda40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spellDamage: 1
 --- !u!135 &1070565208334518070
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5572,7 +5573,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 503
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -5655,15 +5656,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e059b01a1d986064fa1f4b23b29e7049, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000021855694
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e059b01a1d986064fa1f4b23b29e7049, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e059b01a1d986064fa1f4b23b29e7049, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e059b01a1d986064fa1f4b23b29e7049, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
