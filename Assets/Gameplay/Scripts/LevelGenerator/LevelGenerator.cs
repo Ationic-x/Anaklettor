@@ -258,6 +258,11 @@ public class LevelGenerator : MonoBehaviour
 	{
 		get { return _visitedRooms.Count; }
 	}
+
+    public int RoomDifficulty()
+    {
+        return (int)Mathf.Floor(Vector2Int.Distance(_origin, _playerCurrentRoom));
+    }
 	#endregion
 
 	#region Debug
