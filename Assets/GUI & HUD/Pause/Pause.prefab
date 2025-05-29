@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5017860122588388496}
   - component: {fileID: 8233843901373903541}
   - component: {fileID: 1170765201242256436}
-  - component: {fileID: 7946096241867176195}
   m_Layer: 5
   m_Name: Accept
   m_TagString: Untagged
@@ -122,30 +121,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7946096241867176195}
-        m_TargetAssemblyTypeName: CambiarEscena, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 1
+      - m_Target: {fileID: 9109015920711322214}
+        m_TargetAssemblyTypeName: ChangeSceneController, Assembly-CSharp
+        m_MethodName: ChangeSceneInGame
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Menus
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7946096241867176195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 188125929589114512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89cb3486f9bd0cb469774055b2a57d68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &348746850898478223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,6 +1687,7 @@ GameObject:
   - component: {fileID: 7863900504816431956}
   - component: {fileID: 2147652600110468488}
   - component: {fileID: 2247493354105862996}
+  - component: {fileID: 9109015920711322214}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -1764,6 +1752,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9109015920711322214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8971929317390803152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89cb3486f9bd0cb469774055b2a57d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7764442008826434512
 PrefabInstance:
   m_ObjectHideFlags: 0

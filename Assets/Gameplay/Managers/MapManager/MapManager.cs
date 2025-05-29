@@ -23,6 +23,11 @@ public class MapManager : MonoBehaviour
 		}
 	}
 
+	private void OnDisable()
+	{
+		LevelGenerator.OnLevelGeneratorReady -= Initialize;
+	}
+
 	private void Initialize()
 	{
 		_levelInstance = LevelGenerator.Instance;
