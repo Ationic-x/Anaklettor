@@ -1729,7 +1729,7 @@ GameObject:
   - component: {fileID: 1051292402}
   - component: {fileID: 1051292404}
   m_Layer: 0
-  m_Name: VolumenManager
+  m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
