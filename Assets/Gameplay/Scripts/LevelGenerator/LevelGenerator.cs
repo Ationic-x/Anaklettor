@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 
@@ -37,9 +36,6 @@ public class LevelGenerator : MonoBehaviour
 
 	// Player Information
 	private Vector2Int _playerCurrentRoom;
-    private Vector3 _playerPosition;
-    private Quaternion _playerRotation;
-    private Vector2Int _moveDirection = Vector2Int.zero;
 
     // GameData
     private Dictionary<Vector2Int, RoomData> _roomMap = new();
@@ -68,7 +64,12 @@ public class LevelGenerator : MonoBehaviour
 		OnLevelGeneratorReady?.Invoke();
 	}
 
-    private int[,] GenerateMap(int width, int height, Vector2Int origin, int steps)
+	public void DestroyInstance()
+	{
+		DestroyImmediate(gameObject);
+	}
+
+	private int[,] GenerateMap(int width, int height, Vector2Int origin, int steps)
     {
         _playerCurrentRoom = origin;
 

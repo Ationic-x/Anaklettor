@@ -1,13 +1,18 @@
 using UnityEngine;
 
-public class MenuPausa : MonoBehaviour
+public class PauseGUIController : MonoBehaviour
 {
-    public GameObject menuPausa;
 
     private bool isPaused = false;
+    private Animator _animator;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
+    // This should use input map fix in future
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -22,17 +27,17 @@ public class MenuPausa : MonoBehaviour
         }
     }
 
-    public void PauseGame()
+    private void PauseGame()
     {
         Time.timeScale = 0;
-        menuPausa.SetActive(true);
+        _animator.SetTrigger("In");
         isPaused = true;
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1;
-        menuPausa.SetActive(false);
+        _animator.SetTrigger("Out");
         isPaused = false;
     }
 }

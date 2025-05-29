@@ -51,8 +51,6 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: 6f1357e5ce897224e864dbfef724a299, type: 2}
   _listEnemies:
     entries:
-    - Key: 3
-      Value: {fileID: 11400000, guid: 59f022792852399438f6433a5798435a, type: 2}
     - Key: 0
       Value: {fileID: 11400000, guid: 0daae3fb783ebcb42aaaf7cc0c12b751, type: 2}
   _spawnRules: {fileID: 11400000, guid: dd6445d40dde5f34380a995aef080ffa, type: 2}
