@@ -1,8 +1,16 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
+
+
+public static class AudioMathHelper {
+    public static float ToDecibels(float v) {
+        if (v <= 0) return -80f;
+        return (float)(Math.Log10(v) * 20);
+	}
+}
 
 /// <summary>
 /// AudioManager gestiona la reproducción de sonidos en el juego.
@@ -12,17 +20,27 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [Range(0, 1)] public float masterVolume;
+	[Header("Volume")]
+	[Range(0, 1)] public float masterVolume;
     [Range(0, 1)] public float musicVolume;
     [Range(0, 1)] public float sfxVolume;
     [Range(0, 1)] public float uiVolume;
 
+    [Header("AudioMixers")]
     public AudioMixer audioMixer;
     public AudioMixerGroup musicAudioGroup;
     public AudioMixerGroup sfxAudioGroup;
     public AudioMixerGroup uiAudioGroup;
 
-    [Tooltip("List of SoundLibs")]
+    [Header("Sliders")]
+    public Slider masterSlider;
+	public Slider musicSlider;
+	public Slider sfxSlider;
+	public Slider uiSlider;
+
+
+
+	[Tooltip("List of SoundLibs")]
     public List<SoundLib> soundLibsList;
 
     private Dictionary<string, (AudioClip clip, SoundCategory category)> globalSoundDictionary;
@@ -54,18 +72,12 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// Método Update se ejecuta una vez por frame.
-    /// En este caso, se utiliza para actualizar dinámicamente los volúmenes de las categorías de sonido
-    /// (Music, SFX, UI) en función de los valores configurados en el inspector.
-    /// </summary>
-    private void Update()
-    {
-        SetMasterVolume(masterVolume);
-        SetMusicVolume(musicVolume);
-        SetSfxVolume(sfxVolume);
-        SetUiVolume(uiVolume);
-    }
+
+	private void Start()
+	{
+        LoadAllVolumeSettings();
+	}
+
 
     /// <summary>
     /// Reproduce un sonido específico por su nombre. 
@@ -171,66 +183,119 @@ public class AudioManager : MonoBehaviour
     }
     public void SetMasterVolume(float volume)
     {
-        if (volume == 0)
-        {
-            audioMixer.SetFloat("MasterVolume", -80.0f);
-        }
-        else
-        {
-            audioMixer.SetFloat("MasterVolume", (float)(Math.Log10(volume) * 20));
-        }
-    }
-    /// <summary>
-    /// Ajusta el volumen de la música en el AudioMixer.
-    /// </summary>
-    /// <param name="volume">El volumen de la música, un valor entre 0.0 (silencio) y 1.0 (volumen máximo).</param>
-    public void SetMusicVolume(float volume)
+        masterVolume = volume;
+		audioMixer.SetFloat("MasterVolume", AudioMathHelper.ToDecibels(masterVolume));
+        SaveMasterVolumeSettings();
+
+        if(masterSlider!=null) masterSlider.value = masterVolume;
+	}
+	/// <summary>
+	/// Ajusta el volumen de la música en el AudioMixer.
+	/// </summary>
+	/// <param name="volume">El volumen de la música, un valor entre 0.0 (silencio) y 1.0 (volumen máximo).</param>
+	public void SetMusicVolume(float volume)
     {
-        if (volume == 0)
-        {
-            audioMixer.SetFloat("MusicVolume", -80.0f);
-        }
-        else
-        {
-            audioMixer.SetFloat("MusicVolume", (float)(Math.Log10(volume) * 20));
-        }
-    }
-    /// <summary>
-    /// Ajusta el volumen de los efectos de sonido (SFX) en el AudioMixer.
-    /// </summary>
-    /// <param name="volume">El volumen de los efectos de sonido, un valor entre 0.0 (silencio) y 1.0 (volumen máximo).</param>
-    public void SetSfxVolume(float volume)
+        musicVolume = volume;
+		audioMixer.SetFloat("MusicVolume", AudioMathHelper.ToDecibels(musicVolume));
+		SaveMusicVolumeSettings();
+		if (musicSlider != null) musicSlider.value = musicVolume;
+	}
+	/// <summary>
+	/// Ajusta el volumen de los efectos de sonido (SFX) en el AudioMixer.
+	/// </summary>
+	/// <param name="volume">El volumen de los efectos de sonido, un valor entre 0.0 (silencio) y 1.0 (volumen máximo).</param>
+	public void SetSfxVolume(float volume)
     {
-        if (volume == 0)
-        {
-            audioMixer.SetFloat("SFXVolume", -80.0f);
-        }
-        else
-        {
-            audioMixer.SetFloat("SFXVolume", (float)(Math.Log10(volume) * 20));
-        }
-    }
-    /// <summary>
-    /// Ajusta el volumen de los sonidos de la interfaz de usuario (UI) en el AudioMixer.
-    /// </summary>
-    /// <param name="volume">El volumen de los sonidos de la interfaz de usuario, un valor entre 0.0 (silencio) y 1.0 (volumen máximo).</param>
-    public void SetUiVolume(float volume)
+        sfxVolume = volume;
+		audioMixer.SetFloat("SFXVolume", AudioMathHelper.ToDecibels(sfxVolume));
+		SaveSFXVolumeSettings();
+		if (sfxSlider != null) sfxSlider.value = sfxVolume;
+
+	}
+	/// <summary>
+	/// Ajusta el volumen de los sonidos de la interfaz de usuario (UI) en el AudioMixer.
+	/// </summary>
+	/// <param name="volume">El volumen de los sonidos de la interfaz de usuario, un valor entre 0.0 (silencio) y 1.0 (volumen máximo).</param>
+	public void SetUiVolume(float volume)
     {
-        if (volume == 0)
-        {
-            audioMixer.SetFloat("UIVolume", -80.0f);
-        }
-        else
-        {
-            audioMixer.SetFloat("UIVolume", (float)(Math.Log10(volume) * 20));
-        }
+        uiVolume = volume;
+		audioMixer.SetFloat("UIVolume", AudioMathHelper.ToDecibels(uiVolume));
+		SaveUIVolumeSettings();
+		if (uiSlider != null) uiSlider.value = uiVolume;
+	}
+
+	public void LoadAllVolumeSettings() { 
+        LoadMasterVolumeSettings();
+        LoadMusicVolumeSettings();
+        LoadSFXVolumeSettings();
+        LoadUIVolumeSettings();
     }
-    /// <summary>
-    /// Obtiene el grupo de mezcla (`AudioMixerGroup`) correspondiente a la categoría de sonido especificada.
-    /// </summary>
-    /// <param name="category">La categoría del sonido (Music, SFX, UI).</param>
-    /// <returns>El `AudioMixerGroup` asociado a la categoría, o `null` si no se encuentra una coincidencia.</returns>
-    private AudioMixerGroup GetGroup(SoundCategory category)
+
+    public void SaveAllVolumeSettings() {
+        SaveMasterVolumeSettings();
+        SaveMusicVolumeSettings();
+        SaveSFXVolumeSettings();
+        SaveUIVolumeSettings();
+    }
+
+    public void LoadMasterVolumeSettings() {
+        SetMasterVolume(PlayerPrefs.GetFloat("MasterVolume"));
+	}
+
+	public void LoadMusicVolumeSettings()
+	{
+		SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume"));
+	}
+
+	public void LoadSFXVolumeSettings()
+	{
+		SetSfxVolume(PlayerPrefs.GetFloat("SFXVolume"));
+	}
+
+	public void LoadUIVolumeSettings()
+	{
+		SetUiVolume(PlayerPrefs.GetFloat("UIVolume"));
+	}
+
+	public void SaveMasterVolumeSettings() {
+        PlayerPrefs.SetFloat("MasterVolume", masterVolume);
+        PlayerPrefs.Save();
+    }
+
+	public void SaveMusicVolumeSettings()
+	{
+		PlayerPrefs.SetFloat("MusicVolume", musicVolume);
+        PlayerPrefs.Save();
+	}
+
+	public void SaveSFXVolumeSettings()
+	{
+		PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
+        PlayerPrefs.Save();
+	}
+
+	public void SaveUIVolumeSettings()
+	{
+		PlayerPrefs.SetFloat("UIVolume", uiVolume);
+        PlayerPrefs.Save();
+	}
+
+	private void OnValidate()
+	{
+        masterVolume = masterVolume;
+        musicVolume = musicVolume;
+        sfxVolume = sfxVolume;
+        uiVolume = uiVolume;
+
+        SaveAllVolumeSettings();
+	}
+
+	/// <summary>
+	/// Obtiene el grupo de mezcla (`AudioMixerGroup`) correspondiente a la categoría de sonido especificada.
+	/// </summary>
+	/// <param name="category">La categoría del sonido (Music, SFX, UI).</param>
+	/// <returns>El `AudioMixerGroup` asociado a la categoría, o `null` si no se encuentra una coincidencia.</returns>
+	private AudioMixerGroup GetGroup(SoundCategory category)
     {
         return category switch
         {
