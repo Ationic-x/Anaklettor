@@ -42,7 +42,8 @@ public class LifeGUIController: MonoBehaviour
 
     private void OnDisable()
     {
-        _player.OnHPChange -= UpdateHP;
+        if (_player != null)
+			_player.OnHPChange -= UpdateHP;
     }
 
     public void UpdateHP()
@@ -58,7 +59,7 @@ public class LifeGUIController: MonoBehaviour
             _animator.SetTrigger("Out");
     }
 
-    IEnumerator LerpHP(float start, float end)
+    private IEnumerator LerpHP(float start, float end)
     {
         float duration = _fillDuration;
         float t = 0f;

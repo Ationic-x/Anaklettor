@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153e48faea1a5364c84b3728a9984305, type: 3}
+  m_Name: SFX_Player_Knight
+  m_EditorClassIdentifier: 
+  soundEntries:
+  - soundName: snd_knight_talk
+    clip: {fileID: 0}
+    category: 0
+  - soundName: snd_knight_slash
+    clip: {fileID: 8300000, guid: fc1d2ef98dac46c4f8b918464a816e37, type: 3}
+    category: 0
+  - soundName: snd_knight_step
+    clip: {fileID: 8300000, guid: 023ea3ddeaa8dd146b7633a0800e5a0e, type: 3}
+    category: 0
+  - soundName: snd_knight_death1
+    clip: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
+    category: 0
+  - soundName: snd_knight_hit
+    clip: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
+    category: 0
+  - soundName: snd_knight_blow
+    clip: {fileID: 0}
+    category: 0

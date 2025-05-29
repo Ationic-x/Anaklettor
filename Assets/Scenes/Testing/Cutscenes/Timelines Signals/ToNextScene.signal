@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 153e48faea1a5364c84b3728a9984305, type: 3}
-  m_Name: SFX_Player
+  m_Script: {fileID: 11500000, guid: d6fa2d92fc1b3f34da284357edf89c3b, type: 3}
+  m_Name: ToNextScene
   m_EditorClassIdentifier: 
-  soundEntries:
-  - soundName: snd_chara_atk
-    clip: {fileID: 8300000, guid: 987c29b725c58d344b13fb2989e9e5f6, type: 3}

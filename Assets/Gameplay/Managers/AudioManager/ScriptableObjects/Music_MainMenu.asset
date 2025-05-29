@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153e48faea1a5364c84b3728a9984305, type: 3}
+  m_Name: Music_MainMenu
+  m_EditorClassIdentifier: Assembly-CSharp::SoundLib
+  soundEntries:
+  - soundName: mus_mm1
+    clip: {fileID: 8300000, guid: 59b884963029b4d4090e9e7f5ca566ec, type: 3}
+    category: 1
+  - soundName: mus_mm2
+    clip: {fileID: 8300000, guid: 99370f302743b14439c37aa1a3682e9d, type: 3}
+    category: 1
+  - soundName: mus_mm3
+    clip: {fileID: 8300000, guid: 5c9d5e8f61e647d43a757a2789f10735, type: 3}
+    category: 1
+  - soundName: mus_mm4
+    clip: {fileID: 8300000, guid: 303716da72bbe874cb61066bcb28e1c3, type: 3}
+    category: 1

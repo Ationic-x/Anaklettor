@@ -48,6 +48,7 @@ public class PlayerController : ActorController
 	public event Action OnLevelUp;
 	public event Action OnUpgradeSelected;
 	public event Action OnHPChange;
+	public event Action OnPlayerDied;
 
 	// Eevent received
 	[Header("Actions")]
@@ -319,7 +320,8 @@ public class PlayerController : ActorController
 		
 		if (resultHP <= 0)
 		{
-            gameObject.GetComponent<Rigidbody>().isKinematic = true;
+			OnPlayerDied.Invoke();
+			gameObject.GetComponent<Rigidbody>().isKinematic = true;
             gameObject.GetComponent<BoxCollider>().enabled = false;
 			_isDead = true;
 			animator.SetLayerWeight(1, 0f);

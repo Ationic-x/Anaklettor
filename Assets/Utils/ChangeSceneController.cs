@@ -1,13 +1,36 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class ChangeSceneController: MonoBehaviour
 {
-    #region Methods
-    public void ChangeScene(string SeneName)
+    public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene(SeneName);
+        SceneManager.LoadScene(sceneName);
     }
 
-    #endregion
+	public void ChangeSceneInGame(string sceneName)
+	{
+		StartCoroutine(DestroyLevelInstance(sceneName));
+	}
+
+	private IEnumerator DestroyLevelInstance(string sceneName)
+	{
+
+		LevelGenerator levelGO;
+		do
+		{
+			levelGO = FindFirstObjectByType<LevelGenerator>();
+			yield return null;
+		} while (levelGO == null);
+		levelGO.DestroyInstance();
+		
+		while (LevelGenerator.Instance != null)
+		{
+			yield return null;
+		}
+		yield return new WaitForSeconds(0.5f); // small delay
+
+		SceneManager.LoadScene(sceneName);
+	}
 }
