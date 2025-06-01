@@ -28,6 +28,22 @@ public static class SoundsNames
 
     #endregion
 
+    #region Anakletor
+
+    public const string AnakletorTalk = "snd_anakletor_talk";
+    public const string AnakletorDeath = "snd_anakletor_death";
+    public const string AnakletorVoiceDeath = "snd_anakletor_voice_death";
+    public const string AnakletorComplain1 = "snd_anakletor_voice_complain1";
+    public const string AnakletorComplain2 = "snd_anakletor_voice_complain2";
+    public const string AnakletorSlash = "snd_anakletor_slash";
+    public const string AnakletorStep = "snd_anakletor_step";
+    public const string AnakletorHit = "snd_anakletor_hit";
+    public const string AnakletorShootSpell = "snd_anakletor_shootspell";
+    public const string AnakletorShootArrow = "snd_anakletor_shootarrow";
+    public const string AnakletorSpellExplosion = "snd_anakletor_spellexplosion";
+
+    #endregion END Anakletor
+
     #region Skeletons
 
     public const string SkeletonTalk = "snd_skeleton_talk";
