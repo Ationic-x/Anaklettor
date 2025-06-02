@@ -11,9 +11,38 @@ public class Player_Knight_SoundControllerEventBridge : MonoBehaviour
         _audioManager = FindAnyObjectByType<AudioManager>();
     }
 
+    public void Talk()
+    {
+        _audioManager.Play3D(SoundsNames.KnightVTalk, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.33f);
+    }
+
+    public void Attack()
+    {
+        _audioManager.Play3D(SoundsNames.KnightVAttack, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.33f);
+    }
+
+    public void ChargedAttack()
+    {
+        _audioManager.Play3D(SoundsNames.KnightVCharged, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.33f);
+    }
+
+    public void Fanfarre()
+    {
+        _audioManager.Play3D(SoundsNames.KnightVFanfarre, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.33f);
+    }
+
+    public void SwordSlash()
+    {
+        _audioManager.Play3D(SoundsNames.KnightSlash, this.transform.gameObject, pitch: RandomPitch(1f, 2f), volume: 0.5f);
+    }
+
     public void SwordBlow()
     {
         _audioManager.Play3D(SoundsNames.KnightBlow, this.transform.gameObject, pitch: RandomPitch(1f, 2f), volume: 0.5f);
+    }
+    public void Block()
+    {
+        _audioManager.Play3D(SoundsNames.KnightBlock, this.transform.gameObject, pitch: RandomPitch(1f, 2f), volume: 0.5f);
     }
 
     public void Death()
@@ -26,17 +55,14 @@ public class Player_Knight_SoundControllerEventBridge : MonoBehaviour
         _audioManager.Play3D(SoundsNames.KnightHit, this.transform.gameObject, pitch: RandomPitch(1.2f, 2f), playIfAlreadyPlaying: true);
     }
 
-    public void Step()
+    public void StepLeft()
     {
-        _audioManager.Play3D(SoundsNames.KnightStep, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.5f, playIfAlreadyPlaying: true);
+        _audioManager.Play3D(SoundsNames.KnightStepLeft, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.5f, playIfAlreadyPlaying: true);
     }
-
-    //FIX Cambiar el sonido por uno mas corto
-    public void Search()
+    public void StepRight()
     {
-        //_audioManager.Play3D(SoundsNames.SkeletonTalk, this.transform.gameObject);
+        _audioManager.Play3D(SoundsNames.KnightStepRight, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.5f, playIfAlreadyPlaying: true);
     }
-
 
     public float RandomPitch(float min = 0.9f, float max = 1.1f)
     {

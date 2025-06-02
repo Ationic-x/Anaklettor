@@ -13,17 +13,20 @@ MonoBehaviour:
   m_Name: SFX_Player_Knight
   m_EditorClassIdentifier: 
   soundEntries:
-  - soundName: snd_knight_talk
-    clip: {fileID: 8300000, guid: 9277691861addb0418e78f9459789eae, type: 3}
-    category: 0
-  - soundName: snd_knight_slash
-    clip: {fileID: 8300000, guid: fc1d2ef98dac46c4f8b918464a816e37, type: 3}
-    category: 0
   - soundName: snd_knight_voice_attack
     clip: {fileID: 8300000, guid: 0ee5db39e63fa214daa00d95d254aef3, type: 3}
     category: 0
   - soundName: snd_knight_voice_charged
     clip: {fileID: 8300000, guid: 52930aa885e88b14a857945ce0c21133, type: 3}
+    category: 0
+  - soundName: snd_knight_voice_talk
+    clip: {fileID: 8300000, guid: 9277691861addb0418e78f9459789eae, type: 3}
+    category: 0
+  - soundName: snd_knight_voice_fanfarre
+    clip: {fileID: 8300000, guid: 32c0816947718764582c074be548b3cb, type: 3}
+    category: 0
+  - soundName: snd_knight_slash
+    clip: {fileID: 8300000, guid: fc1d2ef98dac46c4f8b918464a816e37, type: 3}
     category: 0
   - soundName: snd_knight_step1
     clip: {fileID: 8300000, guid: df13435a990a8bc4bb1fa534c1d238b4, type: 3}
@@ -38,8 +41,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
     category: 0
   - soundName: snd_knight_blow
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: b30fd506158a3114094d1f968807a354, type: 3}
     category: 0
-  - soundName: snd_knight_voice_fanfarre
-    clip: {fileID: 8300000, guid: 32c0816947718764582c074be548b3cb, type: 3}
+  - soundName: snd_knight_block
+    clip: {fileID: 8300000, guid: b7b5a6156961bac44a67504d42ce6fcf, type: 3}
     category: 0
