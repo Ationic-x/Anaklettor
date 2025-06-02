@@ -605,7 +605,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -630,8 +630,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &63045283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -715,11 +715,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &63045287
 CapsuleCollider:
@@ -740,10 +740,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1 &68214285
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,11 +997,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &91726320
 CapsuleCollider:
@@ -1022,10 +1022,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &101798690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1109,11 +1109,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &101798694
 CapsuleCollider:
@@ -1134,10 +1134,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &103767628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1221,11 +1221,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.32000002, y: 0.46300003, z: 0.32000002}
+  m_Extents: {x: 0.05, y: 0.5, z: 0.05}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.46300003, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
 --- !u!65 &103767632
 BoxCollider:
@@ -1246,8 +1246,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.64002013, y: 0.92519176, z: 0.64002013}
-  m_Center: {x: 0, y: 0.46259582, z: -0.000000029802322}
+  m_Size: {x: 0.65, y: 1, z: 0.65}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &111774680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1393,11 +1393,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 2.38, y: 3.7380002, z: 2.0770001}
+  m_Extents: {x: 1.2, y: 3.75, z: 1.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.017, y: 3.183, z: 0.001}
+  m_Center: {x: 0, y: 3.2, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &113148664
 CapsuleCollider:
@@ -1505,11 +1505,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 2.38, y: 3.7380002, z: 2.0770001}
+  m_Extents: {x: 1.2, y: 3.75, z: 1.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.017, y: 3.183, z: 0.001}
+  m_Center: {x: 0, y: 3.2, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &121859242
 CapsuleCollider:
@@ -1774,11 +1774,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 2.38, y: 3.7380002, z: 2.0770001}
+  m_Extents: {x: 1.2, y: 3.75, z: 1.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.017, y: 3.183, z: 0.001}
+  m_Center: {x: 0, y: 3.2, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &171592006
 CapsuleCollider:
@@ -2060,11 +2060,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.32000002, y: 0.46300003, z: 0.32000002}
+  m_Extents: {x: 0.05, y: 0.5, z: 0.05}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.46300003, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
 --- !u!65 &214319073
 BoxCollider:
@@ -2085,8 +2085,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.64002013, y: 0.92519176, z: 0.64002013}
-  m_Center: {x: 0, y: 0.46259582, z: -0.000000029802322}
+  m_Size: {x: 0.65, y: 1, z: 0.65}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &258786308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2294,11 +2294,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &261654073
 CapsuleCollider:
@@ -2319,10 +2319,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &266124690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2658,7 +2658,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.004, y: 1.6500001, z: 0}
+  m_Center: {x: 0, y: 1.6500001, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &296604750
 CapsuleCollider:
@@ -2682,7 +2682,7 @@ CapsuleCollider:
   m_Radius: 0.212
   m_Height: 3.3
   m_Direction: 1
-  m_Center: {x: -0.004, y: 1.65, z: 0}
+  m_Center: {x: 0, y: 1.65, z: 0}
 --- !u!1001 &321453008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2766,7 +2766,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -2791,8 +2791,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &339521102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2876,11 +2876,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &339521106
 CapsuleCollider:
@@ -2901,10 +2901,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &347588406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3129,7 +3129,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -3154,8 +3154,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &373093542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3301,11 +3301,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &375094696
 CapsuleCollider:
@@ -3326,10 +3326,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &384828942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3599,7 +3599,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -3624,8 +3624,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &427896833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3771,11 +3771,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &467752806
 CapsuleCollider:
@@ -3796,10 +3796,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &469306647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3883,11 +3883,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &469306651
 CapsuleCollider:
@@ -3908,10 +3908,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &474611311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4342,7 +4342,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -4367,8 +4367,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &486729039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5663,7 +5663,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -5688,8 +5688,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &663755797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5897,7 +5897,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -5922,8 +5922,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &766562336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6007,11 +6007,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 2.38, y: 3.7380002, z: 2.0770001}
+  m_Extents: {x: 1.2, y: 3.75, z: 1.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.017, y: 3.183, z: 0.001}
+  m_Center: {x: 0, y: 3.2, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &766562340
 CapsuleCollider:
@@ -6300,7 +6300,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -6325,8 +6325,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &810496316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6673,7 +6673,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -6698,8 +6698,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &874346481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6840,7 +6840,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -6865,8 +6865,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &888241640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7279,7 +7279,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -7304,8 +7304,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &943620845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7451,7 +7451,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -7476,8 +7476,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &960554123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7747,7 +7747,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -7772,8 +7772,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &988748487
 GameObject:
   m_ObjectHideFlags: 0
@@ -8402,7 +8402,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.004, y: 1.6500001, z: 0}
+  m_Center: {x: 0, y: 1.6500001, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1051589703
 CapsuleCollider:
@@ -8426,7 +8426,7 @@ CapsuleCollider:
   m_Radius: 0.212
   m_Height: 3.3
   m_Direction: 1
-  m_Center: {x: -0.004, y: 1.65, z: 0}
+  m_Center: {x: 0, y: 1.65, z: 0}
 --- !u!1001 &1056848902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8510,11 +8510,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 2.38, y: 3.7380002, z: 2.0770001}
+  m_Extents: {x: 1.2, y: 3.75, z: 1.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.017, y: 3.183, z: 0.001}
+  m_Center: {x: 0, y: 3.2, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1056848906
 CapsuleCollider:
@@ -8808,11 +8808,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.32000002, y: 0.46300003, z: 0.32000002}
+  m_Extents: {x: 0.05, y: 0.5, z: 0.05}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.46300003, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
 --- !u!65 &1140876560
 BoxCollider:
@@ -8833,8 +8833,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.64002013, y: 0.92519176, z: 0.64002013}
-  m_Center: {x: 0, y: 0.46259582, z: -0.000000029802322}
+  m_Size: {x: 0.65, y: 1, z: 0.65}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &1162564399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8918,7 +8918,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -8943,8 +8943,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &1167665209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9090,7 +9090,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -9115,8 +9115,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &1191272096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9262,7 +9262,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -9287,8 +9287,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &1217558462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9372,11 +9372,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 2.38, y: 3.7380002, z: 2.0770001}
+  m_Extents: {x: 1.2, y: 3.75, z: 1.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.017, y: 3.183, z: 0.001}
+  m_Center: {x: 0, y: 3.2, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1217558466
 CapsuleCollider:
@@ -9484,11 +9484,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.32000002, y: 0.46300003, z: 0.32000002}
+  m_Extents: {x: 0.05, y: 0.5, z: 0.05}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.46300003, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
 --- !u!65 &1237846701
 BoxCollider:
@@ -9509,8 +9509,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.64002013, y: 0.92519176, z: 0.64002013}
-  m_Center: {x: 0, y: 0.46259582, z: -0.000000029802322}
+  m_Size: {x: 0.65, y: 1, z: 0.65}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &1239846640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9691,11 +9691,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.6650001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1250812334
 CapsuleCollider:
@@ -9716,10 +9716,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &1253663005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10097,7 +10097,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -10122,8 +10122,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &1290717338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10269,11 +10269,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.32000002, y: 0.46300003, z: 0.32000002}
+  m_Extents: {x: 0.05, y: 0.5, z: 0.05}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.46300003, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
 --- !u!65 &1301586539
 BoxCollider:
@@ -10294,8 +10294,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.64002013, y: 0.92519176, z: 0.64002013}
-  m_Center: {x: 0, y: 0.46259582, z: -0.000000029802322}
+  m_Size: {x: 0.65, y: 1, z: 0.65}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &1310274042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10442,11 +10442,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 2.38, y: 3.7380002, z: 2.0770001}
+  m_Extents: {x: 1.2, y: 3.75, z: 1.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.017, y: 3.183, z: 0.001}
+  m_Center: {x: 0, y: 3.2, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1338090866
 CapsuleCollider:
@@ -10616,11 +10616,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1342429821
 CapsuleCollider:
@@ -10641,10 +10641,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &1354124833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10901,7 +10901,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.004, y: 1.6500001, z: 0}
+  m_Center: {x: 0, y: 1.6500001, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1390347444
 CapsuleCollider:
@@ -10925,7 +10925,7 @@ CapsuleCollider:
   m_Radius: 0.212
   m_Height: 3.3
   m_Direction: 1
-  m_Center: {x: -0.004, y: 1.65, z: 0}
+  m_Center: {x: 0, y: 1.65, z: 0}
 --- !u!1001 &1406468121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11133,11 +11133,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.32000002, y: 0.46300003, z: 0.32000002}
+  m_Extents: {x: 0.05, y: 0.5, z: 0.05}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.46300003, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
 --- !u!65 &1445853048
 BoxCollider:
@@ -11158,8 +11158,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.64002013, y: 0.92519176, z: 0.64002013}
-  m_Center: {x: 0, y: 0.46259582, z: -0.000000029802322}
+  m_Size: {x: 0.65, y: 1, z: 0.65}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &1452982247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11243,11 +11243,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1452982251
 CapsuleCollider:
@@ -11268,10 +11268,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &1454944280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11417,11 +11417,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1461218740
 CapsuleCollider:
@@ -11442,10 +11442,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &1473433119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11936,11 +11936,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1520596853
 CapsuleCollider:
@@ -11961,10 +11961,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &1522799578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12353,11 +12353,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1568218822
 CapsuleCollider:
@@ -12378,10 +12378,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &1571088860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12527,11 +12527,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1572040376
 CapsuleCollider:
@@ -12552,10 +12552,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &1598238422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12825,7 +12825,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -12850,8 +12850,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &1727599753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13178,7 +13178,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -13203,8 +13203,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &1852447464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13457,7 +13457,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -13482,8 +13482,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &1876221752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13691,11 +13691,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.32000002, y: 0.46300003, z: 0.32000002}
+  m_Extents: {x: 0.05, y: 0.5, z: 0.05}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.46300003, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
 --- !u!65 &1894236855
 BoxCollider:
@@ -13716,8 +13716,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.64002013, y: 0.92519176, z: 0.64002013}
-  m_Center: {x: 0, y: 0.46259582, z: -0.000000029802322}
+  m_Size: {x: 0.65, y: 1, z: 0.65}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &1901739089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13987,11 +13987,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 2.38, y: 3.7380002, z: 2.0770001}
+  m_Extents: {x: 1.2, y: 3.75, z: 1.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.017, y: 3.183, z: 0.001}
+  m_Center: {x: 0, y: 3.2, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &1964570524
 CapsuleCollider:
@@ -14347,7 +14347,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -14372,8 +14372,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &2018357502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14519,11 +14519,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 1.6650001, y: 2.936, z: 1.5600001}
+  m_Extents: {x: 0.3, y: 2.1, z: 0.3}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.012, y: 2.456, z: 0.20600002}
+  m_Center: {x: 0, y: 1.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &2019303638
 CapsuleCollider:
@@ -14544,10 +14544,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.664951
-  m_Height: 5.8718686
+  m_Radius: 1.2
+  m_Height: 7.5
   m_Direction: 1
-  m_Center: {x: 0.01196301, y: 2.4557269, z: 0.20558798}
+  m_Center: {x: 0, y: 3.2, z: 0}
 --- !u!1001 &2024529573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14697,7 +14697,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.004, y: 1.6500001, z: 0}
+  m_Center: {x: 0, y: 1.6500001, z: 0}
   m_TimeToStationary: 0.5
 --- !u!136 &2034423459
 CapsuleCollider:
@@ -14721,7 +14721,7 @@ CapsuleCollider:
   m_Radius: 0.212
   m_Height: 3.3
   m_Direction: 1
-  m_Center: {x: -0.004, y: 1.65, z: 0}
+  m_Center: {x: 0, y: 1.65, z: 0}
 --- !u!1001 &2037300501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14805,7 +14805,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -14830,8 +14830,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &2043257467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15339,7 +15339,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -15364,8 +15364,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &2108077340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15449,11 +15449,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.32000002, y: 0.46300003, z: 0.32000002}
+  m_Extents: {x: 0.05, y: 0.5, z: 0.05}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.46300003, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
 --- !u!65 &2108077344
 BoxCollider:
@@ -15474,8 +15474,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.64002013, y: 0.92519176, z: 0.64002013}
-  m_Center: {x: 0, y: 0.46259582, z: -0.000000029802322}
+  m_Size: {x: 0.65, y: 1, z: 0.65}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &2116603493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15559,7 +15559,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 0.25, z: 0.37500003}
+  m_Extents: {x: 0.5, y: 0.25, z: 0.1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -15584,8 +15584,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000114, y: 0.5, z: 0.75}
-  m_Center: {x: 0, y: 0.25, z: -0.00000008940697}
+  m_Size: {x: 2, y: 0.5, z: 0.75}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1001 &2130248118
 PrefabInstance:
   m_ObjectHideFlags: 0
