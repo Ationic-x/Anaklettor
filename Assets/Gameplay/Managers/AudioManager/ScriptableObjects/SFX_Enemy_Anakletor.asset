@@ -28,9 +28,6 @@ MonoBehaviour:
   - soundName: snd_anakletor_voice_complain2
     clip: {fileID: 8300000, guid: db97b931c4f35ef41a8410181c232357, type: 3}
     category: 0
-  - soundName: snd_anakletor_slash
-    clip: {fileID: 8300000, guid: fc1d2ef98dac46c4f8b918464a816e37, type: 3}
-    category: 0
   - soundName: snd_anakletor_step
     clip: {fileID: 8300000, guid: 3f889ead58220974fb1f45ba29facce5, type: 3}
     category: 0
