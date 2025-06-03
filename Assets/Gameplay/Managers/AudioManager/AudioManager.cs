@@ -38,8 +38,6 @@ public class AudioManager : MonoBehaviour
 	public Slider sfxSlider;
 	public Slider uiSlider;
 
-
-
 	[Tooltip("List of SoundLibs")]
     public List<SoundLib> soundLibsList;
 
