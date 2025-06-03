@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,7 +8,15 @@ public class AnaklettorIAController : EnemyController
 
     [SerializeField] private GameObject _spellPrefab;
 
-    protected override void SubscribeToEvents()
+    public Action OnDead;
+
+	public override void Initialize(ActorData actorData, string name)
+	{
+		base.Initialize(actorData, name);
+        targetFound = true;
+	}
+
+	protected override void SubscribeToEvents()
     {
         if (_iaEventsBridge != null)
         {
@@ -29,8 +38,16 @@ public class AnaklettorIAController : EnemyController
         _spellSpawnPoint = GetComponentInChildren<ProjectileMarker>();
     }
 
+    protected override void Dead()
+	{
+        if (isDead) return;
 
-    protected override IEnumerator Attack()
+		base.Dead();
+		OnDead.Invoke();
+	}
+
+
+	protected override IEnumerator Attack()
     {
         _hasHit = false;
         _isAttacking = true;
@@ -42,8 +59,8 @@ public class AnaklettorIAController : EnemyController
 
     public void TrhowSpell()
     {
-        float randomOffsetX = Random.Range(-0.35f, 0.35f);
-        float randomOffsetY = Random.Range(-0.35f, 0.35f);
+        float randomOffsetX = UnityEngine.Random.Range(-0.35f, 0.35f);
+        float randomOffsetY = UnityEngine.Random.Range(-0.35f, 0.35f);
 
         // Crear nueva posición de spawn con dispersion
         Vector3 randomOffset = new Vector3(randomOffsetX, randomOffsetY, 0);

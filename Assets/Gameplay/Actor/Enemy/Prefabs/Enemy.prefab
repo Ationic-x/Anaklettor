@@ -47,10 +47,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d3d60d7b5d9cb41a78eeb6f10e0905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    _level: 0
+    _exp: 0
+    _maxHP: 0
+    _hp: 0
+    _attack: 0
+    _defense: 0
+    _aspd: 0
+    _bspd: 0
+    _speed: 0
+    _atkDelay: 0
+    _minDistanceAttack: 0
+    _addExp: 0
+    _addAttack: 0
+    _addHP: 0
+    _mulAspd: 0
+    _mulBspd: 0
+    _mulSpeed: 0
+    _mulAtkDelay: 0
   _arrowGameObject: {fileID: 2173545139428971142, guid: adab96fe1eb1cb040813f9e7e5730921, type: 3}
   _soul: {fileID: 5317525548059721113, guid: 56ecac00ccd096a47bbe929ac64967b3, type: 3}
-  _attackDelay: 0.5
-  _arrowAttackRotationOffset: {x: -90, y: 0, z: 0}
 --- !u!195 &6941475715393521252
 NavMeshAgent:
   m_ObjectHideFlags: 0
