@@ -33,11 +33,11 @@ public class EnemyController : ActorController
 
     protected bool _isAttacking = false;
 
-    private bool _targetFound = false;
+    protected bool targetFound = false;
 
     private bool _isSearching = false;
 
-    private bool _isDead = false;
+    protected bool isDead = false;
 
     protected bool _hasHit = false; // Ha golpeado al jugador? Evitamos multiple llamadas
 
@@ -71,7 +71,7 @@ public class EnemyController : ActorController
         {
             animator.SetLayerWeight(1, 1f);
 
-            _isDead = false;
+            isDead = false;
             Dead();
         }
         else
@@ -98,7 +98,7 @@ public class EnemyController : ActorController
 
     void Update()
     {
-        if (!_isDead)
+        if (!isDead)
         {
             RayDetector();
 
@@ -154,7 +154,7 @@ public class EnemyController : ActorController
     {
         int rayDistance = 10;
 
-        if (!_targetFound && !_isDead)
+        if (!targetFound && !isDead)
         {
             RaycastHit hit;
 
@@ -175,7 +175,7 @@ public class EnemyController : ActorController
                         //Aqui se comprueba si el rayo colisiona con el jugador
                         if (hit.transform.gameObject.tag.Equals(Tags.Player))
                         {
-                            _targetFound = true;
+                            targetFound = true;
                         }
 
                     }
@@ -204,7 +204,7 @@ public class EnemyController : ActorController
 
         while (elapsed < searchDuration)
         {
-            if (_targetFound)
+            if (targetFound)
             {
                 break;
             }
@@ -216,7 +216,7 @@ public class EnemyController : ActorController
 
         Stop();
 
-        if (_targetFound)
+        if (targetFound)
         {
             StartCoroutine(Chase());
         }
@@ -237,7 +237,7 @@ public class EnemyController : ActorController
 
         Stop();
 
-        if (_targetFound)
+        if (targetFound)
         {
             StartCoroutine(Chase());
         }
@@ -264,7 +264,7 @@ public class EnemyController : ActorController
         {
             yield return new WaitForFixedUpdate();
 
-            if (_targetFound)
+            if (targetFound)
             {
                 break;
             }
@@ -272,7 +272,7 @@ public class EnemyController : ActorController
 
         Stop();
 
-        if (_targetFound)
+        if (targetFound)
         {
             StartCoroutine(Chase());
         }
@@ -495,11 +495,11 @@ public class EnemyController : ActorController
 
     //Esto hace que aparezca en los 3 puntos en el componente script este metodo para ejecutar 
     [ContextMenu("Dead")]
-    public void Dead()
+    protected virtual void Dead()
     {
-        if (!_isDead)
+        if (!isDead)
         {
-            _isDead = true;
+            isDead = true;
             Stop();
             StopAllCoroutines();
             _nvAgent.enabled = false;
@@ -546,7 +546,7 @@ public class EnemyController : ActorController
         //Hace que el enemigo pueda seguir moviendose
         _nvAgent.isStopped = false;
 
-        _targetFound = true;
+        targetFound = true;
 
         StartCoroutine(Chase());
 
@@ -563,7 +563,7 @@ public class EnemyController : ActorController
             animator.SetBool("_isMoving", _isMoving);
             animator.SetBool("_isAttacking", _isAttacking);
             animator.SetBool("_isSearching", _isSearching);
-            animator.SetBool("_targetFound", _targetFound);
+            animator.SetBool("_targetFound", targetFound);
 
         }
 

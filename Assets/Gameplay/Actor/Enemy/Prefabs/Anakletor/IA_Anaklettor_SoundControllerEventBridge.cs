@@ -11,9 +11,24 @@ public class IA_Anaklettor_SoundControllerEventBridge : MonoBehaviour
         _audioManager = FindAnyObjectByType<AudioManager>();
     }
 
+    public void Talk()
+    {
+        _audioManager.Play3D(SoundsNames.AnakletorTalk, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.33f);
+    }
+
+    public void Complain1()
+    {
+        _audioManager.Play3D(SoundsNames.AnakletorComplain1, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.33f);
+    }
+
+    public void Complain2()
+    {
+        _audioManager.Play3D(SoundsNames.AnakletorComplain2, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.33f);
+    }
+
     public void ShootingSpell()
     {
-        _audioManager.Play3D(SoundsNames.SkeletonShootSpell, this.transform.gameObject, pitch: RandomPitch(2f, 2.7f));
+        _audioManager.Play3D(SoundsNames.AnakletorShootSpell, this.transform.gameObject, pitch: RandomPitch(2f, 2.7f));
     }
 
     public void RechargingSpell()
@@ -23,17 +38,17 @@ public class IA_Anaklettor_SoundControllerEventBridge : MonoBehaviour
 
     public void Death()
     {
-        _audioManager.Play3D(SoundsNames.SkeletonDeath1, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.25f);
+        _audioManager.Play3D(SoundsNames.AnakletorDeath, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.25f);
     }
 
     public void TakeDamage()
     {
-        _audioManager.Play3D(SoundsNames.SkeletonHit, this.transform.gameObject, pitch: RandomPitch(1.5f, 1.8f), playIfAlreadyPlaying: true);
+        _audioManager.Play3D(SoundsNames.AnakletorHit, this.transform.gameObject, pitch: RandomPitch(1.5f, 1.8f), playIfAlreadyPlaying: true);
     }
 
     public void Step()
     {
-        _audioManager.Play3D(SoundsNames.SkeletonStep, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.5f, playIfAlreadyPlaying: true);
+        _audioManager.Play3D(SoundsNames.AnakletorStep, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.5f, playIfAlreadyPlaying: true);
     }
 
     //FIX Cambiar el sonido por uno mas corto

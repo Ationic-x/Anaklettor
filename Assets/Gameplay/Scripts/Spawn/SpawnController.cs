@@ -82,7 +82,6 @@ public static class SpawnController
 			FirstTimeSpawn(enemy, rules, enemiesDictionary);
 
             _enemyContainer.transform.rotation = _map.transform.rotation;
-            _enemyContainer.transform.localScale = _map.transform.localScale;
         }
     }
 
@@ -100,6 +99,9 @@ public static class SpawnController
 	{
 		Vector3 floorPostion = _floor.transform.position;
 		Vector3 floorScale = _floor.transform.localScale;
+
+		if (floorScale.x < 0)
+			floorPostion = new Vector3(-floorPostion.x, floorPostion.y, floorPostion.z);
 
 		int roomDifficulty = _mapManager.LevelInstance.RoomDifficulty();
 

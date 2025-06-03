@@ -19,12 +19,17 @@ public static class SoundsNames
 
     #region Knight
 
-    public const string KnightBlow = "snd_knight_blow";
-    public const string KnightTalk = "snd_knight_talk";
+    public const string KnightVAttack = "snd_knight_voice_attack";
+    public const string KnightVCharged = "snd_knight_voice_charged";
+    public const string KnightVTalk = "snd_knight_voice_talk";
+    public const string KnightVFanfarre = "snd_knight_voice_fanfarre";
     public const string KnightSlash = "snd_knight_slash";
-    public const string KnightStep = "snd_knight_step";
+    public const string KnightStepLeft = "snd_knight_step1";
+    public const string KnightStepRight = "snd_knight_step2";
     public const string KnightDeath1 = "snd_knight_death1";
     public const string KnightHit = "snd_knight_hit";
+    public const string KnightBlow = "snd_knight_blow";
+    public const string KnightBlock = "snd_knight_block";
 
     #endregion
 

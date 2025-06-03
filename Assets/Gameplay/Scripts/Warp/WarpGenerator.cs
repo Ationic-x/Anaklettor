@@ -4,12 +4,6 @@ public static class WarpGenerator
 {
 	public static void Generate(LevelGenerator levelInstance, GameObject floor, GameObject warpPrefab, GameObject warpContainer)
 	{
-		if (warpContainer == null)
-		{
-			Debug.LogError("Warp container not found");
-			return;
-		}
-
 		float warpScaleX = floor.transform.localScale.x * 0.1f;
 		float warpScaleZ = floor.transform.localScale.z * 0.01f;
 		float floorYOffset = floor.transform.localScale.y * 0.55f;
