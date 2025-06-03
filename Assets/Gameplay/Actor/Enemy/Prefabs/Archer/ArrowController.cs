@@ -21,6 +21,11 @@ public class ArrowController : MonoBehaviour
             player.Hit(transform, ArrowDamage);
             Destroy(gameObject);
         }
+        else if(other.gameObject.TryGetComponent<BoxCollider>(out BoxCollider boxCollider) || other.gameObject.TryGetComponent<CapsuleCollider>(out CapsuleCollider capsuleCollider))
+        {
+            Destroy(gameObject);
+        }
+        
         
     }
 
