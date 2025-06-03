@@ -38,6 +38,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FromTemplates/MiscScenes/Misc_5.unity
     guid: 54d443f13711c96448af9d0f47181e29
+  - enabled: 1
+    path: Assets/Scenes/FromTemplates/BossFight/End.unity
+    guid: e533e5421d2a94b4eb7eab5fb25e95b8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
