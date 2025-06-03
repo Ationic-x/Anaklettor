@@ -7205,6 +7205,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _spawnRules
+      value: 
+      objectReference: {fileID: 11400000, guid: d360ab8ea20a8bc4499a9a87ff9ba4fe, type: 2}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _listEnemies.entries.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[2].Key
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[3].Key
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[4].Key
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[1].Value
+      value: 
+      objectReference: {fileID: 11400000, guid: 7569012dc476f22409adabd448dda286, type: 2}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[2].Value
+      value: 
+      objectReference: {fileID: 11400000, guid: 59f022792852399438f6433a5798435a, type: 2}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[3].Value
+      value: 
+      objectReference: {fileID: 11400000, guid: d21b9773b0ee95546a234116435a4691, type: 2}
+    - target: {fileID: 6940611651657775770, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
+      propertyPath: _listEnemies.entries.Array.data[4].Value
+      value: 
+      objectReference: {fileID: 11400000, guid: 133279381c19fbc4b82651b01dd2dbd9, type: 2}
     - target: {fileID: 7091069037955569101, guid: 10d1b59d80535154cb725aab4deaf9b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.862738
