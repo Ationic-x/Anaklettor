@@ -48,7 +48,7 @@ Material:
     - _GridSize: {r: 3, g: 3, b: 0, a: 0}
     - _PlayerCell: {r: 3, g: 3, b: 0, a: 0}
     - _PlayerColor: {r: 1, g: 0, b: 0, a: 1}
-    - _PlayerRoom: {r: 3, g: 3, b: 0, a: 0}
+    - _PlayerRoom: {r: 5, g: 0, b: 0, a: 0}
     - _RoomColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
     - _Translate: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
