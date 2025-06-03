@@ -197,8 +197,16 @@ public class LevelGenerator : MonoBehaviour
         return IsOrigin(PlayerCurrentRoom);
     }
 
+    public bool IsCurrentEnd()
+	{
+        return CurrentRoomId < 32 && PlayerCurrentRoom != _origin && (CurrentRoomId & 0b1) == 1;
+	}
+
 	public bool IsValid(Vector2Int pos)
     {
+        if (IsCurrentEnd())
+            return false;
+
 		return pos.x >= 0 && pos.x < _mapWidth && pos.y >= 0 && pos.y < _mapHeight;
     }
 	#endregion

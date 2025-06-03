@@ -72,7 +72,13 @@ public static class MapController
 
 		if (rotation < 0)
 		{
-            floor.transform.localScale = new Vector3(-floorScale.x, floorScale.y, floorScale.z);
+			foreach (BoxCollider collider in map.GetComponentsInChildren<BoxCollider>(true))
+			{
+				Transform t = collider.transform;
+				Vector3 scale = t.localScale;
+
+				t.localScale = new Vector3(-scale.x, scale.y, scale.z);
+			}
             map.transform.localScale = new Vector3(-mapScale.x, mapScale.y, mapScale.z);
 		}
     }

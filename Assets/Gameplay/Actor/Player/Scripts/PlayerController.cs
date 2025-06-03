@@ -488,7 +488,7 @@ public class PlayerController : ActorController
 
 	private void ChangeCurrentHP(int amount)
 	{
-		Stats.HP += amount;
+        Stats.HP += amount;
 		OnHPChange.Invoke();
 	}
 }

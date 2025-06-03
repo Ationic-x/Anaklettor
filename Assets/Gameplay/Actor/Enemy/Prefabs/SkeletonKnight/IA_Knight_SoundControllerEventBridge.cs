@@ -13,21 +13,25 @@ public class IA_Knight_SoundControllerEventBridge : MonoBehaviour
 
     public void SwordBlow()
     {
+        if (!_audioManager) return;
         _audioManager.Play3D(SoundsNames.SkeletonSlash, this.transform.gameObject, pitch: RandomPitch(1f, 2f), volume: 0.5f);
     }
 
     public void Death()
     {
+        if (!_audioManager) return;
         _audioManager.Play3D(SoundsNames.SkeletonDeath1, this.transform.gameObject, pitch: RandomPitch(0.5f, 0.7f), volume: 0.25f);
     }
 
     public void TakeDamage()
     {
+        if (!_audioManager) return;
         _audioManager.Play3D(SoundsNames.SkeletonHit, this.transform.gameObject, pitch: RandomPitch(1.2f, 2f), playIfAlreadyPlaying: true);
     }
 
     public void Step()
     {
+        if (!_audioManager) return;
         _audioManager.Play3D(SoundsNames.SkeletonStep, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.5f, playIfAlreadyPlaying: true);
     }
 
