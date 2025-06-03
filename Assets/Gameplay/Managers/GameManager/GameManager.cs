@@ -33,17 +33,17 @@ public class GameManager : MonoBehaviour
 		_isLoading = false;
 	}
 
-	private void Start()
-	{
-
-		if (_mapManager.LevelInstance.PlayerData.MoveDirection != Vector2Int.zero) StartCoroutine(ExitAnimationDelayed());
-	}
-
 	public MapManager MapManager { set
 		{
 			_mapManager = value;		
 			StartCoroutine(WaitForGameObjects());
 		}
+	}
+
+	private void Start()
+	{
+		// Is required enable the animation because the animator is reseted when the scene is loaded
+		if (_mapManager.LevelInstance.PlayerData.MoveDirection != Vector2Int.zero) _hudController.Load.Enable();
 	}
 
 	IEnumerator WaitForGameObjects()
@@ -76,11 +76,19 @@ public class GameManager : MonoBehaviour
 		SpawnController.SpawnPlayer(_player, _playerData, _playerCamera);
 		SpawnController.SpawnEnemies(_enemy, _spawnRules, _listEnemies.ToDictionary());
 
+		if (levelInstance.IsCurrentEnd())
+		{
+			Debug.Log("Atleast inside");
+			spawn.GetComponentInChildren<AnaklettorIAController>().OnDead += OnBossDead;
+		}
+
 		// Save
 		SaveController.Initialize(levelInstance);
 
 		// Minimap
 		_hudController.Minimap.SetMinimap(levelInstance);
+
+		if (_mapManager.LevelInstance.PlayerData.MoveDirection != Vector2Int.zero) StartCoroutine(ExitAnimationDelayed());
 	}
     #endregion
 
@@ -92,6 +100,11 @@ public class GameManager : MonoBehaviour
 		_isLoading = true;
 		_direction = direction;
 		StartCoroutine(LoadSceneAsync(newRoom));
+	}
+
+	private void OnBossDead()
+	{
+		Debug.Log("Anaklettor is dead, loading next scene...");
 	}
 
 
@@ -141,8 +154,6 @@ public class GameManager : MonoBehaviour
     #region End Load
     IEnumerator ExitAnimationDelayed()
 	{
-		// Is required enable the animation because the animator is reseted when the scene is loaded
-		_hudController.Load.Enable();
 		
 		// Apply animation and making sure is applied
 		yield return new WaitForEndOfFrame(); // synch animation
