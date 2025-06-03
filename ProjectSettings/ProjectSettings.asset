@@ -16,7 +16,7 @@ PlayerSettings:
   productName: My project
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.82641506, g: 0.19802772, b: 0.82641506, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
