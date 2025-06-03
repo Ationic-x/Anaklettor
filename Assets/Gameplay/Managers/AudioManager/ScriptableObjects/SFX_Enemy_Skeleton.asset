@@ -37,3 +37,6 @@ MonoBehaviour:
   - soundName: snd_skeleton_spellexplosion
     clip: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
     category: 0
+  - soundName: snd_skeleton_rechargingspell
+    clip: {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
+    category: 0
