@@ -9,22 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b07a83b9d10e06e4a9d6682c53ecbf6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 18d440353ee949849b9b5bd59b84e4c1, type: 3}
   m_Name: Rogue
   m_EditorClassIdentifier: 
-  model: {fileID: 6426459787062088218, guid: 8555e7286662ec147b9132f01fff4810, type: 3}
-  job:
-    jobType: 2
+  model: {fileID: 0}
+  job: 2
   stats:
-    characterName: Carlos
-    speed: 5
-    maxHP: 100
-    hp: 100
-    mana: 0
-    maxMana: 0
-    attack: 3
-    defense: 5
-    movementSpeed: 0
-    mulAttack: 0
-    mulDefense: 0
-  animatorController: {fileID: 9100000, guid: ce6fb4950ba47684f9b6e473eaf47d2d, type: 2}
+    _level: 0
+    _exp: 0
+    _maxHP: 0
+    _hp: 0
+    _attack: 0
+    _defense: 0
+    _aspd: 0
+    _bspd: 0
+    _speed: 0
+    _atkDelay: 0
+    _minDistanceAttack: 0
+    _addExp: 0
+    _addAttack: 0
+    _addHP: 0
+    _mulAspd: 0
+    _mulBspd: 0
+    _mulSpeed: 0
+    _mulAtkDelay: 0

@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEngine.EventSystems.PointerEventData;
 
 public class GameOverGUIController : MonoBehaviour
 {
     private Animator _animator;
 
+	[SerializeField] Selectable initButton;
 	private void Awake()
 	{
 		_animator = GetComponent<Animator>();
@@ -29,6 +32,7 @@ public class GameOverGUIController : MonoBehaviour
 
 	private void OnPlayerDied()
     {
-		_animator.SetTrigger("In");
+		initButton.Select();
+        _animator.SetTrigger("In");
 	}
 }
