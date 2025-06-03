@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LifeGUIController: MonoBehaviour
 {
@@ -7,17 +8,20 @@ public class LifeGUIController: MonoBehaviour
     private PlayerController _player;
     private Animator _animator;
     
-    private readonly float _fillDuration = 0.5f;
-    private float _fillScaleX = 1f;
+    private readonly float _fillDuration = 0.2f;
+    private float _currentFillValue = 1f;
 
     private Transform _hpTransform;
+    private Image _hpImage;
     private Coroutine _fillCoroutine = null;
 
 
     private void Awake()
     {
         _hpTransform = _fillHP.transform;
+        _hpImage = _fillHP.GetComponent<Image>();
         _animator = GetComponent<Animator>();
+        _currentFillValue = 1f;
     }
 
     private void Start()
@@ -38,6 +42,12 @@ public class LifeGUIController: MonoBehaviour
         _player = playerGO.GetComponent<PlayerController>();
         
         _player.OnHPChange += UpdateHP;
+
+        //Set the HP bar initial value
+        _currentFillValue = (float)_player.Stats.HP / (float)_player.Stats.MaxHP;
+        SetHPBar(_currentFillValue);
+
+
     }
 
     private void OnDisable()
@@ -53,29 +63,39 @@ public class LifeGUIController: MonoBehaviour
         if (_fillCoroutine != null) 
             StopCoroutine(_fillCoroutine);
 
-        _fillCoroutine = StartCoroutine(LerpHP(_hpTransform.localScale.x, hpPercentage));
+        _fillCoroutine = StartCoroutine(LerpHP(hpPercentage));
 
         if (_player.Stats.HP <= 0)
             _animator.SetTrigger("Out");
     }
 
-    private IEnumerator LerpHP(float start, float end)
+    private IEnumerator LerpHP(float targetFill)
     {
-        float duration = _fillDuration;
+        //Currrent Time
         float t = 0f;
+        //Initical Fill Value
+        float initFill = _currentFillValue;
 
-        while (t < 1f)
+        //Loop
+        while (t < _fillDuration)
         {
-            _fillScaleX = Mathf.Lerp(start, end, t);
+            //Update fill
+            _currentFillValue = Mathf.Lerp(initFill, targetFill, t/ _fillDuration);
+            SetHPBar(_currentFillValue);
 
-            float fill = Mathf.Lerp(0f, 1f, _fillScaleX);
-
-            _hpTransform.localScale = new Vector3(fill, _hpTransform.localScale.y, _hpTransform.localScale.z);
-
-            t += Time.deltaTime / duration;
-            yield return null;
+            //Increase time and wait to next frame
+            t += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
 
+        //Make sure, the fill is correct
+        _hpImage.fillAmount = targetFill;
+
         yield return new WaitForEndOfFrame();
+    }
+
+    private void SetHPBar(float v)
+    {
+        _hpImage.fillAmount = v;
     }
 }
