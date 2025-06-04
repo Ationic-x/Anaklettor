@@ -1,101 +1,85 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class LifeGUIController: MonoBehaviour
+public class LifeGUIController : MonoBehaviour
 {
-    [SerializeField] private GameObject _fillHP;
-    private PlayerController _player;
-    private Animator _animator;
-    
-    private readonly float _fillDuration = 0.2f;
-    private float _currentFillValue = 1f;
+	[SerializeField] private GameObject _fillHP;
+	private PlayerController _player;
+	private Animator _animator;
 
-    private Transform _hpTransform;
-    private Image _hpImage;
-    private Coroutine _fillCoroutine = null;
+	private readonly float _fillDuration = 0.2f;
+	private float _fillScaleX = 1f;
 
-
-    private void Awake()
-    {
-        _hpTransform = _fillHP.transform;
-        _hpImage = _fillHP.GetComponent<Image>();
-        _animator = GetComponent<Animator>();
-        _currentFillValue = 1f;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(WaitPlayer());
-    }
-
-    private IEnumerator WaitPlayer()
-    {
-        GameObject playerGO;
-        do
-        {
-            playerGO = GameObject.FindGameObjectWithTag(Tags.Player);
-            yield return null;
-        } while (playerGO == null);
+	private Transform _hpTransform;
+	private Coroutine _fillCoroutine = null;
 
 
-        _player = playerGO.GetComponent<PlayerController>();
-        
-        _player.OnHPChange += UpdateHP;
+	private void Awake()
+	{
+		_hpTransform = _fillHP.transform;
+		_animator = GetComponent<Animator>();
+	}
 
-        //Set the HP bar initial value
-        _currentFillValue = (float)_player.Stats.HP / (float)_player.Stats.MaxHP;
-        SetHPBar(_currentFillValue);
+	private void Start()
+	{
+		StartCoroutine(WaitPlayer());
+	}
+
+	private IEnumerator WaitPlayer()
+	{
+		GameObject playerGO;
+		do
+		{
+			playerGO = GameObject.FindGameObjectWithTag(Tags.Player);
+			yield return null;
+		} while (playerGO == null);
 
 
-    }
+		_player = playerGO.GetComponent<PlayerController>();
 
-    private void OnDisable()
-    {
-        if (_player != null)
+		_hpTransform.localScale = new Vector3(HpAtPercentage(), _hpTransform.localScale.y, _hpTransform.localScale.z);
+		_player.OnHPChange += UpdateHP;
+
+	}
+
+	private void OnDisable()
+	{
+		if (_player != null)
 			_player.OnHPChange -= UpdateHP;
-    }
+	}
 
-    public void UpdateHP()
-    {
-        float hpPercentage = (float)_player.Stats.HP / (float)_player.Stats.MaxHP;
-        
-        if (_fillCoroutine != null) 
-            StopCoroutine(_fillCoroutine);
+	private float HpAtPercentage()
+	{
+		return (float)_player.Stats.HP / (float)_player.Stats.MaxHP;
+	}
 
-        _fillCoroutine = StartCoroutine(LerpHP(hpPercentage));
+	public void UpdateHP()
+	{
 
-        if (_player.Stats.HP <= 0)
-            _animator.SetTrigger("Out");
-    }
+		if (_fillCoroutine != null)
+			StopCoroutine(_fillCoroutine);
 
-    private IEnumerator LerpHP(float targetFill)
-    {
-        //Currrent Time
-        float t = 0f;
-        //Initical Fill Value
-        float initFill = _currentFillValue;
+		_fillCoroutine = StartCoroutine(LerpHP(_hpTransform.localScale.x, HpAtPercentage()));
 
-        //Loop
-        while (t < _fillDuration)
-        {
-            //Update fill
-            _currentFillValue = Mathf.Lerp(initFill, targetFill, t/ _fillDuration);
-            SetHPBar(_currentFillValue);
+		if (_player.Stats.HP <= 0)
+			_animator.SetTrigger("Out");
+	}
 
-            //Increase time and wait to next frame
-            t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
+	private IEnumerator LerpHP(float start, float end)
+	{
+		float duration = _fillDuration;
+		float t = 0f;
 
-        //Make sure, the fill is correct
-        _hpImage.fillAmount = targetFill;
+		while (t < 1f)
+		{
+			_fillScaleX = Mathf.Lerp(start, end, t);
 
-        yield return new WaitForEndOfFrame();
-    }
+			_hpTransform.localScale = new Vector3(_fillScaleX, _hpTransform.localScale.y, _hpTransform.localScale.z);
 
-    private void SetHPBar(float v)
-    {
-        _hpImage.fillAmount = v;
-    }
+			t += Time.deltaTime / duration;
+			yield return null; // using null to allow the coroutine work in timescale 0
+		}
+
+		yield return new WaitForEndOfFrame();
+	}
 }
