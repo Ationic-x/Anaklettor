@@ -1422,6 +1422,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4008662132106411481, guid: abebbc4b423f9d540ab679c138773bbb, type: 3}
+      propertyPath: m_text
+      value: "Ismael Garc\xEDa G\xF3nzalez\n\nFrancisco Mart\xEDn Vida\xF1a\n\nLuis
+        Francisco Mateo Parra\n\nPablo Ramos Bl\xE1nquez\n\n\xC1lvaro M\xE1rquez
+        Cazorla\n\nJuan Jos\xE9 Salvador Piedra"
+      objectReference: {fileID: 0}
     - target: {fileID: 5145661527865044707, guid: abebbc4b423f9d540ab679c138773bbb, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
