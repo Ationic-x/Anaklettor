@@ -29,8 +29,9 @@ public class ChangeSceneController: MonoBehaviour
 		{
 			yield return null;
 		}
-		yield return new WaitForSeconds(0.5f); // small delay
+		yield return new WaitForSecondsRealtime(0.5f); // small delay
 
+		Time.timeScale = 1f; // Reset time scale to normal
 		SceneManager.LoadScene(sceneName);
 	}
 }

@@ -421,6 +421,7 @@ public class PlayerController : ActorController
 	public void IncreaseHP()
 	{
 		stats.MaxHP += stats.AddHP;
+		ChangeCurrentHP(stats.AddHP);
 		OnUpgradeSelected.Invoke();
 	}
 

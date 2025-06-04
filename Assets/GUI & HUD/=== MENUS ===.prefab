@@ -506,11 +506,11 @@ PrefabInstance:
     - target: {fileID: 2773696813420155061, guid: c19e203989c5f9e48832c064fb746662, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 6933374906920608094}
+      objectReference: {fileID: 5640397689927457416}
     - target: {fileID: 2773696813420155061, guid: c19e203989c5f9e48832c064fb746662, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 5640397689927457416}
+      objectReference: {fileID: 6933374906920608094}
     - target: {fileID: 2773696813420155061, guid: c19e203989c5f9e48832c064fb746662, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
@@ -557,6 +557,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2773696813420155061, guid: c19e203989c5f9e48832c064fb746662, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773696813420155061, guid: c19e203989c5f9e48832c064fb746662, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2773696813420155061, guid: c19e203989c5f9e48832c064fb746662, type: 3}
@@ -1739,7 +1743,7 @@ PrefabInstance:
       addedObject: {fileID: 5542351322664914858}
     - targetCorrespondingSourceObject: {fileID: 3507745211181313273, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6495836011971112527}
+      addedObject: {fileID: 6926964162626363876}
   m_SourcePrefab: {fileID: 100100000, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
 --- !u!1 &3482553436715144357 stripped
 GameObject:
@@ -1791,7 +1795,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3507745211181313273, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
   m_PrefabInstance: {fileID: 5155149994017503506}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6495836011971112527
+--- !u!114 &6926964162626363876
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
