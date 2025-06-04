@@ -305,6 +305,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b905beab528c16e4fb7d2173b8780995, type: 3}
   m_PrefabInstance: {fileID: 114179460}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &135944124 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5640397689927457416, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+  m_PrefabInstance: {fileID: 1610566722}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &154060495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2199,15 +2204,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 5a2a06330eb24554d82e0d590f98af14, type: 2}
---- !u!114 &1423321630 stripped
+--- !u!114 &1359763167 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 297824661464662811, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5281824456438446056, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
   m_PrefabInstance: {fileID: 1610566722}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1359763160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1434891121 stripped
@@ -2451,7 +2456,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538744634}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1538744636
 Camera:
   m_ObjectHideFlags: 0
@@ -2849,9 +2854,65 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Start_Cutscene
       objectReference: {fileID: 0}
+    - target: {fileID: 1006036126645902029, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006036126645902029, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1147888476735644832, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1699202066262132639, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_Color.a
       value: 0.47058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 3492365401634198080, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945382282622773508, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945382282622773508, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945382282622773508, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 135944124}
+    - target: {fileID: 3945382282622773508, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1359763167}
+    - target: {fileID: 3945382282622773508, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945382282622773508, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945382282622773508, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945382282622773508, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.UI.Selectable, UnityEngine.UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945382282622773508, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.AudioSource, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945382282622773508, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4604430225375969530, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_Name
@@ -2941,7 +3002,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Start_Cutscene
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2613756259071933326, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+    - {fileID: 949392164018067479, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+    - {fileID: 3166891837648167523, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+    - {fileID: 1983205267994802024, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+    - {fileID: 343287362568249341, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
