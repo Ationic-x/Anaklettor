@@ -3567,7 +3567,7 @@ GameObject:
   - component: {fileID: 398483170}
   - component: {fileID: 398483171}
   m_Layer: 0
-  m_Name: Cutscene3_Rogue
+  m_Name: Cutscene3_Rogue (TO BE RE-DONE)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
