@@ -78,10 +78,10 @@ public static class SpawnController
             StoredSpawn(enemy, roomData);
 		} else
 		{
-            
+            _enemyContainer.transform.rotation = _map.transform.rotation;
+
 			FirstTimeSpawn(enemy, rules, enemiesDictionary);
 
-            _enemyContainer.transform.rotation = _map.transform.rotation;
         }
     }
 
