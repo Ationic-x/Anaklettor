@@ -363,7 +363,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.95
+  m_fontSize: 61.2
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -881,7 +881,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59
+  m_fontSize: 72
   m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1363,7 +1363,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.95
+  m_fontSize: 61.2
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1772,6 +1772,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7863900504816431956}
     m_Modifications:
+    - target: {fileID: 159448951627467118, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 700701499439922379, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1791,6 +1795,10 @@ PrefabInstance:
     - target: {fileID: 1068989181502233412, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436814336033179689, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
+      propertyPath: m_fontSize
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 1735870947752794884, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1823,6 +1831,10 @@ PrefabInstance:
     - target: {fileID: 2860505004926113868, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
       propertyPath: m_Name
       value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814566701362890198, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
+      propertyPath: m_fontSize
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 4314305233596466262, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1940,7 +1952,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8304840553592279731, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510755332271853777, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
+      propertyPath: m_fontSize
+      value: 47.6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2888941615513310491, guid: 529c2120a0211614da07bd6cfd4feb55, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
