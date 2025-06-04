@@ -6,6 +6,7 @@ public class HUDController : MonoBehaviour
 	[SerializeField] private MinimapRenderer _minimapRenderer;
 	[SerializeField] private LoadGUIController _loadGUIController;
 	[SerializeField] private LevelGUIController _levelGUIController;
+	[SerializeField] private VictoryGUIController _victoryGUIController;
 
 	public static bool isBusy;
 
@@ -37,5 +38,10 @@ public class HUDController : MonoBehaviour
 	public LevelGUIController Level
 	{
 		get => _levelGUIController;
+	}
+	
+	public VictoryGUIController Victory
+	{
+		get => _victoryGUIController;
 	}
 }

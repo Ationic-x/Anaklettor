@@ -76,17 +76,23 @@ public class GameManager : MonoBehaviour
 		SpawnController.SpawnPlayer(_player, _playerData, _playerCamera);
 		SpawnController.SpawnEnemies(_enemy, _spawnRules, _listEnemies.ToDictionary());
 
-		if (levelInstance.IsCurrentEnd())
-		{
-			Debug.Log("Atleast inside");
-			spawn.GetComponentInChildren<AnaklettorIAController>().OnDead += OnBossDead;
-		}
-
 		// Save
 		SaveController.Initialize(levelInstance);
 
 		// Minimap
 		_hudController.Minimap.SetMinimap(levelInstance);
+
+		// Initialize victory screen if is the end of the game
+		if (levelInstance.IsCurrentEnd())
+		{
+			AnaklettorIAController amaklettor;
+			do
+			{
+				amaklettor = spawn.GetComponentInChildren<AnaklettorIAController>();
+			} while (amaklettor == null);
+
+			_hudController.Victory.Initialize(amaklettor);
+		}
 
 		if (_mapManager.LevelInstance.PlayerData.MoveDirection != Vector2Int.zero) StartCoroutine(ExitAnimationDelayed());
 	}
@@ -100,11 +106,6 @@ public class GameManager : MonoBehaviour
 		_isLoading = true;
 		_direction = direction;
 		StartCoroutine(LoadSceneAsync(newRoom));
-	}
-
-	private void OnBossDead()
-	{
-		Debug.Log("Anaklettor is dead, loading next scene...");
 	}
 
 

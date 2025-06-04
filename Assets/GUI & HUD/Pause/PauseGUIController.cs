@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PauseGUIController : MonoBehaviour
@@ -36,8 +37,14 @@ public class PauseGUIController : MonoBehaviour
 
     public void ResumeGame()
     {
-        Time.timeScale = 1;
         _animator.SetTrigger("Out");
+        StartCoroutine(ResumeAfterSeconds(0.5f));
         isPaused = false;
     }
+
+    IEnumerator ResumeAfterSeconds(float seconds)
+    {
+		yield return new WaitForSecondsRealtime(seconds);
+		Time.timeScale = 1;
+	}
 }
