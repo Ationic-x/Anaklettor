@@ -18,12 +18,12 @@ public class IA_Anaklettor_SoundControllerEventBridge : MonoBehaviour
 
     public void Complain1()
     {
-        _audioManager.Play3D(SoundsNames.AnakletorComplain1, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.33f);
+        _audioManager.Play3D(SoundsNames.AnakletorComplain1, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.66f);
     }
 
     public void Complain2()
     {
-        _audioManager.Play3D(SoundsNames.AnakletorComplain2, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.33f);
+        _audioManager.Play3D(SoundsNames.AnakletorComplain2, this.transform.gameObject, pitch: RandomPitch(0.9f, 1.1f), volume: 0.66f);
     }
 
     public void ShootingSpell()
@@ -38,7 +38,7 @@ public class IA_Anaklettor_SoundControllerEventBridge : MonoBehaviour
 
     public void Death()
     {
-        _audioManager.Play3D(SoundsNames.AnakletorDeath, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.25f);
+        _audioManager.Play3D(SoundsNames.AnakletorDeath, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.33f);
     }
 
     public void TakeDamage()
@@ -48,7 +48,7 @@ public class IA_Anaklettor_SoundControllerEventBridge : MonoBehaviour
 
     public void Step()
     {
-        _audioManager.Play3D(SoundsNames.AnakletorStep, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.5f, playIfAlreadyPlaying: true);
+        _audioManager.Play3D(SoundsNames.AnakletorStep, this.transform.gameObject, pitch: RandomPitch(1.5f, 2f), volume: 0.66f, playIfAlreadyPlaying: true);
     }
 
     //FIX Cambiar el sonido por uno mas corto

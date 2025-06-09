@@ -43,6 +43,9 @@ public class AudioManager : MonoBehaviour
 
     private Dictionary<string, (AudioClip clip, SoundCategory category)> globalSoundDictionary;
 
+    private AudioSource musicSource;
+    private string currentMusicName = null;
+
     /// <summary>
     /// Inicializa el AudioSource y construye el diccionario global de sonidos.
     /// </summary>
@@ -76,7 +79,6 @@ public class AudioManager : MonoBehaviour
         LoadAllVolumeSettings();
 	}
 
-
     /// <summary>
     /// Reproduce un sonido específico por su nombre. 
     /// Ideal para música de fondo, sonido ambiente, etc.
@@ -84,22 +86,29 @@ public class AudioManager : MonoBehaviour
     /// <param name="soundName">El nombre del sonido que se desea reproducir.</param>
     public void Play(string soundName, float pitch = 1.0f, float spatialBlend = 0.0f, float dopplerLevel = 0.0f, bool loop = true, float volume = 1.0f)
     {
-        // Busca el AudioClip correspondiente en el diccionario global.
         if (globalSoundDictionary.TryGetValue(soundName, out var entry))
         {
-            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            if (currentMusicName == soundName && musicSource != null && musicSource.isPlaying)
+            {
+                return;
+            }
 
-            if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+            if(musicSource != null)
+            {
+                musicSource.Stop();
+                Destroy(musicSource);
+            }
 
-            audioSource.clip = entry.clip;
-            audioSource.outputAudioMixerGroup = GetGroup(entry.category);
-            audioSource.volume = volume;
-            audioSource.spatialBlend = spatialBlend;
-            audioSource.dopplerLevel = dopplerLevel;
-            audioSource.pitch = pitch;
-            audioSource.loop = loop;
+            musicSource = gameObject.AddComponent<AudioSource>();
+            musicSource.clip = entry.clip;
+            musicSource.outputAudioMixerGroup = GetGroup(entry.category);
+            musicSource.volume = volume;
+            musicSource.spatialBlend = spatialBlend;
+            musicSource.dopplerLevel = dopplerLevel;
+            musicSource.pitch = pitch;
+            musicSource.loop = loop;
 
-            if (!audioSource.isPlaying) audioSource.Play();
+            if (!musicSource.isPlaying) musicSource.Play();
         }
         else
         {
@@ -112,7 +121,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     /// <param name="soundName">El nombre del sonido que se desea reproducir.</param>
     /// <param name="targetObject">El GameObject al que el sonido debe seguir.</param>
-    public void Play3D(string soundName, GameObject targetObject, float spatialBlend = 1.0f, float pitch = 1.0f, float dopplerLevel = 0.0f, bool loop = false, float volume = 1.0f, bool playIfAlreadyPlaying = false)
+    public void Play3D(string soundName, GameObject targetObject, float spatialBlend = 1.0f, float pitch = 1.0f, float dopplerLevel = 0.0f, bool loop = false, float volume = 1.0f, float minDistance = 6f, bool playIfAlreadyPlaying = false)
     {
         // Busca el AudioClip correspondiente en el diccionario global.
         if (globalSoundDictionary.TryGetValue(soundName, out var entry))
@@ -125,6 +134,7 @@ public class AudioManager : MonoBehaviour
             audioSource.spatialBlend = spatialBlend;
             audioSource.dopplerLevel = dopplerLevel;
             audioSource.pitch = pitch;
+            audioSource.minDistance = minDistance;
             audioSource.loop = loop; // Para testeo
 
             if (playIfAlreadyPlaying)

@@ -4,16 +4,21 @@ public static class SoundsNames
 
     public const string MainMenuMusic1 = "mus_mm1";
     public const string MainMenuMusic2 = "mus_mm2";
-    public const string MainMenuMusic3 = "mus_mm3";
-    public const string MainMenuMusic4 = "mus_mm4";
 
     #endregion
+
+    #region Ingame Music Background
+
+    public const string ExplorationMusic = "mus_exploration";
+    public const string AnakletorFightMusic = "mus_anakletor_fight";
+    public const string AnakletorCutscene = "mus_anakletor_cutscene";
+
+    #endregion 
 
     #region Game Over Music Background
 
     public const string GameOverMusic1 = "mus_go1";
     public const string GameOverMusic2 = "mus_go2";
-    public const string GameOverMusic3 = "mus_go3";
 
     #endregion
 

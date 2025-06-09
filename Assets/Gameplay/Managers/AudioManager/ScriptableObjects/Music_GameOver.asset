@@ -17,8 +17,5 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ff7b2b8e7beb5a041925767d91d9f897, type: 3}
     category: 1
   - soundName: mus_go2
-    clip: {fileID: 8300000, guid: 2da344a515b4c824687f953328bda12a, type: 3}
-    category: 1
-  - soundName: mus_go3
     clip: {fileID: 8300000, guid: e6c29d7f9f72ffe47b709e050d3f62f3, type: 3}
     category: 1
