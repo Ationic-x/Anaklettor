@@ -19,3 +19,6 @@ MonoBehaviour:
   - soundName: mus_anakletor_fight
     clip: {fileID: 8300000, guid: a2b088aa68bf5fb4cb56cf1ab7559086, type: 3}
     category: 1
+  - soundName: mus_anakletor_cutscene
+    clip: {fileID: 8300000, guid: 2da344a515b4c824687f953328bda12a, type: 3}
+    category: 1
