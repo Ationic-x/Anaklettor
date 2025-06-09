@@ -6,7 +6,7 @@ public class PauseGUIController : MonoBehaviour
 
     private bool isPaused = false;
     private Animator _animator;
-
+    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -15,6 +15,11 @@ public class PauseGUIController : MonoBehaviour
     // This should use input map fix in future
     private void Update()
     {
+        if (HUDController.isBusy)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -27,6 +32,7 @@ public class PauseGUIController : MonoBehaviour
             }
         }
     }
+
 
     private void PauseGame()
     {
@@ -44,7 +50,8 @@ public class PauseGUIController : MonoBehaviour
 
     IEnumerator ResumeAfterSeconds(float seconds)
     {
-		yield return new WaitForSecondsRealtime(seconds);
-		Time.timeScale = 1;
-	}
+        yield return new WaitForSecondsRealtime(seconds);
+        Time.timeScale = 1;
+    }
+
 }

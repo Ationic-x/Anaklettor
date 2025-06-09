@@ -17,14 +17,14 @@ MonoBehaviour:
   stats:
     _level: 0
     _exp: 0
-    _maxHP: 10
-    _hp: 10
+    _maxHP: 40
+    _hp: 40
     _attack: 6
     _defense: 0
     _aspd: 0
     _bspd: 0
-    _speed: 3
-    _atkDelay: 1
+    _speed: 4
+    _atkDelay: 0.5
     _minDistanceAttack: 6
     _addExp: 0
     _addAttack: 0

@@ -2713,6 +2713,30 @@ PrefabInstance:
         Francisco Mateo Parra\n\nPablo Ramos Bl\xE1nquez\n\n\xC1lvaro M\xE1rquez
         Cazorla\n\nJuan Jos\xE9 Salvador Piedra"
       objectReference: {fileID: 0}
+    - target: {fileID: 392931531699283611, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 392931531699283611, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 392931531699283611, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 392931531699283611, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 182
+      objectReference: {fileID: 0}
+    - target: {fileID: 702277753773345178, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 702277753773345178, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1006036126645902029, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
       value: 1
@@ -2953,6 +2977,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: === MENUS ===
       objectReference: {fileID: 0}
+    - target: {fileID: 5286955912394187350, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286955912394187350, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635025499852244441, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635025499852244441, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635025499852244441, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635025499852244441, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 182
+      objectReference: {fileID: 0}
     - target: {fileID: 6610709840636711451, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3032,6 +3080,58 @@ PrefabInstance:
     - target: {fileID: 6610709840636711451, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766396779488573023, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766396779488573023, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766396779488573023, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6766396779488573023, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 182
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842844029885162806, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842844029885162806, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6889883960310817302, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6889883960310817302, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6933374906920608094, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959269735919615300, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959269735919615300, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959269735919615300, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959269735919615300, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 182
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

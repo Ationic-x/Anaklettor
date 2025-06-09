@@ -16,7 +16,7 @@ MonoBehaviour:
   job: 3
   stats:
     _level: 0
-    _exp: 0
+    _exp: 30
     _maxHP: 4
     _hp: 4
     _attack: 4
@@ -26,7 +26,7 @@ MonoBehaviour:
     _speed: 2.5
     _atkDelay: 1.15
     _minDistanceAttack: 1.5
-    _addExp: 0
+    _addExp: 10
     _addAttack: 0
     _addHP: 0
     _mulAspd: 0
