@@ -267,7 +267,7 @@ public class PlayerController : ActorController
 		float attackDuration = animator.GetCurrentAnimatorClipInfo(1)[0].clip.length; // Attack layer 1
 		float actualDuration = attackDuration / stats.Aspd;
 		
-		yield return new WaitForSeconds(actualDuration);
+		yield return new WaitForSeconds(actualDuration + stats.AtkDelay);
 		_isAttacking = false;
 	}
 
@@ -454,11 +454,11 @@ public class PlayerController : ActorController
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.TryGetComponent<EnemyController>(out EnemyController enemy))
-			enemy.TakeDamage(_attackID, 1);
+			enemy.TakeDamage(_attackID, stats.Attack);
 		
 		if (other.gameObject.TryGetComponent<WarpData>(out WarpData warp))
-		{
-			warp.gameObject.GetComponentInChildren<Animator>().SetTrigger("In");
+		{			
+			warp.gameObject.GetComponentInChildren<Animator>().SetBool("IsEnter",true);
 			_enterPosition = transform.position;
 		}
 	}
@@ -470,9 +470,9 @@ public class PlayerController : ActorController
 		{
 
 			float offset = 1.1f;
-			warp.GetComponentInChildren<Animator>().SetTrigger("Out");
+            warp.gameObject.GetComponentInChildren<Animator>().SetBool("IsEnter", false);
 
-			Vector3 position = transform.position;
+            Vector3 position = transform.position;
 			Vector2Int direction = warp.Direction;
 
 			bool shouldWarp =

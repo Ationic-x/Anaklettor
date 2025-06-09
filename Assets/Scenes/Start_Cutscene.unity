@@ -1317,7 +1317,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OMITIR
+  m_text: Saltar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 40cc3e012d0697c4c806413a2bd1dd36, type: 2}
   m_sharedMaterial: {fileID: -1341841847969050697, guid: 40cc3e012d0697c4c806413a2bd1dd36, type: 2}
@@ -2121,7 +2121,6 @@ GameObject:
   m_Component:
   - component: {fileID: 236886379}
   - component: {fileID: 236886378}
-  - component: {fileID: 236886377}
   - component: {fileID: 236886380}
   m_Layer: 0
   m_Name: Main Camera
@@ -2130,14 +2129,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &236886377
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236886376}
-  m_Enabled: 1
 --- !u!20 &236886378
 Camera:
   m_ObjectHideFlags: 0
@@ -12046,10 +12037,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.81960785, g: 0.36078432, b: 0.4, a: 0.6666667}
+    m_HighlightedColor: {r: 0.94509804, g: 0.2627451, b: 0.32156864, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.94509804, g: 0.2627451, b: 0.32156864, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

@@ -65,21 +65,24 @@ public class LifeGUIController : MonoBehaviour
 			_animator.SetTrigger("Out");
 	}
 
-	private IEnumerator LerpHP(float start, float end)
-	{
-		float duration = _fillDuration;
-		float t = 0f;
+    private IEnumerator LerpHP(float start, float end)
+    {
+        float duration = _fillDuration;
+        float t = 0f;
 
-		while (t < 1f)
-		{
-			_fillScaleX = Mathf.Lerp(start, end, t);
+        while (t <= 1f)
+        {
+            _fillScaleX = Mathf.Lerp(start, end, t);
 
-			_hpTransform.localScale = new Vector3(_fillScaleX, _hpTransform.localScale.y, _hpTransform.localScale.z);
+            _hpTransform.localScale = new Vector3(_fillScaleX, _hpTransform.localScale.y, _hpTransform.localScale.z);
 
-			t += Time.deltaTime / duration;
-			yield return null; // using null to allow the coroutine work in timescale 0
-		}
+            t += Time.deltaTime / duration;
 
-		yield return new WaitForEndOfFrame();
-	}
+            yield return null;
+        }
+
+        _hpTransform.localScale = new Vector3(end, _hpTransform.localScale.y, _hpTransform.localScale.z);
+
+        // using null to allow the coroutine work in timescale 0
+    }
 }

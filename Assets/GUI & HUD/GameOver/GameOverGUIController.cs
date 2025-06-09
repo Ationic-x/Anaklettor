@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,32 +8,35 @@ public class GameOverGUIController : MonoBehaviour
 {
     private Animator _animator;
 
-	[SerializeField] Selectable initButton;
-	private void Awake()
-	{
-		_animator = GetComponent<Animator>();
-	}
+    public Action<bool> OnEnable;
 
-	private void Start()
-	{
-		StartCoroutine(WaitPlayer());
-	}
-
-	private IEnumerator WaitPlayer()
-	{
-		GameObject playerGO;
-		do
-		{
-			playerGO = GameObject.FindGameObjectWithTag(Tags.Player);
-			yield return null;
-		} while (playerGO == null);
-
-		playerGO.GetComponent<PlayerController>().OnPlayerDied += OnPlayerDied;
-	}
-
-	private void OnPlayerDied()
+    [SerializeField] Selectable initButton;
+    private void Awake()
     {
-		initButton.Select();
+        _animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(WaitPlayer());
+    }
+
+    private IEnumerator WaitPlayer()
+    {
+        GameObject playerGO;
+        do
+        {
+            playerGO = GameObject.FindGameObjectWithTag(Tags.Player);
+            yield return null;
+        } while (playerGO == null);
+
+        playerGO.GetComponent<PlayerController>().OnPlayerDied += OnPlayerDied;
+    }
+
+    private void OnPlayerDied()
+    {
+        initButton.Select();
         _animator.SetTrigger("In");
-	}
+        OnEnable.Invoke(true);
+    }
 }

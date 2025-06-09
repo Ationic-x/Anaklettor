@@ -7,9 +7,7 @@ public class SpellController : MonoBehaviour
 
     private AudioManager _audioManager;
 
-    [SerializeField] private int _spellDamage = 0;
-
-    public int SpellDamage { get => _spellDamage; set => _spellDamage = value; }
+    private AnaklettorIAController _controller;
 
     private void OnEnable()
     {
@@ -18,6 +16,8 @@ public class SpellController : MonoBehaviour
         _animator = GetComponent<Animator>();
 
         _audioManager = FindAnyObjectByType<AudioManager>();
+
+        _controller = FindAnyObjectByType<AnaklettorIAController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,7 +27,8 @@ public class SpellController : MonoBehaviour
         // Debería estar filtrado por layer gracias al ridgidbody del enemigo, pero por si acaso
         if (other.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
         {
-            player.Hit(transform, SpellDamage);
+            player.Hit(transform, _controller.Stats.Attack);
+
             transform.GetComponent<Rigidbody>().isKinematic = true;
 
             _animator.SetBool("ExplotionTrigger", true);
