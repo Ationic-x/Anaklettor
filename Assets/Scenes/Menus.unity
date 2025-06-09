@@ -2713,6 +2713,10 @@ PrefabInstance:
         Francisco Mateo Parra\n\nPablo Ramos Bl\xE1nquez\n\n\xC1lvaro M\xE1rquez
         Cazorla\n\nJuan Jos\xE9 Salvador Piedra"
       objectReference: {fileID: 0}
+    - target: {fileID: 665846517723945001, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
+      propertyPath: m_text
+      value: Anaklettor, el maldito esqueleto
+      objectReference: {fileID: 0}
     - target: {fileID: 1006036126645902029, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
       value: 1
