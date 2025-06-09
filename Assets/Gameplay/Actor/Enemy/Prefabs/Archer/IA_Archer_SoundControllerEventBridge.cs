@@ -13,7 +13,7 @@ public class IA_Archer_SoundControllerEventBridge : MonoBehaviour
 
     public void ShootingArrow()
     {
-        _audioManager.Play3D(SoundsNames.SkeletonShootArrow, this.transform.gameObject, pitch: RandomPitch(1.7f, 2f), volume: 0.25f);
+        _audioManager.Play3D(SoundsNames.SkeletonShootArrow, this.transform.gameObject, pitch: RandomPitch(1.7f, 2f), volume: 0.66f);
     }
 
     public void Death()
