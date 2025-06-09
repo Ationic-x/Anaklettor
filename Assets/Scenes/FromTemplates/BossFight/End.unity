@@ -1534,6 +1534,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3438076129466465921, guid: 20e19aefec04a2d44b3fd052e01cc0bc, type: 3}
+      propertyPath: m_text
+      value: "FELICIDADES, \nHAS DERROTADO A ANAKLETTOR"
+      objectReference: {fileID: 0}
     - target: {fileID: 6034421201896742861, guid: 20e19aefec04a2d44b3fd052e01cc0bc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
