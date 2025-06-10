@@ -1763,7 +1763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe7137ea08209542b448a8a8f595a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolume: 0.525
+  masterVolume: 1
   musicVolume: 1
   sfxVolume: 1
   uiVolume: 1
@@ -2727,7 +2727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 392931531699283611, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 182
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 702277753773345178, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2999,7 +2999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5635025499852244441, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 182
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6610709840636711451, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_Pivot.x
@@ -3095,7 +3095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6766396779488573023, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 182
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6842844029885162806, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3131,7 +3131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8959269735919615300, guid: 03cfc81b5db12734c9d4c91e79422b69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 182
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

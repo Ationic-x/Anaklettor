@@ -15,10 +15,10 @@ public class MasterVolumeControl : MonoBehaviour
 
     private void Update()
     {
-        MusicVolumeController(slider.value);
+        MasterVolumeController(slider.value);
     }
 
-    public void MusicVolumeController(float sliderMusica)
+    public void MasterVolumeController(float sliderMusica)
     {
         if (sliderMusica == 0)
         {
