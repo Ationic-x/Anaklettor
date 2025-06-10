@@ -43,9 +43,15 @@ public static class SpawnController
 		Vector3 flip = Vector3.one;
 
 		if (dir == Vector2Int.up || dir == Vector2Int.down)
+		{
 			flip.z = -0.85f;
+			position.x = Mathf.Abs(position.x) > floorPostion.x * 0.85f ? position.x * 0.85f : position.x;
+		}
 		else if (dir == Vector2Int.left || dir == Vector2Int.right)
+		{
 			flip.x = -0.85f;
+			position.z = Mathf.Abs(position.z) > floorPostion.z * 0.85f ? position.z * 0.85f : position.z;
+		}
 
 		player = Object.Instantiate(player, Vector3.Scale(position, flip), rotation);
 		PlayerController pc = player.GetComponent<PlayerController>(); 
