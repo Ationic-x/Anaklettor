@@ -12,6 +12,11 @@ public class HUDController : MonoBehaviour
 
     public static bool isBusy;
 
+    private void Start()
+    {
+        EnableAllChildren();
+	}
+
     private void OnEnable()
     {
         _levelGUIController.OnLevelUpAction += IsBusy;
@@ -36,7 +41,15 @@ public class HUDController : MonoBehaviour
         isBusy = value;
     }
 
-    public MinimapRenderer Minimap
+    private void EnableAllChildren()
+	{
+		foreach (Transform child in transform)
+		{
+			child.gameObject.SetActive(true);
+		}
+	}
+
+	public MinimapRenderer Minimap
     {
         get => _minimapRenderer;
     }
