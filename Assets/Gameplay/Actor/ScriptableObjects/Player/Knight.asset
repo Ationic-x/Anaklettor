@@ -22,7 +22,7 @@ MonoBehaviour:
     _attack: 2
     _defense: 0
     _aspd: 0.75
-    _bspd: 0.75
+    _bspd: 0.65
     _speed: 5
     _atkDelay: 0.5
     _minDistanceAttack: 0
