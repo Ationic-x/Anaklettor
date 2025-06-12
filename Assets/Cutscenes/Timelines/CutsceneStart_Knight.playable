@@ -2583,11 +2583,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
   m_Name: AudioPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: eb95bd2026f8245499e00417c481630c, type: 3}
+  m_Clip: {fileID: 8300000, guid: 400d16100503ab947941057458846e82, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
-    volume: 1
+    volume: 0.8
 --- !u!114 &-5358931946760302284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5399,7 +5399,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: -5477526507129643192}
-    m_Duration: 29.279208333333333
+    m_Duration: 29.27920833333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: 5937837601921918578}
     m_EaseInDuration: 0
@@ -5463,7 +5463,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: Anaklettor, toma 3 con arreglo
+    m_DisplayName: Anaklettor Audio
   m_Markers:
     m_Objects: []
   m_TrackProperties:
