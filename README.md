@@ -12,4 +12,4 @@ Menu BG Music: https://pixabay.com/sound-effects/loop-menu-preview-109594/
 CutScene BG Music: https://pixabay.com/es/sound-effects/brutal-battle-159869/
 GameOver BG Music: https://pixabay.com/sound-effects/028331-beautiful-violin-musicwav-71597/
 Rest of the SFX audios are done using foley by Luis (Shieldnien)
-Voices are done by Alvaro(AlqZ-devFox) and Pablo(MrSpiderPablo)
+Voices are done by Alyx (AlqZdevFox) and Pablo (MrSpiderPablo)
